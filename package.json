@@ -1,0 +1,16 @@
+{
+  "homepage": ".",
+  "name": "gnome-bazaar-client",
+  "version": "1.0.0",
+  "description": "college assignment - web development w node",
+  "main": "./public/pages/home/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Elad ovadia, shir hirsh, lina elman, liav tibi",
+  "license": "ISC",
+  "dependencies": {
+    "d3.js": "^0.0.2-security",
+    "module_name": "^1.0.0"
+  }
+}
