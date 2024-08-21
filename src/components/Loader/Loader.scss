@@ -1,0 +1,33 @@
+.loader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--light-primary-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::after {
+    content: " ";
+    $radius: 8rem;
+    width: $radius;
+    height: $radius;
+    border-radius: 50%;
+
+    border-color: var(--secondary-color);
+    border-top-color: var(--active-color);
+    border-width: 0.85rem;
+    border-style: solid;
+    box-shadow: 0 0 3rem 0.1rem var(--active-color);
+    animation: 1s load infinite ease-out;
+
+    @keyframes load {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

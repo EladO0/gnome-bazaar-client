@@ -1,0 +1,23 @@
+.popup-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--light-primary-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .popup {
+    border-radius: 0.75rem;
+    border-color: var(--primary-color);
+    border-width: 0.125rem;
+    border-style: solid;
+    background-color: var(--theme-color);
+    padding: 1rem;
+
+    box-shadow: 0 0 5rem .1rem var(--theme-color);
+  }
+}

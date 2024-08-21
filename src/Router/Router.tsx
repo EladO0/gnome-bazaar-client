@@ -1,10 +1,32 @@
-import './Router.scss'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Root from "../Root/Root";
+import Loader from "../components/Loader/Loader";
+import NotFound from "../pages/NotFound/NotFound";
+import "./Router.scss";
 
-const Router = ()=>{
-    return(
-        <div className="router">
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Root />,
+      children: [],
+    },
+    {
+      path: "*",
+      element: <NotFound />,
+    },
+  ],
+  {
+    basename: "/Gnome-Bazaar",
+  }
+);
 
-        </div>
-    )
-}
-export default Router
+const Router = () => {
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Loader />
+    </>
+  );
+};
+export default Router;

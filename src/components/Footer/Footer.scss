@@ -1,0 +1,28 @@
+.footer {
+  width: 100%;
+  background-color: var(--theme-color);
+  padding: 0.75rem 3rem;
+  box-sizing: border-box;
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+
+  .logo {
+    margin-left: 2rem;
+    font-weight: 600;
+  }
+  .authors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--font-primary-color);
+    font-weight: 500;
+
+    .MuiSvgIcon-root {
+      font-size: 1.5rem;
+    }
+  }
+}
