@@ -3,9 +3,9 @@ export type Supplier = {
 };
 
 export type JWT = {
-  hash: string | null;
+  token: string;
   name: string;
-  expiry: Date | null;
-  isSupplier: Supplier | boolean;
+  expiry: Date;
+  isSupplier: Supplier | false;
   isAdmin: boolean;
 };

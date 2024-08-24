@@ -1,0 +1,82 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  direction: rtl;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 500;
+    // backg
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 80%;
+    height: 5rem;
+  }
+
+  a {
+    width: 100%;
+    text-decoration: none;
+    color: var(--font-primary-color);
+    user-select: none;
+  }
+
+  .cart {
+    width: 100%;
+    background-color: var(--active-color);
+    color: var(--light-theme-color);
+    padding: 0.4rem 0;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .routes {
+    flex: 1;
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    .route {
+      font-size: 1rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 1rem;
+      box-sizing: border-box;
+      border-radius: 0.25rem;
+      transition: 0.5s;
+
+      &.selected {
+        background-color: var(--secondary-color);
+      }
+    }
+  }
+  .log-out {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--active-color);
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 1rem;
+    cursor: pointer;
+  }
+}

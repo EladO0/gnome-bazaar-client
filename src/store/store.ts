@@ -1,13 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import popupSlice from "./slices/popupSlice";
-import loaderSlice from "./slices/loaderSlice";
-import userSlice from "./slices/user-slice";
+import authSlice from "./slices/authenticationSlice";
 
 export const store = configureStore({
   reducer: {
     popup: popupSlice,
-    loader: loaderSlice,
-    user: userSlice,
+    auth: authSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

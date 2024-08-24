@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { SearchOff } from "@mui/icons-material";
+import { Home, SearchOff } from "@mui/icons-material";
 import Footer from "../../components/Footer/Footer";
 import "./NotFound.scss";
 
@@ -12,15 +12,17 @@ const NotFound = () => {
     <div className="not-found">
       <div className="navigation">
         <div className="wrong-url">
-          <SearchOff />
-          <div className="warning">לא נמצא</div>
           הדף שחיפשת
+          <div className="warning">לא</div>
+          נמצא
+          <SearchOff />
         </div>
         <div className="lost-visitor" onClick={goHome}>
-          חזרה למקום מבטחים
+          חזרה לחוף מבטחים
+          <Home />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

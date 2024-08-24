@@ -1,30 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { JWT } from "../../config/types/userTypes";
 
-
 const initialState: JWT = {
-  hash: null,
+  token: "",
   name: "",
-  expiry: null,
+  expiry: new Date(),
   isSupplier: false,
   isAdmin: false,
 };
 
-export const userSlice = createSlice({
-  name: "user",
+export const authSlice = createSlice({
+  name: "authentication",
   initialState,
   reducers: {
-    loadUser: (state, action: PayloadAction<JWT>) => {
-      state.hash = action.payload.hash;
+    loadToken: (state, action: PayloadAction<JWT>) => {
+      state.token = action.payload.token;
       state.name = action.payload.name;
       state.expiry = action.payload.expiry;
       state.isSupplier = action.payload.isSupplier;
       state.isAdmin = action.payload.isAdmin;
     },
-    reset: () => initialState,
+    resetToken: () => initialState,
   },
 });
 
-export const { loadUser: loudJWT, reset } = userSlice.actions;
+export const { loadToken, resetToken } = authSlice.actions;
 
-export default userSlice.reducer;
+export default authSlice.reducer;

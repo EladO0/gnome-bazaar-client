@@ -1,22 +1,26 @@
 html {
-  --warning-color: crimson;
+  font-size: calc(0.85vw + 0.4vh);
+
+  --warning-color: #e34249;
   --active-color: #4173f9;
   --primary-color: #f5f7ff;
   --light-primary-color: #e5e5e5a2;
   --secondary-color: #ccddff87;
   --theme-color: #fff;
+  --light-theme-color: #f2f3f6;
   --font-primary-color: #7c879c;
   --font-light-color: #7c879c86;
 }
 
+
 body {
-  font-size: calc(0.85vw + 0.5vh);
   margin: 0;
   background-color: var(--primary-color);
 
   * {
+    font-size: 1rem;
     font-family: "Rubik", sans-serif !important;
-    animation: .4s fade-in linear;
+    animation: 0.4s fade-in ease;
   }
 
   @keyframes fade-in {

@@ -21,26 +21,34 @@
       flex-direction: row;
       align-items: center;
       gap: 0.5rem;
-      font-size: 3rem;
+      font-size: 4rem;
       color: var(--font-primary-color);
       .MuiSvgIcon-root {
-        font-size: 3rem;
+        font-size: 4rem;
         color: var(--active-color);
       }
 
       .warning {
+        font-size: 4rem;
         color: var(--warning-color);
       }
     }
     .lost-visitor {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
       font-size: 1.5rem;
       font-weight: 500;
       color: var(--font-light-color);
       transition: 0.5s;
       cursor: pointer;
+      .MuiSvgIcon-root {
+        font-size: 1.75rem;
+        color: var(--active-color);
+      }
       &:hover {
         color: var(--active-color);
-        text-decoration: underline;
+        border-bottom: 0.2rem solid;
       }
     }
   }
