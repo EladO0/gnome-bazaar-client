@@ -1,20 +1,28 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-
+const bodyParser = require("body-parser");
 const app = express();
+
 const port = process.argv[2] || 5000;
 const BASENAME = "/Gnome-Bazaar";
 
+app.use(bodyParser.json());
 app.use(cors({ origin: "http://localhost:3000" }));
-
 app.use((req, res, next) => {
   console.log(`[${new Date().toLocaleString()}]`);
   console.log(`${req.method} ${req.url}\n`);
   next();
 });
 
-app.get(`${BASENAME}/api/token`, (req, res) => {
+app.post(`${BASENAME}/api/token`, (req, res) => {
+  const { user, pwd } = req.body;
+  console.log(user, pwd);
+  if (user !== "admin" || pwd !== "1234") {
+    res.status(401).end();
+    return;
+  }
+
   res.json({
     name: "Elad D Gozman",
     expiry: new Date(),
@@ -23,10 +31,6 @@ app.get(`${BASENAME}/api/token`, (req, res) => {
     isSupplier: false,
   });
 });
-
-
-
-
 
 app.get(`${BASENAME}/404`, (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));

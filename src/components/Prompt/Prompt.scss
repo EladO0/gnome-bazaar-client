@@ -1,0 +1,51 @@
+.prompt {
+  position: fixed;
+  top: 5rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  animation: enter 0.75s ease;
+
+  @keyframes enter {
+    from {
+      top: -1rem;
+    }
+  }
+
+  &.success {
+    background-color: var(--active-color);
+  }
+  &.error {
+    background-color: var(--warning-color);
+  }
+
+  .message {
+    font-size: 2rem;
+    color: var(--theme-color);
+  }
+
+  .timer {
+    border-radius: 50%;
+    $size: 2rem;
+    width: $size;
+    height: $size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+
+    &.success {
+      background-color: var(--secondary-color);
+      color: var(--theme-color);
+    }
+    &.error {
+      background-color: var(--secondary-color);
+      color: var(--theme-color);
+    }
+  }
+}

@@ -10,9 +10,19 @@ const apiService = axios.create({
 
 export const eventEmitter = new EventEmitter();
 const emitUnAuthorized = () => {
+  console.log("unauthorized user");
   eventEmitter.emit(eventTypes.UnAuthorized);
 };
 
+const emitExpired = () => {
+  console.log("token has Expired");
+  eventEmitter.emit(eventTypes.TokenExpired);
+};
+
+const emitNetWorkError = () => {
+  console.log("Network Error");
+  eventEmitter.emit(eventTypes.NetWorkError);
+};
 const emitLoading = () => {
   eventEmitter.emit(eventTypes.StartLoading);
 };
@@ -37,7 +47,15 @@ apiService.interceptors.response.use(
   },
   async (error) => {
     emitFinishLoading();
-    if (error.response && error.response.status === statusCodes.UnAuthorized) {
+    if (error.code === statusCodes.NetWorkError) {
+      emitNetWorkError();
+      return;
+    }
+    if (error.response.status === statusCodes.expiredToken) {
+      emitExpired();
+      return;
+    }
+    if (error.response.status === statusCodes.UnAuthorized) {
       emitUnAuthorized();
       return;
     }

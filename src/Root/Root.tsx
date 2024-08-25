@@ -15,18 +15,26 @@ const Root = () => {
     navigate("/401");
   }, [navigate]);
 
+  const requireLogin = useCallback(() => {
+    navigate("/home");
+  }, [navigate]);
+
+
   useEffect(() => {
     eventEmitter.on(eventTypes.UnAuthorized, unAuthorize);
+    eventEmitter.on(eventTypes.TokenExpired, requireLogin);
+    eventEmitter.on(eventTypes.NetWorkError, requireLogin);
     return () => {
       eventEmitter.removeListener(eventTypes.UnAuthorized, unAuthorize);
+      eventEmitter.removeListener(eventTypes.TokenExpired, requireLogin);
     };
-  }, [unAuthorize]);
+  }, [unAuthorize, requireLogin]);
 
   useEffect(() => {
     if (!auth.token) {
-      unAuthorize();
+      requireLogin();
     }
-  }, [unAuthorize, auth]);
+  }, [requireLogin, auth]);
   return (
     <div className="root">
       <div className="navigation-container">

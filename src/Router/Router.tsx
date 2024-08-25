@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useAppDispatch } from "../store/hooks";
+import { promptMessage } from "../store/slices/promptSlice";
 import { eventEmitter } from "../config/api/api-config";
 import { BASENAME, eventTypes } from "../config/constants";
 import Root from "../Root/Root";
@@ -15,6 +17,7 @@ import Home from "../pages/Home/Home";
 import UserHistory from "../pages/UserHistory/UserHistory";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import Cart from "../pages/Cart/Cart";
+import Prompt from "../components/Prompt/Prompt";
 import "./Router.scss";
 
 const router = createBrowserRouter(
@@ -74,6 +77,7 @@ const router = createBrowserRouter(
 );
 
 const Router = () => {
+  const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
   const startSpinner = () => {
@@ -82,21 +86,27 @@ const Router = () => {
   const stopSpinner = () => {
     setIsLoading(false);
   };
+const promptNetworkError = useCallback(() => {
+    dispatch(promptMessage({ message: "...השרת אינו זמין", type: "error" }));
+  }, [dispatch]);
 
   useEffect(() => {
     eventEmitter.on(eventTypes.StartLoading, startSpinner);
     eventEmitter.on(eventTypes.FinishLoading, stopSpinner);
+    eventEmitter.on(eventTypes.NetWorkError, promptNetworkError);
     return () => {
       eventEmitter.removeListener(eventTypes.StartLoading, startSpinner);
       eventEmitter.removeListener(eventTypes.FinishLoading, stopSpinner);
+      eventEmitter.removeListener(eventTypes.NetWorkError, promptNetworkError);
     };
-  }, []);
+  }, [promptNetworkError]);
 
   return (
     <>
       <RouterProvider router={router} />
       <Loader isLoading={isLoading} />
       <Popup />
+      <Prompt />
     </>
   );
 };

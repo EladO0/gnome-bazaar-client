@@ -9,3 +9,8 @@ export type JWT = {
   isSupplier: Supplier | false;
   isAdmin: boolean;
 };
+
+export type Credentials = {
+  user: string;
+  pwd: string;
+};
