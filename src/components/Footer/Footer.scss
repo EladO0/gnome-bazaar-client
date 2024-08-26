@@ -1,17 +1,24 @@
 .footer {
   width: 100%;
   background-color: var(--theme-color);
-  padding: 0.75rem 3rem;
+  padding: 0.75rem 1rem;
   box-sizing: border-box;
   border-radius: 0.75rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  gap: 1rem;
 
   .logo {
-    margin-left: 2rem;
-    font-weight: 600;
+    background-image: url("/gnome.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 3rem;
+    height: 2rem;
+    // margin-left: 2rem;
+    // font-weight: 600;
   }
   .authors {
     display: flex;

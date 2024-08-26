@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="authors">
         (2024) פותח על ידי צוות אלפא <Copyright />
       </div>
-      <div className="logo">LOGO</div>
+      <div className="logo"></div>
     </div>
   );
 };

@@ -53,10 +53,6 @@ const Navigation = () => {
     return location.pathname.includes(route.url) ? "selected" : undefined;
   };
 
-  const goHome = () => {
-    navigate("/home");
-  };
-
   const logOut = () => {
     dispatch(resetToken());
     navigate("/home");
@@ -64,9 +60,7 @@ const Navigation = () => {
 
   return (
     <div className="navigation">
-      <div className="logo" onClick={goHome}>
-        LOGO
-      </div>
+      <div className="logo">{/* LOGO */}</div>
 
       <Link to={"/shopping-cart"}>
         <button className="cart">

@@ -6,6 +6,8 @@
   align-items: center;
   padding: 1rem;
   box-sizing: border-box;
+  user-select: none;
+
   .prompt-container {
     flex: 1;
     display: flex;
