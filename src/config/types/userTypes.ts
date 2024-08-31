@@ -14,3 +14,11 @@ export type Credentials = {
   user: string;
   pwd: string;
 };
+
+export type UserInfo = {
+  user: string;
+  pwd: string;
+  mail: string;
+  address: string;
+  phone: string;
+};

@@ -16,7 +16,7 @@ const Root = () => {
   }, [navigate]);
 
   const requireLogin = useCallback(() => {
-    navigate("/home");
+    navigate("/login");
   }, [navigate]);
 
 
@@ -35,6 +35,7 @@ const Root = () => {
       requireLogin();
     }
   }, [requireLogin, auth]);
+
   return (
     <div className="root">
       <div className="navigation-container">

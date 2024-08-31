@@ -1,8 +1,12 @@
 import { Warning } from "@mui/icons-material";
+import { useEffect } from "react";
 import Footer from "../../components/Footer/Footer";
 import "./Unauthorized.scss";
 
 const Unauthorized = () => {
+  useEffect(() => {
+    console.log("unauthorized page");
+  }, []);
   return (
     <div className="unauthorized">
       <div className="prompt-container">

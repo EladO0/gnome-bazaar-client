@@ -13,11 +13,12 @@ import Profile from "../pages/Profile/Profile";
 import Market from "../pages/Market/Market";
 import Analysis from "../pages/Analysis/Analysis";
 import AdminPanel from "../pages/AdminPanel/AdminPanel";
-import Home from "../pages/Home/Home";
 import UserHistory from "../pages/UserHistory/UserHistory";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import Cart from "../pages/Cart/Cart";
 import Prompt from "../components/Prompt/Prompt";
+import Login from "../pages/Login/Login";
+import Registration from "../pages/Registration/Registration";
 import "./Router.scss";
 
 const router = createBrowserRouter(
@@ -57,11 +58,15 @@ const router = createBrowserRouter(
       ],
     },
     {
-      path: "/home",
-      element: <Home />,
+      path: "/login",
+      element: <Login />,
       index: true,
     },
-
+    {
+      path: "/registration",
+      element: <Registration />,
+      index: true,
+    },
     {
       path: "/401",
       element: <Unauthorized />,
@@ -86,7 +91,7 @@ const Router = () => {
   const stopSpinner = () => {
     setIsLoading(false);
   };
-const promptNetworkError = useCallback(() => {
+  const promptNetworkError = useCallback(() => {
     dispatch(promptMessage({ message: "...השרת אינו זמין", type: "error" }));
   }, [dispatch]);
 

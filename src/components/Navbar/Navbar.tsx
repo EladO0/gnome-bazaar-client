@@ -1,10 +1,10 @@
 import { Search, Settings } from "@mui/icons-material";
-import "./Navbar.scss";
 import { Link } from "react-router-dom";
+import "./Navbar.scss";
 
 const Navbar = () => {
   return (
-    <div className="navbar">
+    <section className="navbar">
       <div className="icons-container">
         <Link to={"/admin-panel"}>
           <Settings />
@@ -14,7 +14,7 @@ const Navbar = () => {
         <input type="text" className="search" placeholder="חיפוש..." />
         <Search className="magnifying-glass" />
       </div>
-    </div>
+    </section>
   );
 };
 export default Navbar;

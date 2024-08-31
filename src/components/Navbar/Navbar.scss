@@ -11,13 +11,17 @@
     align-items: center;
     gap: 2rem;
 
-    .MuiSvgIcon-root {
-      font-size: 1.25rem;
-      color: var(--font-primary-color);
-      background-color: var(--primary-color);
-      padding: 0.5rem;
-      border-radius: 0.75rem;
-      cursor: pointer;
+    a {
+      display: flex;
+      align-items: center;
+      .MuiSvgIcon-root {
+        font-size: 1.25rem;
+        color: var(--font-primary-color);
+        background-color: var(--primary-color);
+        padding: 0.5rem;
+        border-radius: 0.75rem;
+        cursor: pointer;
+      }
     }
   }
   .search-container {

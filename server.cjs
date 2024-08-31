@@ -4,11 +4,11 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
 
-const port = process.argv[2] || 5000;
+const port = 5000;
 const BASENAME = "/Gnome-Bazaar";
 
 app.use(bodyParser.json());
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "*" }));
 app.use((req, res, next) => {
   console.log(`[${new Date().toLocaleString()}]`);
   console.log(`${req.method} ${req.url}\n`);
@@ -60,6 +60,7 @@ app.get(`${BASENAME}/*`, (req, res, next) => {
 app.use((req, res) => {
   res.redirect(`${BASENAME}/404`);
 });
+
 
 app.listen(port, () => {
   console.log(

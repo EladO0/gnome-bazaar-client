@@ -6,13 +6,13 @@
   direction: rtl;
 
   .logo {
-    background-image: url('/store.png');
+    background-image: url("/store.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     width: 80%;
     height: 6rem;
-    margin-bottom: .75rem;
+    margin-bottom: 0.75rem;
   }
 
   a {
@@ -63,6 +63,7 @@
       }
     }
   }
+
   .log-out {
     display: flex;
     align-items: center;
@@ -70,7 +71,14 @@
     color: var(--active-color);
     font-weight: 500;
     font-size: 1rem;
-    padding: 1rem;
+    margin: 1rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
+    transition: 0.75s !important;
+    border-radius: 0.5rem;
+
+    &:hover {
+      background-color: var(--light-theme-color);
+    }
   }
 }

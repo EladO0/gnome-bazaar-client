@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   BarChart,
   ContactSupport,
@@ -14,6 +14,7 @@ import {
   navigationRoutes,
 } from "../../config/types/commonTypes";
 import { resetToken } from "../../store/slices/authenticationSlice";
+import { promptMessage } from "../../store/slices/promptSlice";
 import "./Navigation.scss";
 
 const routes: navigationRoutes = [
@@ -46,6 +47,7 @@ const routes: navigationRoutes = [
 
 const Navigation = () => {
   const dispatch = useAppDispatch();
+  const loggedUser = useAppSelector((x) => x.auth.name);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -54,13 +56,15 @@ const Navigation = () => {
   };
 
   const logOut = () => {
+    const msg = `${loggedUser} להתראות`;
+    dispatch(promptMessage({ message: msg, type: "success" }));
     dispatch(resetToken());
-    navigate("/home");
+    navigate("/login");
   };
 
   return (
-    <div className="navigation">
-      <div className="logo">{/* LOGO */}</div>
+    <aside className="navigation">
+      <header className="logo">{/* LOGO */}</header>
 
       <Link to={"/shopping-cart"}>
         <button className="cart">
@@ -68,7 +72,7 @@ const Navigation = () => {
           <ShoppingCart />
         </button>
       </Link>
-      <div className="routes">
+      <nav className="routes">
         {routes.map((route, id) => (
           <Link to={route.url} key={id}>
             <div className={`route ${isActive(route)}`}>
@@ -77,12 +81,12 @@ const Navigation = () => {
             </div>
           </Link>
         ))}
-      </div>
+      </nav>
       <div className="log-out" onClick={logOut}>
         התנתקות
         <Logout />
       </div>
-    </div>
+    </aside>
   );
 };
 

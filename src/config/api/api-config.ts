@@ -2,14 +2,14 @@ import axios from "axios";
 import { EventEmitter } from "events";
 import { eventTypes, statusCodes } from "../constants";
 
-const server = "http://localhost:5000/Gnome-Bazaar/api";
+const server = `http://localhost:5000/Gnome-Bazaar/api`;
 
 const apiService = axios.create({
   baseURL: server,
 });
 
 export const eventEmitter = new EventEmitter();
-const emitUnAuthorized = () => {
+export const emitUnAuthorized = () => {
   console.log("unauthorized user");
   eventEmitter.emit(eventTypes.UnAuthorized);
 };
@@ -51,11 +51,11 @@ apiService.interceptors.response.use(
       emitNetWorkError();
       return;
     }
-    if (error.response.status === statusCodes.expiredToken) {
+    if (error?.response?.status === statusCodes.expiredToken) {
       emitExpired();
       return;
     }
-    if (error.response.status === statusCodes.UnAuthorized) {
+    if (error?.response?.status === statusCodes.UnAuthorized) {
       emitUnAuthorized();
       return;
     }

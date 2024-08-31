@@ -3,12 +3,12 @@ import "./Footer.scss";
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <footer className="footer">
       <div className="authors">
         (2024) פותח על ידי צוות אלפא <Copyright />
       </div>
       <div className="logo"></div>
-    </div>
+    </footer>
   );
 };
 export default Footer;

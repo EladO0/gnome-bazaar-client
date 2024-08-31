@@ -5,7 +5,8 @@ import eslintPlugin from "vite-plugin-eslint";
 
 export default defineConfig({
   server: {
-    open: "/Gnome-Bazaar/home",
+    open: "/Gnome-Bazaar/login",
+    host: "0.0.0.0",
     port: 3000,
     cors: {
       allowedHeaders: "*",
