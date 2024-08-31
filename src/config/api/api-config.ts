@@ -49,7 +49,6 @@ apiService.interceptors.response.use(
     emitFinishLoading();
     if (error.code === statusCodes.NetWorkError) {
       emitNetWorkError();
-      return;
     }
     if (error?.response?.status === statusCodes.expiredToken) {
       emitExpired();
