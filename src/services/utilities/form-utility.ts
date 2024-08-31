@@ -6,7 +6,7 @@ export const validateName = (name: string): boolean => {
   return true;
 };
 
-export const validatevalue = (value: string): boolean => {
+export const validatePWD = (value: string): boolean => {
   if (value.length < 8) {
     return false;
   }
