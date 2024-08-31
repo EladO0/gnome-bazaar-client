@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 app.post(`${BASENAME}/api/token`, (req, res) => {
   const { user, pwd } = req.body;
   console.log(user, pwd);
-  if (user !== "admin" || pwd !== "1234") {
+  if (user !== "admin" || pwd !== "Aa123456!") {
     res.status(401).end();
     return;
   }

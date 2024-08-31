@@ -8,13 +8,14 @@ import { Credentials } from "../../config/types/userTypes";
 import { promptMessage } from "../../store/slices/promptSlice";
 import "./Login.scss";
 import {
-  validateName,
+  validateLoginForm,
+  validateUser,
   validatePWD,
 } from "../../services/utilities/form-utility";
 
 const initialCredentials: Credentials = {
   user: "admin",
-  pwd: "1234",
+  pwd: "Aa123456!",
 };
 
 const Login = () => {
@@ -28,6 +29,8 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
+    if (!validateLoginForm(credentials)) return;
+
     const tokenResult = await getAuthToken(credentials);
     if (tokenResult) {
       dispatch(loadToken(tokenResult));
@@ -52,7 +55,7 @@ const Login = () => {
   };
   const onUserChange = (e) => {
     const newVal = e.target.value;
-    if (!validateName(newVal)) return;
+    if (!validateUser(newVal)) return;
     setCredentials((x) => {
       const newCredentialsState = { ...x };
       newCredentialsState.user = newVal;
@@ -67,7 +70,7 @@ const Login = () => {
 
         <div className="input-container">
           <label htmlFor="username">שם משתמש:</label>
-          <div className="field-container">
+          <div className="field-container" id="user">
             <PersonOutline />
             <input
               value={credentials.user}
@@ -81,7 +84,7 @@ const Login = () => {
 
         <div className="input-container">
           <label htmlFor="password">סיסמא:</label>
-          <div className="field-container">
+          <div className="field-container" id="password">
             <LockOutlined />
             <input
               value={credentials.pwd}

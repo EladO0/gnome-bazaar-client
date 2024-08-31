@@ -14,14 +14,15 @@ import "./Registration.scss";
 import {
   validateAddress,
   validateMail,
-  validateName,
+  validateUser,
   validatePhone,
   validatePWD,
+  validateRegistrationForm,
 } from "../../services/utilities/form-utility";
 
 const initialCredentials: UserInfo = {
   user: "admin",
-  pwd: "1234",
+  pwd: "Aa123456!",
   address: "david elazar 8 ness ziona",
   mail: "shirhirsh510@gmail.com",
   phone: "0503403413",
@@ -34,6 +35,8 @@ const Registration = () => {
 
   const register = async (e) => {
     e.preventDefault();
+    if (!validateRegistrationForm(registrationData)) return;
+
     const registrationStatus = true;
     if (registrationStatus) {
       const msg = "!יצירת חשבון בוצעה בהצלחה";
@@ -57,7 +60,7 @@ const Registration = () => {
 
   const onUserChange = (e) => {
     const newVal = e.target.value;
-    if (!validateName(newVal)) return;
+    if (!validateUser(newVal)) return;
 
     setCredentials((x) => {
       const newCredentialsState = { ...x };
@@ -106,7 +109,7 @@ const Registration = () => {
 
         <div className="input-container">
           <label htmlFor="username">שם משתמש:</label>
-          <div className="field-container">
+          <div className="field-container" id="user">
             <PersonOutline />
             <input
               value={registrationData.user}
@@ -120,7 +123,7 @@ const Registration = () => {
 
         <div className="input-container">
           <label htmlFor="password">סיסמא:</label>
-          <div className="field-container">
+          <div className="field-container" id="password">
             <LockOutlined />
             <input
               value={registrationData.pwd}
@@ -134,7 +137,7 @@ const Registration = () => {
 
         <div className="input-container">
           <label htmlFor="mail">מייל:</label>
-          <div className="field-container">
+          <div className="field-container" id="mail">
             <AlternateEmail />
             <input
               value={registrationData.mail}
@@ -148,7 +151,7 @@ const Registration = () => {
 
         <div className="input-container">
           <label htmlFor="address">כתובת מגורים:</label>
-          <div className="field-container">
+          <div className="field-container" id="address">
             <HomeOutlined />
             <input
               value={registrationData.address}
@@ -162,7 +165,7 @@ const Registration = () => {
 
         <div className="input-container">
           <label htmlFor="phone">טלפון נייד:</label>
-          <div className="field-container">
+          <div className="field-container" id="phone">
             <Phone />
             <input
               value={registrationData.phone}

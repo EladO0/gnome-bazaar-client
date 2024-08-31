@@ -63,7 +63,10 @@
         gap: 0.5rem;
         padding-bottom: 0.5rem;
         border-bottom: 0.15rem solid var(--font-primary-color);
-        transition: 0.3s;
+        transition: 0.4s;
+        &.error {
+          border-color: var(--warning-color);
+        }
         &:hover {
           border-color: var(--active-color);
         }
