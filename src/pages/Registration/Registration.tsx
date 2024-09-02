@@ -44,7 +44,7 @@ const Registration = () => {
       navigate(`/login`);
     } else {
       setCredentials(initialCredentials);
-    }
+    } 
   };
 
   const onPasswordChange = (e) => {
