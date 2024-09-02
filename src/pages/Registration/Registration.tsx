@@ -93,7 +93,8 @@ const Registration = () => {
 
   const onPhoneChange = (e) => {
     const newVal = e.target.value;
-    if (!validatePhone(newVal)) return;
+    const isNumeric = newVal.length === 0 || '0' <= newVal.slice(-1) && newVal.slice(-1) <= '9';
+    if (!validatePhone(newVal) || !isNumeric) return;
 
     setCredentials((x) => {
       const newCredentialsState = { ...x };

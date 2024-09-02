@@ -37,7 +37,7 @@ export const validateMail = (value: string): boolean => {
 };
 
 export const validatePhone = (value: string): boolean => {
-  if (value.length > 30) {
+  if (value.length > 10) {
     return false;
   }
 
