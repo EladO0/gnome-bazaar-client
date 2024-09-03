@@ -20,7 +20,7 @@ import "./Navigation.scss";
 const routes: navigationRoutes = [
   {
     url: "/Profile",
-    title: "פרופיל",
+    title: "אזור אישי",
     Icon: <Person />,
   },
   {

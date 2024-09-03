@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import {
+  AccountCircle,
   AlternateEmail,
-  HomeOutlined,
   LockOutlined,
   PersonOutline,
   Phone,
@@ -12,7 +12,7 @@ import { UserInfo } from "../../config/types/userTypes";
 import { promptMessage } from "../../store/slices/promptSlice";
 import "./Registration.scss";
 import {
-  validateAddress,
+  validateFullName,
   validateMail,
   validateUser,
   validatePhone,
@@ -20,10 +20,10 @@ import {
   validateRegistrationForm,
 } from "../../services/utilities/form-utility";
 
-const initialCredentials: UserInfo = {
+const initialUserInfo: UserInfo = {
   user: "admin",
   pwd: "Aa123456!",
-  address: "david elazar 8 ness ziona",
+  fullName: "shir hirsh",
   mail: "shirhirsh510@gmail.com",
   phone: "0503403413",
 };
@@ -31,7 +31,7 @@ const initialCredentials: UserInfo = {
 const Registration = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [registrationData, setCredentials] = useState(initialCredentials);
+  const [registrationData, setUserInfo] = useState(initialUserInfo);
 
   const register = async (e) => {
     e.preventDefault();
@@ -43,15 +43,15 @@ const Registration = () => {
       dispatch(promptMessage({ message: msg, type: "success" }));
       navigate(`/login`);
     } else {
-      setCredentials(initialCredentials);
-    } 
+      setUserInfo(initialUserInfo);
+    }
   };
 
   const onPasswordChange = (e) => {
     const newVal = e.target.value;
     if (!validatePWD(newVal)) return;
 
-    setCredentials((x) => {
+    setUserInfo((x) => {
       const newCredentialsState = { ...x };
       newCredentialsState.pwd = newVal;
       return newCredentialsState;
@@ -62,20 +62,20 @@ const Registration = () => {
     const newVal = e.target.value;
     if (!validateUser(newVal)) return;
 
-    setCredentials((x) => {
+    setUserInfo((x) => {
       const newCredentialsState = { ...x };
       newCredentialsState.user = newVal;
       return newCredentialsState;
     });
   };
 
-  const onAddressChange = (e) => {
+  const onFullNameChange = (e) => {
     const newVal = e.target.value;
-    if (!validateAddress(newVal)) return;
+    if (!validateFullName(newVal)) return;
 
-    setCredentials((x) => {
+    setUserInfo((x) => {
       const newCredentialsState = { ...x };
-      newCredentialsState.address = newVal;
+      newCredentialsState.fullName = newVal;
       return newCredentialsState;
     });
   };
@@ -84,7 +84,7 @@ const Registration = () => {
     const newVal = e.target.value;
     if (!validateMail(newVal)) return;
 
-    setCredentials((x) => {
+    setUserInfo((x) => {
       const newCredentialsState = { ...x };
       newCredentialsState.mail = newVal;
       return newCredentialsState;
@@ -96,7 +96,7 @@ const Registration = () => {
     const isNumeric = newVal.length === 0 || '0' <= newVal.slice(-1) && newVal.slice(-1) <= '9';
     if (!validatePhone(newVal) || !isNumeric) return;
 
-    setCredentials((x) => {
+    setUserInfo((x) => {
       const newCredentialsState = { ...x };
       newCredentialsState.phone = newVal;
       return newCredentialsState;
@@ -108,6 +108,19 @@ const Registration = () => {
       <form className="registration-form" onSubmit={register}>
         <header className="title">הרשמה</header>
 
+        <div className="input-container">
+          <label htmlFor="fullName">שם מלא:</label>
+          <div className="field-container" id="fullName">
+            <AccountCircle />
+            <input
+              value={registrationData.fullName}
+              onChange={onFullNameChange}
+              name="fullName"
+              type="text"
+              placeholder="הזן שם מלא"
+            />
+          </div>
+        </div>
         <div className="input-container">
           <label htmlFor="username">שם משתמש:</label>
           <div className="field-container" id="user">
@@ -121,6 +134,7 @@ const Registration = () => {
             />
           </div>
         </div>
+
 
         <div className="input-container">
           <label htmlFor="password">סיסמא:</label>
@@ -146,20 +160,6 @@ const Registration = () => {
               name="mail"
               type="text"
               placeholder="הזן מייל"
-            />
-          </div>
-        </div>
-
-        <div className="input-container">
-          <label htmlFor="address">כתובת מגורים:</label>
-          <div className="field-container" id="address">
-            <HomeOutlined />
-            <input
-              value={registrationData.address}
-              onChange={onAddressChange}
-              name="address"
-              type="text"
-              placeholder="הזן כתובת מגורים"
             />
           </div>
         </div>

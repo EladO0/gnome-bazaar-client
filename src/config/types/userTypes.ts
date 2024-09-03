@@ -3,6 +3,7 @@ export type Supplier = {
 };
 
 export type JWT = {
+  uuid: string,
   token: string;
   name: string;
   expiry: Date;
@@ -19,6 +20,6 @@ export type UserInfo = {
   user: string;
   pwd: string;
   mail: string;
-  address: string;
+  fullName: string;
   phone: string;
 };

@@ -18,12 +18,12 @@ export const validatePWD = (value: string): boolean => {
   return true;
 };
 
-export const validateAddress = (value: string): boolean => {
+export const validateFullName = (value: string): boolean => {
   if (value.length > 30) {
     return false;
   }
 
-  document.getElementById("address")?.classList.remove("error");
+  document.getElementById("fullName")?.classList.remove("error");
   return true;
 };
 
@@ -47,7 +47,7 @@ export const validatePhone = (value: string): boolean => {
 
 ////// Submission validation //////
 
-const addressSchemeValidation = (value: string): boolean => {
+const fullNameSchemeValidation = (value: string): boolean => {
   if (!value) return false;
   return true;
 };
@@ -78,10 +78,10 @@ const userSchemeValidation = (value: string): boolean => {
   return true;
 };
 
-export const validateRegistrationForm = (formData: UserInfo): boolean => {
+export const validateRegistrationForm = (formData: UserInfo, skip_pwd = false): boolean => {
   let isValid = true;
-  if (!addressSchemeValidation(formData.address)) {
-    document.getElementById("address")?.classList.add("error");
+  if (!fullNameSchemeValidation(formData.fullName)) {
+    document.getElementById("fullName")?.classList.add("error");
   }
   if (!mailSchemeValidation(formData.mail)) {
     document.getElementById("mail")?.classList.add("error");
@@ -91,7 +91,7 @@ export const validateRegistrationForm = (formData: UserInfo): boolean => {
     document.getElementById("phone")?.classList.add("error");
     isValid = false;
   }
-  if (!passwordSchemeValidation(formData.pwd)) {
+  if (!skip_pwd && !passwordSchemeValidation(formData.pwd)) {
     document.getElementById("password")?.classList.add("error");
     isValid = false;
   }

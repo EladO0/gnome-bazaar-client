@@ -28,6 +28,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+
     .top-container {
       padding: 1rem 5rem 1rem 2rem;
       border: $border;
@@ -35,10 +36,12 @@
       border-right: none;
       background-color: var(--theme-color);
     }
+
     .outlet-container {
       flex-grow: 1;
       display: flex;
       flex-direction: column;
+      overflow: auto;
     }
   }
 

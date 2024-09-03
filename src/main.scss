@@ -20,12 +20,27 @@ body {
     font-size: 1rem;
     font-family: "Rubik" !important;
     animation: 0.4s fade-in ease;
+
+    &::-webkit-scrollbar {
+      width: .85rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--light-theme-color);
+      border-radius: 5rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--font-light-color);
+      border-radius: 5rem;
+    }
   }
 
   @keyframes fade-in {
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }

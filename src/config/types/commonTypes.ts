@@ -9,3 +9,11 @@ export type navigationRoute = {
 };
 
 export type navigationRoutes = Array<navigationRoute>;
+
+
+
+export type dataPreviewType = Array<{
+  title: string,
+  value: number,
+  total: number
+}>
