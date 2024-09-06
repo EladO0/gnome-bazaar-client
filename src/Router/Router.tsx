@@ -8,7 +8,6 @@ import Root from "../Root/Root";
 import Loader from "../components/Loader/Loader";
 import NotFound from "../pages/NotFound/NotFound";
 import Unauthorized from "../pages/Unauthorized/Unauthorized";
-import Popup from "../components/Popup/Popup";
 import Profile from "../pages/Profile/Profile";
 import Market from "../pages/Market/Market";
 import Analysis from "../pages/Analysis/Analysis";
@@ -19,6 +18,7 @@ import Cart from "../pages/Cart/Cart";
 import Prompt from "../components/Prompt/Prompt";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
+import SupplierPanel from "../pages/SupplierPanel/SupplierPanel";
 import "./Router.scss";
 
 const router = createBrowserRouter(
@@ -55,6 +55,10 @@ const router = createBrowserRouter(
           path: "/admin-panel",
           element: <AdminPanel />,
         },
+        {
+          path: "/supplier-panel",
+          element: <SupplierPanel />,
+        },
       ],
     },
     {
@@ -89,6 +93,8 @@ const Router = () => {
     setIsLoading(true);
   };
   const stopSpinner = () => {
+    console.log('ffef');
+
     setIsLoading(false);
   };
   const promptNetworkError = useCallback(() => {
@@ -110,7 +116,6 @@ const Router = () => {
     <>
       <RouterProvider router={router} />
       <Loader isLoading={isLoading} />
-      <Popup />
       <Prompt />
     </>
   );

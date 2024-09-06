@@ -5,6 +5,7 @@ import { eventEmitter } from "../config/api/api-config";
 import { useAppSelector } from "../store/hooks";
 import Navigation from "../components/Navigation/Navigation";
 import Navbar from "../components/Navbar/Navbar";
+import Popup from "../components/Popup/Popup";
 import "./Root.scss";
 
 const Root = () => {
@@ -51,6 +52,8 @@ const Root = () => {
           <Outlet />
         </div>
       </div>
+
+      <Popup />
     </div>
   );
 };

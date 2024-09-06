@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { JWT } from "../../config/types/userTypes";
 
 const initialState: JWT = {
+  uuid: "",
   token: "",
   name: "",
   expiry: new Date(),

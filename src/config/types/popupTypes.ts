@@ -1,6 +1,5 @@
-import { Props } from "./commonTypes";
+import { ReactElement } from "react";
 
 export type PopupState = {
-  component: ((props: any) => JSX.Element) | null;
-  props: Props;
+  component: ReactElement<any, any> | null;
 };

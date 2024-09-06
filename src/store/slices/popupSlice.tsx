@@ -1,10 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PopupState } from "../../config/types/popupTypes";
 
-
 const initialState: PopupState = {
   component: null,
-  props: {},
 };
 
 export const counterSlice = createSlice({
@@ -13,7 +11,6 @@ export const counterSlice = createSlice({
   reducers: {
     openPopup: (state, action: PayloadAction<PopupState>) => {
       state.component = action.payload.component;
-      state.props = action.payload.props;
     },
     closePopup: () => initialState,
   },

@@ -28,7 +28,6 @@
             padding: 1rem;
             background-color: var(--light-secondary-color);
             border-radius: .5rem;
-            gap: 1rem;
 
             .my-credits {
                 flex: 1;
@@ -37,6 +36,7 @@
                 align-items: center;
                 text-align: right;
                 gap: .5rem;
+                max-width: 13rem;
 
                 header {
                     width: 100%;
@@ -54,7 +54,7 @@
                 align-items: center;
                 justify-content: center;
                 border-radius: 50%;
-                $size: 3rem;
+                $size: 4rem;
                 width: $size !important;
                 height: $size;
                 font-size: 1.25rem;

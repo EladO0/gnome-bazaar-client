@@ -8,12 +8,14 @@ import { dataPreviewType } from '../../config/types/commonTypes';
 import './Profile.scss'
 
 const initialUserInfo: UserInfo = {
+    id: "",
     user: "admin",
     pwd: "",
     fullName: "shir hirsh",
     mail: "shirhirsh510@gmail.com",
     phone: "0503403413",
-    credits: 830
+    credits: 830,
+    role: undefined
 };
 
 const expenses: dataPreviewType = [

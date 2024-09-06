@@ -21,12 +21,14 @@ import {
 } from "../../services/utilities/form-utility";
 
 const initialUserInfo: UserInfo = {
+  id: "",
   user: "admin",
   pwd: "Aa123456!",
   fullName: "shir hirsh",
   mail: "shirhirsh510@gmail.com",
   phone: "0503403413",
-  credits: 0
+  credits: 0,
+  role: "Admin"
 };
 
 const Registration = () => {

@@ -11,21 +11,38 @@
     align-items: center;
     gap: 2rem;
 
-    a {
+    .admin-panel {
       display: flex;
       align-items: center;
+      color: var(--active-color);
+      font-size: 1.25rem;
+      font-weight: 500;
+      gap: .25rem;
+      border-radius: 1rem;
+      transition: .4s;
+      padding: 0 .5rem;
+      background-color: var(--primary-color);
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+
       .MuiSvgIcon-root {
         font-size: 1.25rem;
-        color: var(--font-primary-color);
-        background-color: var(--primary-color);
+        color: var(--active-color);
         padding: 0.5rem;
         border-radius: 0.75rem;
         cursor: pointer;
       }
     }
   }
+
   .search-container {
     position: relative;
+
     .search {
       direction: rtl;
       padding-right: 1rem;

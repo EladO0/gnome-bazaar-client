@@ -32,6 +32,7 @@ const Login = () => {
     if (!validateLoginForm(credentials)) return;
 
     const tokenResult = await getAuthToken(credentials);
+    
     if (tokenResult) {
       dispatch(loadToken(tokenResult));
       const msg = `${tokenResult.name} ,שלום`;

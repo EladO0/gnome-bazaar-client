@@ -18,7 +18,7 @@ const Popup = () => {
     popup.component && (
       <div className="popup-container" onClick={closeSelf}>
         <div className="popup" onClick={stopPropagation}>
-          <popup.component {...popup.props} />
+          {popup.component}
         </div>
       </div>
     )

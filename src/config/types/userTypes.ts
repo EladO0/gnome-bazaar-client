@@ -16,11 +16,15 @@ export type Credentials = {
   pwd: string;
 };
 
+export type Role = "Admin" | "Supplier" | "User" | undefined;
+
 export type UserInfo = {
+  id: string,
   user: string;
   pwd: string;
   mail: string;
   fullName: string;
   phone: string;
   credits: number;
+  role: Role
 };

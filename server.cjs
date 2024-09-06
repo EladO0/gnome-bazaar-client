@@ -28,7 +28,7 @@ app.post(`${BASENAME}/api/token`, (req, res) => {
     expiry: new Date(),
     token: " d",
     isAdmin: true,
-    isSupplier: false,
+    isSupplier: true,
   });
 });
 

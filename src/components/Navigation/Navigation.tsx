@@ -6,6 +6,7 @@ import {
   History,
   Logout,
   Person,
+  ProductionQuantityLimits,
   ShoppingCart,
   Storefront,
 } from "@mui/icons-material";
@@ -16,38 +17,50 @@ import {
 import { resetToken } from "../../store/slices/authenticationSlice";
 import { promptMessage } from "../../store/slices/promptSlice";
 import "./Navigation.scss";
+import { JWT } from "../../config/types/userTypes";
 
 const routes: navigationRoutes = [
   {
     url: "/Profile",
     title: "אזור אישי",
+    hasAccess: () => true,
     Icon: <Person />,
+  },
+  {
+    url: "/supplier-panel",
+    title: "פאנל ספקים",
+    Icon: <ProductionQuantityLimits />,
+    hasAccess: (auth: JWT) => auth.isSupplier !== false
   },
   {
     url: "/Market",
     title: "מוצרים",
+    hasAccess: () => true,
     Icon: <Storefront />,
   },
   {
     url: "/Analysis",
     title: "סקירה ונתונים",
+    hasAccess: () => true,
     Icon: <BarChart />,
   },
   {
     url: "/history",
     title: "היסטוריית רכישות",
+    hasAccess: () => true,
     Icon: <History />,
   },
   {
     url: "/About-us",
     title: "צרו קשר",
+    hasAccess: () => true,
     Icon: <ContactSupport />,
   },
 ];
 
 const Navigation = () => {
   const dispatch = useAppDispatch();
-  const loggedUser = useAppSelector((x) => x.auth.name);
+  const auth = useAppSelector((x) => x.auth);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -56,7 +69,7 @@ const Navigation = () => {
   };
 
   const logOut = () => {
-    const msg = `${loggedUser} להתראות`;
+    const msg = `${auth.name} להתראות`;
     dispatch(promptMessage({ message: msg, type: "success" }));
     dispatch(resetToken());
     navigate("/login");
@@ -74,6 +87,7 @@ const Navigation = () => {
       </Link>
       <nav className="routes">
         {routes.map((route, id) => (
+          route.hasAccess(auth) &&
           <Link to={route.url} key={id}>
             <div className={`route ${isActive(route)}`}>
               {route.Icon}
