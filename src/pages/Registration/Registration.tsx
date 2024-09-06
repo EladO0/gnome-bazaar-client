@@ -26,6 +26,7 @@ const initialUserInfo: UserInfo = {
   fullName: "shir hirsh",
   mail: "shirhirsh510@gmail.com",
   phone: "0503403413",
+  credits: 0
 };
 
 const Registration = () => {

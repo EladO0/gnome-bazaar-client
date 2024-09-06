@@ -22,4 +22,5 @@ export type UserInfo = {
   mail: string;
   fullName: string;
   phone: string;
+  credits: number;
 };

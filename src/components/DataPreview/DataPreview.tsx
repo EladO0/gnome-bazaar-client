@@ -1,11 +1,13 @@
+import { Star } from '@mui/icons-material';
 import { dataPreviewType } from '../../config/types/commonTypes';
 import './DataPreview.scss'
 
 const defaultData: dataPreviewType = [];
-const DataPreview = ({ title = "", data = defaultData }) => {
+const DataPreview = ({ title = "", data = defaultData, Icon = Star }) => {
     return (
         <div className="data-preview">
             <header>
+                <Icon />
                 {title}
             </header>
             <div className="data-frame">

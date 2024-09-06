@@ -1,7 +1,8 @@
 .data-preview {
     height: 100%;
     padding: 1rem;
-    border-radius: .25rem;
+    box-sizing: border-box;
+    border-radius: .5rem;
     background-color: var(--theme-color);
     display: flex;
     flex-direction: column;
@@ -10,8 +11,16 @@
     overflow: auto;
 
     header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         font-size: 1.25rem;
         font-weight: 500;
+        gap: .25rem;
+        .MuiSvgIcon-root{
+            font-size: 1.5rem;
+            color: orange;
+        }
     }
 
     .data-frame {

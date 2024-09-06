@@ -1,4 +1,4 @@
-import { AccountCircle, TaskAlt } from '@mui/icons-material'
+import { AccountCircle, Receipt, TaskAlt } from '@mui/icons-material'
 import { useState } from 'react'
 import { UserInfo } from '../../config/types/userTypes';
 import { useAppSelector } from '../../store/hooks';
@@ -13,6 +13,7 @@ const initialUserInfo: UserInfo = {
     fullName: "shir hirsh",
     mail: "shirhirsh510@gmail.com",
     phone: "0503403413",
+    credits: 830
 };
 
 const expenses: dataPreviewType = [
@@ -35,32 +36,32 @@ const expenses: dataPreviewType = [
 
 const categories = [
     {
-        title: "אלעד 1",
+        title: "אלעד",
         total: 100,
         value: 54
     },
     {
-        title: "אלעד 1",
+        title: "תמיד",
         total: 100,
         value: 54
     },
     {
-        title: "אלעד 1",
+        title: "מאחר",
         total: 100,
         value: 54
     },
     {
-        title: "אלעד 1",
+        title: "ואוהב",
         total: 100,
         value: 54
     },
     {
-        title: "אלעד 2",
+        title: "לשקר",
         total: 100,
         value: 30
     },
     {
-        title: "אלעד 3",
+        title: "שלא",
         total: 100,
         value: 70
     }
@@ -128,9 +129,23 @@ const Profile = () => {
     }
     return (
         <div className="profile">
-            <div className='user'>
-                <AccountCircle className='profile-icon' />
-                <div className="title">{profileInfo.user}</div>
+            <div className='user-section'>
+                <div className='user'>
+                    <AccountCircle className='profile-icon' />
+                    <div className="title">{profileInfo.user}</div>
+                </div>
+                <div className='credits'>
+                    <div className='credit-count'>{profileInfo.credits}</div>
+                    <div className='my-credits'>
+                        <header>
+                            💰
+                            הקרדיטים שלי
+                        </header>
+                        <div className='description'>
+                            ניתן לממש את הקרדיטים בעת רכישת גמדים/מוצרי גמדים
+                        </div>
+                    </div>
+                </div>
             </div>
             <div className='information'>
                 <div className='entry' id="fullName">
@@ -154,9 +169,14 @@ const Profile = () => {
                     שמירה
                 </button>
             </div>
-            <div>TODO</div>
-            <DataPreview title='הוצאות' data={expenses} />
-            <DataPreview title='הקטגוריות המועדפות' data={categories} />
+            <DataPreview
+                title='הוצאות'
+                data={expenses}
+                Icon={Receipt}
+            />
+            <DataPreview
+                title='הקטגוריות המועדפות'
+                data={categories} />
         </div>
     )
 }
