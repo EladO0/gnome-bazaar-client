@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { eventTypes } from "../config/constants";
-import { eventEmitter } from "../config/api/api-config";
 import { useAppSelector } from "../store/hooks";
+import { eventEmitter } from "../services/utilities/events-utility";
 import Navigation from "../components/Navigation/Navigation";
 import Navbar from "../components/Navbar/Navbar";
 import Popup from "../components/Popup/Popup";

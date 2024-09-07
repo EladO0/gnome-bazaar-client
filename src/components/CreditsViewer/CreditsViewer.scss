@@ -1,0 +1,12 @@
+.credits-viewer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+
+  .MuiSvgIcon-root {
+    cursor: pointer;
+    color: var(--active-color);
+  }
+}

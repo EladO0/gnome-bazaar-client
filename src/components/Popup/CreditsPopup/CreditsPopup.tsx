@@ -1,50 +1,42 @@
-import { useState } from 'react';
-import { UserInfo } from '../../../config/types/userTypes';
-import './CreditsPopup.scss'
-import { TaskAlt } from '@mui/icons-material';
-import { useAppDispatch } from '../../../store/hooks';
-import { closePopup } from '../../../store/slices/popupSlice';
+import { useState } from "react";
+import { UserInfo } from "../../../config/types/userTypes";
+import { TaskAlt } from "@mui/icons-material";
+import { useAppDispatch } from "../../../store/hooks";
+import { closePopup } from "../../../store/slices/popupSlice";
+import "./CreditsPopup.scss";
 
-const defaultUser: UserInfo =
-{
-    id: "1",
-    credits: 200,
-    fullName: "shiri",
-    mail: "credits",
-    phone: "3243243",
-    user: "4353",
-    pwd: "",
-    role: "User",
+interface CreditsProps {
+  user: UserInfo;
+  callback: (user: UserInfo, amount: number) => void;
 }
+const CreditsPopup: React.FC<CreditsProps> = ({ user, callback }) => {
+  const dispatch = useAppDispatch();
+  const [amount, setAmount] = useState(10);
+  console.log(amount);
 
-const CreditsPopup = ({ user = defaultUser, callback }) => {
-    const dispatch = useAppDispatch();
-    const [amount, setAmount] = useState(10);
-    const update = () => {
-        callback(user, amount);
-        dispatch(closePopup());
-    }
+  const update = () => {
+    callback(user, amount);
+    dispatch(closePopup());
+  };
 
-    const onAmountChange = (e) => {
-        const newVal = e.target.value;
-        setAmount(newVal);
-    }
-    return (
-        <div className="credits-popup">
-            <header>:אנא הזן סכום להוספה</header>
+  const onAmountChange = (e) => {
+    const newVal = parseInt(e.target.value);
+    setAmount(newVal);
+  };
+  return (
+    <div className="credits-popup">
+      <header>:אנא הזן סכום להוספה</header>
 
-            <input
-                type="number"
-                value={amount}
-                onChange={onAmountChange} />
-            <div className='warning'>
-                בלחיצה על כפתור האישור, תוסיף {amount} קרדיטים למשתמש {user.user} ({user.fullName})
-            </div>
-            <button onClick={update}>
-                <TaskAlt />
-                הוספת קרדיטים
-            </button>
-        </div>
-    )
-}
+      <input type="number" value={amount} onChange={onAmountChange} />
+      <div className="warning">
+        בלחיצה על כפתור האישור, תוסיף {amount} קרדיטים למשתמש {user.userName} (
+        {user.fullName})
+      </div>
+      <button onClick={update}>
+        <TaskAlt />
+        הוספת קרדיטים
+      </button>
+    </div>
+  );
+};
 export default CreditsPopup;

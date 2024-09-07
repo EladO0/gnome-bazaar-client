@@ -78,7 +78,10 @@ const userSchemeValidation = (value: string): boolean => {
   return true;
 };
 
-export const validateRegistrationForm = (formData: UserInfo, skip_pwd = false): boolean => {
+export const validateRegistrationForm = (
+  formData: UserInfo,
+  skip_pwd = false
+): boolean => {
   let isValid = true;
   if (!fullNameSchemeValidation(formData.fullName)) {
     document.getElementById("fullName")?.classList.add("error");
@@ -95,7 +98,7 @@ export const validateRegistrationForm = (formData: UserInfo, skip_pwd = false): 
     document.getElementById("password")?.classList.add("error");
     isValid = false;
   }
-  if (!userSchemeValidation(formData.user)) {
+  if (!userSchemeValidation(formData.userName)) {
     document.getElementById("user")?.classList.add("error");
     isValid = false;
   }

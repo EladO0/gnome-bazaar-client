@@ -1,185 +1,166 @@
-import { AccountCircle, Receipt, TaskAlt } from '@mui/icons-material'
-import { useState } from 'react'
-import { UserInfo } from '../../config/types/userTypes';
-import { useAppSelector } from '../../store/hooks';
-import { validateFullName, validateMail, validatePhone, validateRegistrationForm, validateUser } from '../../services/utilities/form-utility';
-import DataPreview from '../../components/DataPreview/DataPreview';
-import { dataPreviewType } from '../../config/types/commonTypes';
-import './Profile.scss'
-
-const initialUserInfo: UserInfo = {
-    id: "",
-    user: "admin",
-    pwd: "",
-    fullName: "shir hirsh",
-    mail: "shirhirsh510@gmail.com",
-    phone: "0503403413",
-    credits: 830,
-    role: undefined
-};
-
-const expenses: dataPreviewType = [
-    {
-        title: "שיר 1",
-        total: 100,
-        value: 23
-    },
-    {
-        title: "שיר 2",
-        total: 100,
-        value: 78
-    },
-    {
-        title: "שיר 3",
-        total: 100,
-        value: 92
-    }
-]
-
-const categories = [
-    {
-        title: "אלעד",
-        total: 100,
-        value: 54
-    },
-    {
-        title: "תמיד",
-        total: 100,
-        value: 54
-    },
-    {
-        title: "מאחר",
-        total: 100,
-        value: 54
-    },
-    {
-        title: "ואוהב",
-        total: 100,
-        value: 54
-    },
-    {
-        title: "לשקר",
-        total: 100,
-        value: 30
-    },
-    {
-        title: "שלא",
-        total: 100,
-        value: 70
-    }
-]
+import { AccountCircle, Receipt, TaskAlt } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { useAppSelector } from "../../store/hooks";
+import {
+  validateFullName,
+  validateMail,
+  validatePhone,
+  validateRegistrationForm,
+  validateUser,
+} from "../../services/utilities/form-utility";
+import DataPreview from "../../components/DataPreview/DataPreview";
+import { DataPreviewType } from "../../config/types/commonTypes";
+import {
+  getUserCategories,
+  getUserExpenses,
+  getUserProfile,
+} from "../../services/repositories/user-repository";
+import { UserInfo } from "../../config/types/userTypes";
+import "./Profile.scss";
 
 const Profile = () => {
-    const uuid = useAppSelector(x => x.auth.uuid);
-    const [profileInfo, setProfileInfo] = useState(initialUserInfo);
+  const uuid = useAppSelector((x) => x.auth.uuid);
+  const [profileInfo, setProfileInfo] = useState<UserInfo>({
+    id: "",
+    userName: "",
+    pwd: "",
+    fullName: "",
+    mail: "",
+    phone: "",
+    credits: 0,
+    role: undefined,
+  });
 
-    const onUserChange = (e) => {
-        const newVal = e.target.value;
-        if (!validateUser(newVal)) return;
+  const [categoriesData, setCategoriesData] = useState<DataPreviewType>([]);
+  const [expensesData, setExpensesData] = useState<DataPreviewType>([]);
 
-        setProfileInfo((x) => {
-            const newCredentialsState = { ...x };
-            newCredentialsState.user = newVal;
-            return newCredentialsState;
-        });
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      const userResult = await getUserProfile(uuid);
+      setProfileInfo(userResult);
+
+      const expensesResult = await getUserExpenses(uuid);
+      setExpensesData(expensesResult);
+
+      const categoriesResult = await getUserCategories(uuid);
+      setCategoriesData(categoriesResult);
     };
+    fetchProfileData();
+  }, [uuid]);
 
-    const onFullNameChange = (e) => {
-        const newVal = e.target.value;
-        if (!validateFullName(newVal)) return;
+  const onUserChange = (e) => {
+    const newVal = e.target.value;
+    if (!validateUser(newVal)) return;
 
-        setProfileInfo((x) => {
-            const newCredentialsState = { ...x };
-            newCredentialsState.fullName = newVal;
-            return newCredentialsState;
-        });
+    setProfileInfo((x) => {
+      const newCredentialsState = { ...x };
+      newCredentialsState.userName = newVal;
+      return newCredentialsState;
+    });
+  };
+
+  const onFullNameChange = (e) => {
+    const newVal = e.target.value;
+    if (!validateFullName(newVal)) return;
+
+    setProfileInfo((x) => {
+      const newCredentialsState = { ...x };
+      newCredentialsState.fullName = newVal;
+      return newCredentialsState;
+    });
+  };
+
+  const onMailChange = (e) => {
+    const newVal = e.target.value;
+    if (!validateMail(newVal)) return;
+
+    setProfileInfo((x) => {
+      const newCredentialsState = { ...x };
+      newCredentialsState.mail = newVal;
+      return newCredentialsState;
+    });
+  };
+
+  const onPhoneChange = (e) => {
+    const newVal = e.target.value;
+    const isNumeric =
+      newVal.length === 0 ||
+      ("0" <= newVal.slice(-1) && newVal.slice(-1) <= "9");
+    if (!validatePhone(newVal) || !isNumeric) return;
+
+    setProfileInfo((x) => {
+      const newCredentialsState = { ...x };
+      newCredentialsState.phone = newVal;
+      return newCredentialsState;
+    });
+  };
+
+  const saveChanges = async () => {
+    const data = {
+      uuid: uuid,
+      ...profileInfo,
     };
+    if (!validateRegistrationForm(data, true)) return;
 
-    const onMailChange = (e) => {
-        const newVal = e.target.value;
-        if (!validateMail(newVal)) return;
+    // implement save profile changes
 
-        setProfileInfo((x) => {
-            const newCredentialsState = { ...x };
-            newCredentialsState.mail = newVal;
-            return newCredentialsState;
-        });
-    };
-
-    const onPhoneChange = (e) => {
-        const newVal = e.target.value;
-        const isNumeric = newVal.length === 0 || '0' <= newVal.slice(-1) && newVal.slice(-1) <= '9';
-        if (!validatePhone(newVal) || !isNumeric) return;
-
-        setProfileInfo((x) => {
-            const newCredentialsState = { ...x };
-            newCredentialsState.phone = newVal;
-            return newCredentialsState;
-        });
-    };
-
-    const saveChanges = async () => {
-        const data = {
-            uuid: uuid,
-            ...profileInfo
-        }
-        if (!validateRegistrationForm(data, true)) return;
-
-        // implement save profile changes
-
-        return data;
-    }
-    return (
-        <div className="profile">
-            <div className='user-section'>
-                <div className='user'>
-                    <AccountCircle className='profile-icon' />
-                    <div className="title">{profileInfo.user}</div>
-                </div>
-                <div className='credits'>
-                    <div className='credit-count'>{profileInfo.credits}</div>
-                    <div className='my-credits'>
-                        <header>
-                            💰
-                            הקרדיטים שלי
-                        </header>
-                        <div className='description'>
-                            ניתן לממש את הקרדיטים בעת רכישת גמדים/מוצרי גמדים
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className='information'>
-                <div className='entry' id="fullName">
-                    <input type="text" value={profileInfo.user} onChange={onUserChange} />
-                    <header>שם משתמש</header>
-                </div>
-                <div className='entry' id="fullName">
-                    <input type="text" value={profileInfo.fullName} onChange={onFullNameChange} />
-                    <header>שם מלא</header>
-                </div>
-                <div className='entry' id="fullName">
-                    <input type="text" value={profileInfo.mail} onChange={onMailChange} />
-                    <header>כתובת מייל</header>
-                </div>
-                <div className='entry' id="fullName">
-                    <input type="text" value={profileInfo.phone} onChange={onPhoneChange} />
-                    <header>מספר טלפון</header>
-                </div>
-                <button className='edit-btn' onClick={saveChanges}>
-                    <TaskAlt />
-                    שמירה
-                </button>
-            </div>
-            <DataPreview
-                title='הוצאות'
-                data={expenses}
-                Icon={Receipt}
-            />
-            <DataPreview
-                title='הקטגוריות המועדפות'
-                data={categories} />
+    return data;
+  };
+  return (
+    <div className="profile">
+      <div className="user-section">
+        <div className="user">
+          <AccountCircle className="profile-icon" />
+          <div className="title">{profileInfo.userName}</div>
         </div>
-    )
-}
-export default Profile
+        <div className="credits">
+          <div className="credit-count">{profileInfo.credits}</div>
+          <div className="my-credits">
+            <header>💰 הקרדיטים שלי</header>
+            <div className="description">
+              ניתן לממש את הקרדיטים בעת רכישת גמדים/מוצרי גמדים
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="information">
+        <div className="entry" id="fullName">
+          <input
+            type="text"
+            autoFocus
+            value={profileInfo.userName}
+            onChange={onUserChange}
+          />
+          <header>שם משתמש</header>
+        </div>
+        <div className="entry" id="fullName">
+          <input
+            type="text"
+            value={profileInfo.fullName}
+            onChange={onFullNameChange}
+          />
+          <header>שם מלא</header>
+        </div>
+        <div className="entry" id="fullName">
+          <input type="text" value={profileInfo.mail} onChange={onMailChange} />
+          <header>כתובת מייל</header>
+        </div>
+        <div className="entry" id="fullName">
+          <input
+            type="text"
+            value={profileInfo.phone}
+            onChange={onPhoneChange}
+          />
+          <header>מספר טלפון</header>
+        </div>
+        <button className="edit-btn" onClick={saveChanges}>
+          <TaskAlt />
+          שמירה
+        </button>
+      </div>
+      <DataPreview title="הוצאות" data={expensesData} Icon={Receipt} />
+      <DataPreview title="הקטגוריות המועדפות" data={categoriesData} />
+    </div>
+  );
+};
+export default Profile;

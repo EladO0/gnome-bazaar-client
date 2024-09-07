@@ -2,8 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch } from "../store/hooks";
 import { promptMessage } from "../store/slices/promptSlice";
-import { eventEmitter } from "../config/api/api-config";
 import { BASENAME, eventTypes } from "../config/constants";
+import { eventEmitter } from "../services/utilities/events-utility";
 import Root from "../Root/Root";
 import Loader from "../components/Loader/Loader";
 import NotFound from "../pages/NotFound/NotFound";
@@ -93,8 +93,6 @@ const Router = () => {
     setIsLoading(true);
   };
   const stopSpinner = () => {
-    console.log('ffef');
-
     setIsLoading(false);
   };
   const promptNetworkError = useCallback(() => {

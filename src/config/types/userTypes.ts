@@ -3,7 +3,7 @@ export type Supplier = {
 };
 
 export type JWT = {
-  uuid: string,
+  uuid: string;
   token: string;
   name: string;
   expiry: Date;
@@ -19,12 +19,12 @@ export type Credentials = {
 export type Role = "Admin" | "Supplier" | "User" | undefined;
 
 export type UserInfo = {
-  id: string,
-  user: string;
+  id: string;
+  userName: string;
   pwd: string;
   mail: string;
   fullName: string;
   phone: string;
   credits: number;
-  role: Role
+  role: Role;
 };

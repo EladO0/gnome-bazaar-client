@@ -22,13 +22,13 @@ import {
 
 const initialUserInfo: UserInfo = {
   id: "",
-  user: "admin",
+  userName: "admin",
   pwd: "Aa123456!",
   fullName: "shir hirsh",
   mail: "shirhirsh510@gmail.com",
   phone: "0503403413",
   credits: 0,
-  role: "Admin"
+  role: "Admin",
 };
 
 const Registration = () => {
@@ -67,7 +67,7 @@ const Registration = () => {
 
     setUserInfo((x) => {
       const newCredentialsState = { ...x };
-      newCredentialsState.user = newVal;
+      newCredentialsState.userName = newVal;
       return newCredentialsState;
     });
   };
@@ -96,7 +96,9 @@ const Registration = () => {
 
   const onPhoneChange = (e) => {
     const newVal = e.target.value;
-    const isNumeric = newVal.length === 0 || '0' <= newVal.slice(-1) && newVal.slice(-1) <= '9';
+    const isNumeric =
+      newVal.length === 0 ||
+      ("0" <= newVal.slice(-1) && newVal.slice(-1) <= "9");
     if (!validatePhone(newVal) || !isNumeric) return;
 
     setUserInfo((x) => {
@@ -116,6 +118,7 @@ const Registration = () => {
           <div className="field-container" id="fullName">
             <AccountCircle />
             <input
+              autoFocus
               value={registrationData.fullName}
               onChange={onFullNameChange}
               name="fullName"
@@ -129,7 +132,7 @@ const Registration = () => {
           <div className="field-container" id="user">
             <PersonOutline />
             <input
-              value={registrationData.user}
+              value={registrationData.userName}
               onChange={onUserChange}
               name="username"
               type="text"
@@ -137,7 +140,6 @@ const Registration = () => {
             />
           </div>
         </div>
-
 
         <div className="input-container">
           <label htmlFor="password">סיסמא:</label>

@@ -1,7 +1,7 @@
 import { ManageAccounts, Search } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import "./Navbar.scss";
 import { useAppSelector } from "../../store/hooks";
+import "./Navbar.scss";
 
 const Navbar = () => {
   const auth = useAppSelector(x => x.auth);

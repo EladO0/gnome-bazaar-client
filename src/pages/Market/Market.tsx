@@ -1,10 +1,27 @@
-import './Market.scss'
+import "./Market.scss";
 
-const Market = ()=>{
-    return(
-        <div className="market">
-
-        </div>
-    )
-}
-export default Market
+const Market = () => {
+  return (
+    <div className="market">
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+      <div className="product-card"></div>
+    </div>
+  );
+};
+export default Market;

@@ -1,67 +1,69 @@
 .data-preview {
-    height: 100%;
-    padding: 1rem;
-    box-sizing: border-box;
-    border-radius: .5rem;
-    background-color: var(--theme-color);
+  background-color: var(--theme-color);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  overflow: auto;
+
+  header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 500;
+    gap: 0.25rem;
+    .MuiSvgIcon-root {
+      font-size: 1.5rem;
+      color: orange;
+    }
+  }
+
+  .data-frame {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
     overflow: auto;
 
-    header {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        font-size: 1.25rem;
-        font-weight: 500;
-        gap: .25rem;
-        .MuiSvgIcon-root{
-            font-size: 1.5rem;
-            color: orange;
-        }
-    }
+    .entry {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 1rem;
 
-    .data-frame {
+      header {
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        overflow: auto;
+        text-align: right;
+        font-size: 1rem;
+        color: var(--font-primary-color);
+        font-weight: 600;
+      }
 
-        .entry {
-            width: 80%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            justify-content: center;
-            gap: 1rem;
+      .row-container {
+        background-color: var(--secondary-color);
+        width: 100%;
 
-            header {
-                width: 100%;
-                text-align: right;
-                font-size: 1rem;
-                color: var(--font-primary-color);
-                font-weight: 600;
-            }
-
-            .row-container {
-                background-color: var(--secondary-color);
-                width: 100%;
-
-                &,
-                .row {
-                    height: 1.5rem;
-                    border-radius: 1rem;
-                }
-
-                .row {
-                    z-index: 1;
-                    background-color: var(--active-color);
-                }
-            }
+        &,
+        .row {
+          height: 1.5rem;
+          border-radius: 1rem;
         }
+
+        .row {
+          z-index: 1;
+          background-color: var(--active-color);
+        }
+      }
     }
+  }
 }

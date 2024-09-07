@@ -12,6 +12,10 @@ html {
   --font-primary-color: #7c879c;
   --font-light-color: #7c879c86;
   --second-color: #7398ff58;
+
+  --card-radius: 0.75rem;
+  --card-border: 1px solid var(--light-primary-color);
+  --card-shadow: 0 0 0.3rem 0.1rem var(--light-primary-color);
 }
 
 body {
@@ -24,7 +28,7 @@ body {
     animation: 0.4s fade-in ease;
 
     &::-webkit-scrollbar {
-      width: .85rem;
+      width: 0.85rem;
     }
 
     &::-webkit-scrollbar-track {

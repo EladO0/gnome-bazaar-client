@@ -4,19 +4,28 @@ export type Props = {
   [key: string | number]: any;
 };
 
-export type navigationRoute = {
+export type NavigationRoute = {
   url: string;
   title: string;
   Icon: any;
-  hasAccess: (auth: JWT) => boolean
+  hasAccess: (auth: JWT) => boolean;
 };
 
-export type navigationRoutes = Array<navigationRoute>;
+export type NavigationRoutes = Array<NavigationRoute>;
 
+export type DataPreviewType = Array<{
+  title: string;
+  value: number;
+  total: number;
+}>;
 
+export type TableConfiguration = Array<{
+  header: string;
+  getter: (entry: any) => any;
+  flex: number;
+}>;
 
-export type dataPreviewType = Array<{
-  title: string,
-  value: number,
-  total: number
-}>
+export type SalesData = {
+  date: Date;
+  close: number;
+};

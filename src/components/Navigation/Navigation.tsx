@@ -11,15 +11,15 @@ import {
   Storefront,
 } from "@mui/icons-material";
 import {
-  navigationRoute,
-  navigationRoutes,
+  NavigationRoute,
+  NavigationRoutes,
 } from "../../config/types/commonTypes";
 import { resetToken } from "../../store/slices/authenticationSlice";
 import { promptMessage } from "../../store/slices/promptSlice";
 import "./Navigation.scss";
 import { JWT } from "../../config/types/userTypes";
 
-const routes: navigationRoutes = [
+const routes: NavigationRoutes = [
   {
     url: "/Profile",
     title: "אזור אישי",
@@ -30,7 +30,7 @@ const routes: navigationRoutes = [
     url: "/supplier-panel",
     title: "פאנל ספקים",
     Icon: <ProductionQuantityLimits />,
-    hasAccess: (auth: JWT) => auth.isSupplier !== false
+    hasAccess: (auth: JWT) => auth.isSupplier !== false,
   },
   {
     url: "/Market",
@@ -64,7 +64,7 @@ const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const isActive = (route: navigationRoute) => {
+  const isActive = (route: NavigationRoute) => {
     return location.pathname.includes(route.url) ? "selected" : undefined;
   };
 
@@ -86,15 +86,17 @@ const Navigation = () => {
         </button>
       </Link>
       <nav className="routes">
-        {routes.map((route, id) => (
-          route.hasAccess(auth) &&
-          <Link to={route.url} key={id}>
-            <div className={`route ${isActive(route)}`}>
-              {route.Icon}
-              {route.title}
-            </div>
-          </Link>
-        ))}
+        {routes.map(
+          (route, id) =>
+            route.hasAccess(auth) && (
+              <Link to={route.url} key={id}>
+                <div className={`route ${isActive(route)}`}>
+                  {route.Icon}
+                  {route.title}
+                </div>
+              </Link>
+            )
+        )}
       </nav>
       <div className="log-out" onClick={logOut}>
         התנתקות

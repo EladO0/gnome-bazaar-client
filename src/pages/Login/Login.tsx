@@ -32,7 +32,7 @@ const Login = () => {
     if (!validateLoginForm(credentials)) return;
 
     const tokenResult = await getAuthToken(credentials);
-    
+
     if (tokenResult) {
       dispatch(loadToken(tokenResult));
       const msg = `${tokenResult.name} ,שלום`;
@@ -74,6 +74,7 @@ const Login = () => {
           <div className="field-container" id="user">
             <PersonOutline />
             <input
+              autoFocus
               value={credentials.user}
               onChange={onUserChange}
               name="username"

@@ -1,6 +1,6 @@
 import axios from "axios";
-import { EventEmitter } from "events";
-import { eventTypes, statusCodes } from "../constants";
+import { statusCodes } from "../constants";
+import { emitExpired, emitFinishLoading, emitLoading, emitNetWorkError, emitUnAuthorized } from "../../services/utilities/events-utility";
 
 const server = `http://localhost:5000/Gnome-Bazaar/api`;
 
@@ -8,28 +8,6 @@ const apiService = axios.create({
   baseURL: server,
 });
 
-export const eventEmitter = new EventEmitter();
-export const emitUnAuthorized = () => {
-  console.log("unauthorized user");
-  eventEmitter.emit(eventTypes.UnAuthorized);
-};
-
-const emitExpired = () => {
-  console.log("token has Expired");
-  eventEmitter.emit(eventTypes.TokenExpired);
-};
-
-const emitNetWorkError = () => {
-  console.log("Network Error");
-  eventEmitter.emit(eventTypes.NetWorkError);
-};
-const emitLoading = () => {
-  eventEmitter.emit(eventTypes.StartLoading);
-};
-
-const emitFinishLoading = () => {
-  eventEmitter.emit(eventTypes.FinishLoading);
-};
 
 apiService.interceptors.request.use(async (config) => {
   //   const token = await localStorage.getItem(JWT)
