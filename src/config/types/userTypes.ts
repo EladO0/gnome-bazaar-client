@@ -1,5 +1,8 @@
+import { Product } from "./marketTypes";
+
 export type Supplier = {
-  products: Array<number>;
+  products: Array<Product>;
+  storeAddress: string;
 };
 
 export type JWT = {

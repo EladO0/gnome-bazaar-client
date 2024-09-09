@@ -15,6 +15,13 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get(`/assets/:img`, async (req, res) => {
+  const { img } = req.params;
+  console.log("d fdsf");
+
+  res.sendFile(path.join(__dirname, "public", "gnomes", img));
+});
+
 app.post(`${BASENAME}/api/token`, (req, res) => {
   const { user, pwd } = req.body;
   console.log(user, pwd);
@@ -31,7 +38,6 @@ app.post(`${BASENAME}/api/token`, (req, res) => {
     isSupplier: true,
   });
 });
-
 app.get(`${BASENAME}/404`, (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
@@ -60,7 +66,6 @@ app.get(`${BASENAME}/*`, (req, res, next) => {
 app.use((req, res) => {
   res.redirect(`${BASENAME}/404`);
 });
-
 
 app.listen(port, () => {
   console.log(

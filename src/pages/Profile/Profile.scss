@@ -21,52 +21,6 @@
     justify-content: space-between;
     padding: 2rem;
 
-    .credits {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-around;
-      padding: 1rem;
-      background-color: var(--light-secondary-color);
-      border-radius: 0.5rem;
-
-      .my-credits {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: right;
-        gap: 0.5rem;
-        max-width: 13rem;
-
-        header {
-          width: 100%;
-          font-size: 1.25rem;
-          font-weight: 500;
-        }
-
-        .description {
-          color: var(--font-primary-color);
-        }
-      }
-
-      .credit-count {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        $size: 4rem;
-        width: $size !important;
-        height: $size;
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--active-color);
-        background-color: var(--theme-color);
-        border: 0.3rem solid var(--active-color);
-      }
-    }
-
     .user {
       margin-top: 1rem;
       flex: 0.7;

@@ -17,6 +17,7 @@ import {
 } from "../../services/repositories/user-repository";
 import { UserInfo } from "../../config/types/userTypes";
 import "./Profile.scss";
+import PriceTag from "../../components/PriceTag/PriceTag";
 
 const Profile = () => {
   const uuid = useAppSelector((x) => x.auth.uuid);
@@ -113,15 +114,11 @@ const Profile = () => {
           <AccountCircle className="profile-icon" />
           <div className="title">{profileInfo.userName}</div>
         </div>
-        <div className="credits">
-          <div className="credit-count">{profileInfo.credits}</div>
-          <div className="my-credits">
-            <header>💰 הקרדיטים שלי</header>
-            <div className="description">
-              ניתן לממש את הקרדיטים בעת רכישת גמדים/מוצרי גמדים
-            </div>
-          </div>
-        </div>
+        <PriceTag
+          credits={profileInfo.credits}
+          title="💰 הקרדיטים שלי"
+          description=" ניתן לממש את הקרדיטים בעת רכישת גמדים/מוצרי גמדים"
+        />
       </div>
       <div className="information">
         <div className="entry" id="fullName">

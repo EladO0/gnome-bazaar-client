@@ -71,7 +71,8 @@
     color: var(--active-color);
     font-weight: 500;
     font-size: 1rem;
-    margin: 1rem;
+    margin: 0 1rem;
+    margin-bottom: 1rem;
     padding: 0.5rem 1rem;
     cursor: pointer;
     transition: 0.75s !important;
@@ -80,5 +81,11 @@
     &:hover {
       background-color: var(--light-theme-color);
     }
+  }
+
+  .logged-user {
+    color: var(--font-primary-color);
+    font-size: 0.75rem;
+    font-weight: 500;
   }
 }

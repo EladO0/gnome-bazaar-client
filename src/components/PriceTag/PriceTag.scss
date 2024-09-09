@@ -1,0 +1,58 @@
+.price-tag {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: var(--light-secondary-color);
+  border-radius: 0.5rem;
+  gap: 1rem;
+  direction: ltr;
+
+  @mixin set-size($size) {
+    .my-credits {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: right;
+      gap: 0.5rem;
+
+      header {
+        width: 100%;
+        font-size: calc($size / 3);
+        font-weight: 500;
+      }
+
+      .description {
+        color: var(--font-primary-color);
+        font-size: calc($size / 4);
+        word-break: break-all;
+        direction: rtl;
+      }
+    }
+
+    .credit-count {
+      // @include set-size(4rem);
+      width: $size !important;
+      height: $size;
+      font-size: calc($size / 3);
+      border: calc($size / 12) solid var(--active-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: 600;
+      color: var(--active-color);
+      background-color: var(--theme-color);
+    }
+  }
+
+  &.small {
+    @include set-size(3rem);
+  }
+
+  @include set-size(4rem);
+}

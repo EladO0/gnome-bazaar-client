@@ -98,6 +98,7 @@ const Navigation = () => {
             )
         )}
       </nav>
+      <div className="logged-user">{auth.name}</div>
       <div className="log-out" onClick={logOut}>
         התנתקות
         <Logout />
