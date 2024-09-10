@@ -37,7 +37,7 @@ const Login = () => {
       dispatch(loadToken(tokenResult));
       const msg = `${tokenResult.name} ,שלום`;
       dispatch(promptMessage({ message: msg, type: "success" }));
-      navigate(`/`);
+      navigate(`/market`);
     } else {
       setCredentials(initialCredentials);
       const msg = "!שם משתמש או סיסמא אינם נכונים";

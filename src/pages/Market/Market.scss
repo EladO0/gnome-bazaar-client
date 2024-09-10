@@ -13,6 +13,12 @@
   .product-container {
     animation: animate 0.75s ease forwards;
     opacity: 0;
+    animation-delay: 0.75s;
+    @for $i from 1 through 12 {
+      &:nth-child(#{$i}) {
+        animation-delay: $i * 0.15s;
+      }
+    }
   }
 
   @keyframes animate {

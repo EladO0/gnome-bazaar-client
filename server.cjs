@@ -17,7 +17,6 @@ app.use((req, res, next) => {
 
 app.get(`/assets/:img`, async (req, res) => {
   const { img } = req.params;
-  console.log("d fdsf");
 
   res.sendFile(path.join(__dirname, "public", "gnomes", img));
 });

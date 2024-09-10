@@ -12,6 +12,10 @@ interface ProductProps {
 }
 
 const ProductCard: React.FC<ProductProps> = ({ product }) => {
+  const addToCart = () => {};
+
+  const addToWishList = () => {};
+
   return (
     <div className="product-card">
       <img
@@ -22,8 +26,8 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
       />
 
       <div className="actions">
-        <Favorite className="liked" />
-        <ShoppingCart className="cart" />
+        <Favorite className="liked" onClick={addToWishList} />
+        <ShoppingCart className="cart" onClick={addToCart} />
       </div>
       <div className="product-info">
         <div className="headers">

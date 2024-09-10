@@ -30,6 +30,9 @@
       background-color: transparentize($color: #fff, $amount: 0.25);
       padding: .1rem;
       border-radius: .25rem;
+      box-shadow: 0 0 1rem .15rem var(--theme-color);
+      border: var(--card-border);
+      cursor: pointer;
     }
     .liked {
       color: palevioletred;

@@ -20,7 +20,6 @@ const Root = () => {
     navigate("/login");
   }, [navigate]);
 
-
   useEffect(() => {
     eventEmitter.on(eventTypes.UnAuthorized, unAuthorize);
     eventEmitter.on(eventTypes.TokenExpired, requireLogin);
@@ -52,7 +51,6 @@ const Root = () => {
           <Outlet />
         </div>
       </div>
-
       <Popup />
     </div>
   );

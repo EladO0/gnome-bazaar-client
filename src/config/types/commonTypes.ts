@@ -29,3 +29,7 @@ export type SalesData = {
   date: Date;
   close: number;
 };
+
+export type FiltersType = {
+  searchTerm: string;
+};

@@ -15,3 +15,4 @@ export const statusCodes = {
 export const BASENAME = "/Gnome-Bazaar";
 
 export const MAX_PROMPT_TIMER = 5; //seconds
+export const ENTRIES_PER_PAGE = 8;

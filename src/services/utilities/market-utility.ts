@@ -17,7 +17,7 @@ export const translateCategory = (category: Category): string => {
   }
 };
 
-export const shorten = (text: string, max: number = 35): string => {
+export const shorten = (text: string, max: number = 40): string => {
   if (text.length <= max) return text;
   return text.slice(0, max) + "...";
 };
