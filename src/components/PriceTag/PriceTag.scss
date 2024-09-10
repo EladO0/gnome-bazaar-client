@@ -27,6 +27,7 @@
       }
 
       .description {
+        width: 100%;
         color: var(--font-primary-color);
         font-size: calc($size / 4);
         word-break: break-all;

@@ -1,6 +1,8 @@
+import { gnomes } from "../../config/constants";
 import { DataPreviewType } from "../../config/types/commonTypes";
+import { Product } from "../../config/types/marketTypes";
 import { UserInfo } from "../../config/types/userTypes";
-import { delay } from "../utilities/common-utility";
+import { delay, randomBetween, randomString } from "../utilities/common-utility";
 
 export const getUserProfile = (uuid: string): Promise<UserInfo> => {
   const user = {
@@ -77,3 +79,25 @@ export const getUserCategories = (uuid: string): Promise<DataPreviewType> => {
 
   return delay(data);
 };
+
+
+export const getCartProducts = (uuid: string, n: number = 15): Promise<Array<Product>> => {
+  const products: Array<Product> = [];
+  for (let i = 0; i < n; i++) {
+    const product: Product = {
+      id: uuid + i.toString(),
+      description: randomString(40),
+      img:
+        "http://localhost:5000/assets/" +
+        gnomes[randomBetween(0, gnomes.length - 1)],
+      name: "מוצר" + " " + i,
+      price: randomBetween(250, 600),
+      storeAddress: randomString(14),
+      category: "Gnome",
+      quantity: randomBetween(0, 10),
+    };
+    products.push(product);
+  }
+
+  return delay(products);
+}

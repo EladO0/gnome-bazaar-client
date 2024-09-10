@@ -30,13 +30,13 @@
       cursor: pointer;
 
       @mixin set-tag($color) {
+        color: $color;
+        border-color: $color;
+        box-shadow: 0 0 3rem 0.1rem transparentize($color: $color, $amount: 0.75);
         &.active {
           background-color: $color;
           color: var(--theme-color);
         }
-        color: $color;
-        border-color: $color;
-        box-shadow: 0 0 3rem 0.1rem transparentize($color: $color, $amount: 0.75);
       }
 
       &:nth-child(1) {
