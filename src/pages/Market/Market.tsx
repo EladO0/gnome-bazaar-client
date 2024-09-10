@@ -1,17 +1,36 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Product } from "../../config/types/marketTypes";
+import { Category, Product } from "../../config/types/marketTypes";
 import { getProducts } from "../../services/repositories/market-repository";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { ENTRIES_PER_PAGE } from "../../config/constants";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import "./Market.scss";
+import { translateCategory } from "../../services/utilities/market-utility";
+import { updateSearchCategory } from "../../store/slices/filtersSlice";
+
+const categories: Array<Category> = [
+  "Accessories",
+  "Gnome",
+  "Hat",
+  "Pants",
+  "Shirt",
+  "Shoes"
+]
 
 const Market = () => {
+  const dispatch = useAppDispatch();
   const marketRef = useRef<HTMLDivElement | null>(null);
   const searchFilters = useAppSelector((x) => x.filters);
   const [products, setProducts] = useState<Product[]>([]);
   const [entriesToSkip, setEntriesToSkip] = useState<number>(0);
 
+  const setCategoryFilter = (category: Category): void => {
+    dispatch(updateSearchCategory(category));
+  }
+
+  const isCategorySelected = (category: Category) => {
+    return searchFilters.category === category ? "filter active" : "filter";
+  }
   useEffect(() => {
     const fetchMarketData = async () => {
       marketRef.current?.scrollTo({ top: 0 });
@@ -51,11 +70,21 @@ const Market = () => {
   }, [handleScroll]);
   return (
     <div className="market" ref={marketRef}>
-      {products.map((product, i) => (
-        <div key={i} className="product-container">
-          <ProductCard product={product} />
-        </div>
-      ))}
+      <div className="filters">
+        {categories.map((c, i) => (
+          <div className={isCategorySelected(c)} key={i}
+            onClick={() => setCategoryFilter(c)}>
+            {translateCategory(c)}
+          </div>
+        ))}
+      </div>
+      <div className="products">
+        {products.map((product, i) => (
+          <div key={i} className="product-container">
+            <ProductCard product={product} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

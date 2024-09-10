@@ -3,13 +3,15 @@ import { Category } from "../../config/types/marketTypes";
 export const translateCategory = (category: Category): string => {
   switch (category) {
     case "Gnome":
-      return "גמד";
+      return "גמדים";
     case "Hat":
-      return "כובע";
+      return "כובעים";
     case "Shirt":
-      return "חולצה";
+      return "חולצות";
     case "Shoes":
       return "נעליים";
+    case "Pants":
+      return "מכנסיים";
     case "Accessories":
       return "אביזרים";
     default:

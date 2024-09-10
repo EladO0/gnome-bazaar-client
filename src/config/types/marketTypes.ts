@@ -1,4 +1,4 @@
-export type Category = "Gnome" | "Hat" | "Shirt" | "Shoes" | "Accessories";
+export type Category = "Gnome" | "Hat" | "Shirt" | "Pants" | "Shoes" | "Accessories";
 
 export type Product = {
   id: string;

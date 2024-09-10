@@ -1,3 +1,4 @@
+import { Category } from "./marketTypes";
 import { JWT } from "./userTypes";
 
 export type Props = {
@@ -32,4 +33,5 @@ export type SalesData = {
 
 export type FiltersType = {
   searchTerm: string;
+  category: Category | undefined
 };
