@@ -29,7 +29,6 @@ const Cart = () => {
                 product: product,
                 quantity: 1
             }))
-            console.log(cartProducts);
 
             setProducts(cartProducts);
         }

@@ -12,8 +12,7 @@ interface CreditsProps {
 const CreditsPopup: React.FC<CreditsProps> = ({ user, callback }) => {
   const dispatch = useAppDispatch();
   const [amount, setAmount] = useState(10);
-  console.log(amount);
-
+  
   const update = () => {
     callback(user, amount);
     dispatch(closePopup());

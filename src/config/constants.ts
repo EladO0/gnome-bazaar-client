@@ -15,8 +15,7 @@ export const statusCodes = {
 export const BASENAME = "/Gnome-Bazaar";
 
 export const MAX_PROMPT_TIMER = 5; //seconds
-export const ENTRIES_PER_PAGE = 8;
-
+export const ENTRIES_PER_PAGE = 4 * 3;
 
 export const gnomes = [
   "gnome1.webp",
@@ -63,5 +62,13 @@ export const gnomes = [
   "Shoes2.webp",
   "Shoes3.webp",
   "Shoes4.webp",
-  "Shoes5.webp"
+  "Shoes5.webp",
+  "acc1.jpeg",
+  "acc2.jpeg",
+  "acc3.jpeg",
+  "acc4.jpeg",
+  "acc5.jpeg",
+  "acc6.jpeg",
+  "acc7.jpeg",
+  "acc8.jpeg",
 ];
