@@ -1,3 +1,4 @@
+import millify from "millify";
 import "./PriceTag.scss";
 
 interface PriceTagProps {
@@ -13,10 +14,14 @@ const PriceTag: React.FC<PriceTagProps> = ({
   description,
   small = false,
 }) => {
-
   return (
     <div className={`price-tag ${small && "small"}`}>
-      <div className="credit-count">{credits}</div>
+      <div className="credit-count">
+        {millify(credits, {
+          precision: 3,
+          lowercase: true,
+        })}
+      </div>
       <div className="my-credits">
         <header>{title}</header>
         <div className="description">{description}</div>

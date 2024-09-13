@@ -1,8 +1,13 @@
 import { gnomes } from "../../config/constants";
 import { DataPreviewType } from "../../config/types/commonTypes";
-import { Product } from "../../config/types/marketTypes";
+import { CartProduct, Product, Purchase } from "../../config/types/marketTypes";
 import { UserInfo } from "../../config/types/userTypes";
-import { delay, randomBetween, randomString } from "../utilities/common-utility";
+import {
+  delay,
+  randomBetween,
+  randomDate,
+  randomString,
+} from "../utilities/common-utility";
 
 export const getUserProfile = (uuid: string): Promise<UserInfo> => {
   const user = {
@@ -80,9 +85,12 @@ export const getUserCategories = (uuid: string): Promise<DataPreviewType> => {
   return delay(data);
 };
 
-
-export const getCartProducts = (uuid: string, n: number = 15): Promise<Array<Product>> => {
-  const products: Array<Product> = [];
+export const getCartProducts = (
+  uuid: string,
+  n: number = 15,
+  hasDelay: boolean = true
+): Promise<Array<CartProduct>> => {
+  const products: Array<CartProduct> = [];
   for (let i = 0; i < n; i++) {
     const product: Product = {
       id: uuid + i.toString(),
@@ -96,8 +104,30 @@ export const getCartProducts = (uuid: string, n: number = 15): Promise<Array<Pro
       category: "Gnome",
       quantity: randomBetween(0, 10),
     };
-    products.push(product);
+    const cartProduct: CartProduct = {
+      product: product,
+      quantity: 1,
+    };
+    products.push(cartProduct);
   }
 
-  return delay(products);
-}
+  return delay(products, hasDelay);
+};
+
+export const getUserPurchases = async (
+  uuid: string,
+  n: number = 7
+): Promise<Array<Purchase>> => {
+  const purchases: Array<Purchase> = [];
+  for (let i = 0; i < n; i++) {
+    const products = await getCartProducts(uuid, 6, false);
+    const purchase: Purchase = {
+      products: products,
+      uuid: uuid + randomString(40),
+      date: randomDate(),
+    };
+    purchases.push(purchase);
+  }
+
+  return delay(purchases);
+};

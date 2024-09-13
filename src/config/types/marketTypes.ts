@@ -1,4 +1,10 @@
-export type Category = "Gnome" | "Hat" | "Shirt" | "Pants" | "Shoes" | "Accessories";
+export type Category =
+  | "Gnome"
+  | "Hat"
+  | "Shirt"
+  | "Pants"
+  | "Shoes"
+  | "Accessories";
 
 export type Product = {
   id: string;
@@ -11,8 +17,18 @@ export type Product = {
   quantity: number;
 };
 
-
 export type CartProduct = {
-  product: Product,
-  quantity: number
+  product: Product;
+  quantity: number;
+};
+
+export type Purchase = {
+  uuid: string;
+  date: Date;
+  products: Array<CartProduct>;
+};
+
+export type MarketFiltersType = {
+  productName: string;
+  category: Category | null;
 };

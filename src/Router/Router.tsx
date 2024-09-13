@@ -12,9 +12,9 @@ import Profile from "../pages/Profile/Profile";
 import Market from "../pages/Market/Market";
 import Analysis from "../pages/Analysis/Analysis";
 import AdminPanel from "../pages/AdminPanel/AdminPanel";
-import UserHistory from "../pages/UserHistory/UserHistory";
+import UserPurchases from "../pages/UserPurchases/UserPurchases";
 import AboutUs from "../pages/AboutUs/AboutUs";
-import Cart from "../pages/Cart/Cart";
+import UserCart from "../pages/UserCart/UserCart";
 import Prompt from "../components/Prompt/Prompt";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
@@ -40,12 +40,12 @@ const router = createBrowserRouter(
           element: <Profile />,
         },
         {
-          path: "/history",
-          element: <UserHistory />,
+          path: "/user-purchases",
+          element: <UserPurchases />,
         },
         {
           path: "/shopping-cart",
-          element: <Cart />,
+          element: <UserCart />,
         },
         {
           path: "/about-us",

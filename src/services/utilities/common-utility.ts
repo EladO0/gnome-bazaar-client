@@ -23,12 +23,23 @@ export const randomRole = (): Role => {
   return options[randomIndex];
 };
 
-export const delay = async <T>(data: T): Promise<T> => {
+export const randomDate = (): Date => {
+  const date = randomBetween(1, 28);
+  const month = randomBetween(0, 11);
+  const year = randomBetween(2018, 2024);
+  return new Date(year, month, date);
+};
+
+export const delay = async <T>(
+  data: T,
+  hasDelay: boolean = true
+): Promise<T> => {
   emitLoading();
+  const timer = hasDelay ? 500 : 0;
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(data);
       emitFinishLoading();
-    }, 500);
+    }, timer);
   });
 };

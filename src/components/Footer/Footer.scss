@@ -11,14 +11,12 @@
   gap: 1rem;
 
   .logo {
-    background-image: url("/gnome.png");
+    background-image: url("/logos/gnome.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     width: 3rem;
     height: 2rem;
-    // margin-left: 2rem;
-    // font-weight: 600;
   }
   .authors {
     display: flex;

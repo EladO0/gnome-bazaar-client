@@ -9,7 +9,7 @@ export const store = configureStore({
     popup: popupSlice,
     auth: authSlice,
     prompt: promptSlice,
-    filters: filtersSlice,
+    search: filtersSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

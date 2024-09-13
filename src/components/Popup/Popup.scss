@@ -9,15 +9,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: auto;
+  direction: rtl;
 
   .popup {
     border-radius: 0.75rem;
     border-color: var(--primary-color);
     border-width: 0.125rem;
     border-style: solid;
-    background-color: var(--theme-color);
+    background-color: var(--light-secondary-color);
     padding: 1rem;
+    padding-left: 1rem;
+    overflow: auto;
+    max-height: 75%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    box-shadow: 0 0 5rem .1rem var(--theme-color);
+    box-shadow: 0 0 5rem 0.1rem var(--theme-color);
   }
 }

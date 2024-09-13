@@ -36,10 +36,9 @@
     }
 
     .credit-count {
-      // @include set-size(4rem);
       width: $size !important;
       height: $size;
-      font-size: calc($size / 3);
+      font-size: calc($size / 4);
       border: calc($size / 12) solid var(--active-color);
       display: flex;
       align-items: center;

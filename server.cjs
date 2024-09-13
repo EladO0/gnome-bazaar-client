@@ -15,10 +15,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get(`/assets/:img`, async (req, res) => {
+app.get(`/image-repo/:img`, async (req, res) => {
   const { img } = req.params;
+  console.log(img);
 
-  res.sendFile(path.join(__dirname, "public", "gnomes", img));
+  res.sendFile(path.join(__dirname, "public", 'assets', img));
 });
 
 app.post(`${BASENAME}/api/token`, (req, res) => {

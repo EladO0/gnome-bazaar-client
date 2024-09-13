@@ -1,6 +1,5 @@
 import { gnomes } from "../../config/constants";
-import { FiltersType } from "../../config/types/commonTypes";
-import { Product } from "../../config/types/marketTypes";
+import { MarketFiltersType, Product } from "../../config/types/marketTypes";
 import {
   delay,
   randomBetween,
@@ -8,7 +7,7 @@ import {
 } from "../utilities/common-utility";
 
 export const getProducts = async (
-  filters: FiltersType,
+  filters: MarketFiltersType,
   n: number = 30,
   entriesToSkip: number = 0
 ): Promise<Product[]> => {
@@ -20,7 +19,7 @@ export const getProducts = async (
       id: i.toString(),
       description: randomString(40),
       img:
-        "http://localhost:5000/assets/" +
+        "http://localhost:5000/image-repo/" +
         gnomes[randomBetween(0, gnomes.length - 1)],
       name: "מוצר" + " " + i,
       price: randomBetween(250, 600),

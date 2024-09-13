@@ -45,7 +45,7 @@ const routes: NavigationRoutes = [
     Icon: <BarChart />,
   },
   {
-    url: "/history",
+    url: "/user-purchases",
     title: "היסטוריית רכישות",
     hasAccess: () => true,
     Icon: <History />,
@@ -65,7 +65,9 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const isActive = (route: NavigationRoute) => {
-    return location.pathname.includes(route.url) ? "selected" : undefined;
+    return location.pathname.toLowerCase().includes(route.url.toLowerCase())
+      ? "selected"
+      : undefined;
   };
 
   const logOut = () => {

@@ -6,13 +6,13 @@ import "./Navbar.scss";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
-  const searchTerm = useAppSelector((x) => x.filters.searchTerm);
+  const searchTerm = useAppSelector((x) => x.search.searchTerm);
 
   const auth = useAppSelector((x) => x.auth);
 
   const onSearchChange = (e): void => {
     const newVal = e.target.value;
-    dispatch(updateSearchValue({ searchTerm: newVal }));
+    dispatch(updateSearchValue(newVal));
   };
 
   return (
