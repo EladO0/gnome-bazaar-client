@@ -16,6 +16,7 @@
   "dependencies": {
     "@mui/icons-material": "^5.16.7",
     "@mui/x-date-pickers": "^7.16.0",
+    "@react-google-maps/api": "^2.19.3",
     "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.4",
     "cors": "^2.8.5",

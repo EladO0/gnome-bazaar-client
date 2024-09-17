@@ -96,7 +96,7 @@ export const getCartProducts = (
       id: uuid + i.toString(),
       description: randomString(40),
       img:
-        "http://localhost:5000/assets/" +
+        "http://localhost:5000/image-repo/" +
         gnomes[randomBetween(0, gnomes.length - 1)],
       name: "מוצר" + " " + i,
       price: randomBetween(250, 600),

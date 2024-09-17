@@ -64,12 +64,6 @@ const Login = () => {
     });
   };
 
-  const attack = () => {
-    const iframe = document.getElementById("target");
-    const data = iframe?.contentDocument || iframe?.contentWindow?.document;
-    console.log(data);
-  };
-
   return (
     <div className="login-page">
       <form className="login-form" onSubmit={login}>
@@ -112,8 +106,6 @@ const Login = () => {
           <div className="signup">הרשמה</div>
         </Link>
       </form>
-      <button onClick={attack}>ff</button>
-      <iframe id="target" src="http://localhost:5000/t"></iframe>
     </div>
   );
 };
