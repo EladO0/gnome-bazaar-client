@@ -11,7 +11,7 @@
   justify-content: center;
   overflow: auto;
   direction: rtl;
-
+  z-index: 1;
   .popup {
     border-radius: 0.75rem;
     border-color: var(--primary-color);

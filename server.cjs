@@ -3,9 +3,9 @@ const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
-
 const port = 5000;
 const BASENAME = "/Gnome-Bazaar";
+
 
 app.use(bodyParser.json());
 app.use(cors({ origin: "*" }));
@@ -15,13 +15,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// #region Assets Manager //
+
 app.get(`/image-repo/:img`, async (req, res) => {
   const { img } = req.params;
   console.log(img);
 
-  res.sendFile(path.join(__dirname, "public", 'assets', img));
+  res.sendFile(path.join(__dirname, "public", "assets", img));
 });
 
+// #endregion Assets Manager //
+
+// #region API Endpoints //
 app.post(`${BASENAME}/api/token`, (req, res) => {
   const { user, pwd } = req.body;
   console.log(user, pwd);
@@ -38,6 +43,10 @@ app.post(`${BASENAME}/api/token`, (req, res) => {
     isSupplier: true,
   });
 });
+
+// #endregion API Endpoints //
+
+// #region STATIC Assets Endpoints //
 app.get(`${BASENAME}/404`, (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
@@ -72,3 +81,5 @@ app.listen(port, () => {
     `DEVELOPMENT Server running on http://localhost:${port}${BASENAME}`
   );
 });
+
+// #endregion STATIC Assets Endpoints //

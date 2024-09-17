@@ -62,6 +62,7 @@
       border: var(--card-border);
       background-color: var(--theme-color);
       transition: 0.6s;
+      cursor: pointer;
 
       &.warning {
         color: var(--warning-color);

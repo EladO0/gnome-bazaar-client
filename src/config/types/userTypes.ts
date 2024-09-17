@@ -10,7 +10,7 @@ export type JWT = {
   token: string;
   name: string;
   expiry: Date;
-  isSupplier: Supplier | false;
+  isSupplier: boolean;
   isAdmin: boolean;
 };
 

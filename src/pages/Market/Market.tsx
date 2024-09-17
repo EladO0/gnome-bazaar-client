@@ -29,7 +29,7 @@ const Market = () => {
 
   const filters: MarketFiltersType = useMemo(() => {
     return {
-      searchTerm: searchValue,
+      productName: searchValue,
       category: categoryFilter,
     };
   }, [searchValue, categoryFilter]);
