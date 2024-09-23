@@ -3,8 +3,8 @@ import "./PriceTag.scss";
 
 interface PriceTagProps {
   credits: number;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   small?: boolean;
 }
 
@@ -22,10 +22,12 @@ const PriceTag: React.FC<PriceTagProps> = ({
           lowercase: true,
         })}
       </div>
-      <div className="my-credits">
-        <header>{title}</header>
-        <div className="description">{description}</div>
-      </div>
+      {title && description && (
+        <div className="my-credits">
+          <header>{title}</header>
+          <div className="description">{description}</div>
+        </div>
+      )}
     </div>
   );
 };

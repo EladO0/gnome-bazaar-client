@@ -1,0 +1,56 @@
+.supplier-panel {
+  height: 100%;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  padding-left: 0;
+  padding-bottom: 0;
+  box-sizing: border-box;
+  border-radius: var(--card-radius);
+
+  .my-products {
+    direction: rtl;
+    height: 100%;
+    overflow: auto;
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: var(--card-radius);
+
+    .filters {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 5rem;
+      .add-product {
+        padding: 0.35rem;
+        background-color: var(--active-color);
+        color: var(--theme-color);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.25rem;
+        transition: 0.4s;
+
+        &:hover {
+          background-color: var(--font-light-color);
+        }
+      }
+    }
+
+    .product-entry {
+      background-color: var(--theme-color);
+    }
+
+    .headerClass {
+      background-color: var(--font-light-color);
+      color: var(--theme-color);
+    }
+  }
+}

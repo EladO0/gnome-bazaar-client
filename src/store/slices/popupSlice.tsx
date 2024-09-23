@@ -3,6 +3,7 @@ import { PopupState } from "../../config/types/popupTypes";
 
 const initialState: PopupState = {
   component: null,
+  theme: "light",
 };
 
 export const counterSlice = createSlice({
@@ -11,6 +12,7 @@ export const counterSlice = createSlice({
   reducers: {
     openPopup: (state, action: PayloadAction<PopupState>) => {
       state.component = action.payload.component;
+      state.theme = action.payload.theme;
     },
     closePopup: () => initialState,
   },

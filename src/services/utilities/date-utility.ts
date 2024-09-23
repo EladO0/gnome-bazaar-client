@@ -7,3 +7,9 @@ export const isBeforeDate = (d1: Dayjs | null, d2: Dayjs | null): boolean => {
 
   return d1.isBefore(d2);
 };
+
+export const calcTimeToLive = (expiry: Date | string): number => {
+  const now = new Date();
+  const expectedExpiry = new Date(expiry);
+  return expectedExpiry.getTime() - now.getTime();
+};

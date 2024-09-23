@@ -1,34 +1,16 @@
-import { gnomes } from "../../config/constants";
+import apiService from "../../config/api/api-config";
 import { MarketFiltersType, Product } from "../../config/types/marketTypes";
-import {
-  delay,
-  randomBetween,
-  randomString,
-} from "../utilities/common-utility";
-
 export const getProducts = async (
   filters: MarketFiltersType,
-  n: number = 30,
+  take: number,
   entriesToSkip: number = 0
 ): Promise<Product[]> => {
-  console.log(filters, entriesToSkip);
-
-  const products: Array<Product> = [];
-  for (let i = 0; i < n; i++) {
-    const product: Product = {
-      id: i.toString(),
-      description: randomString(40),
-      img:
-        "http://localhost:5000/image-repo/" +
-        gnomes[randomBetween(0, gnomes.length - 1)],
-      name: "מוצר" + " " + i,
-      price: randomBetween(250, 600),
-      storeAddress: randomString(14),
-      category: "Gnome",
-      quantity: randomBetween(0, 10),
-    };
-    products.push(product);
-  }
-
-  return delay(products);
+  return await apiService.get("products", {
+    params: {
+      productName: filters.productName,
+      category: filters.category,
+      skip: entriesToSkip,
+      take: take,
+    },
+  });
 };

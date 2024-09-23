@@ -1,6 +1,6 @@
 import { Category } from "../../config/types/marketTypes";
 
-export const translateCategory = (category: Category): string => {
+export const translateCategory = (category: Category | string): string => {
   switch (category) {
     case "Gnome":
       return "גמדים";
@@ -17,9 +17,4 @@ export const translateCategory = (category: Category): string => {
     default:
       return "";
   }
-};
-
-export const shorten = (text: string, max: number = 40): string => {
-  if (text.length <= max) return text;
-  return text.slice(0, max) + "...";
 };

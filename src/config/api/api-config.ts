@@ -1,13 +1,19 @@
 import axios from "axios";
 import { statusCodes } from "../constants";
-import { emitExpired, emitFinishLoading, emitLoading, emitNetWorkError, emitUnAuthorized } from "../../services/utilities/events-utility";
+import {
+  emitExpired,
+  emitFinishLoading,
+  emitLoading,
+  emitNetWorkError,
+  emitUnAuthorized,
+} from "../../services/utilities/events-utility";
 
-const server = `http://localhost:5000/Gnome-Bazaar/api`;
+export const environment = import.meta.env.VITE_SERVER;
+const server = environment + "/Gnome-Bazaar/api";
 
 const apiService = axios.create({
   baseURL: server,
 });
-
 
 apiService.interceptors.request.use(async (config) => {
   //   const token = await localStorage.getItem(JWT)

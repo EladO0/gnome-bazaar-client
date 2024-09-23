@@ -1,9 +1,7 @@
 import { Favorite, ShoppingCart } from "@mui/icons-material";
 import { Product } from "../../config/types/marketTypes";
-import {
-  shorten,
-  translateCategory,
-} from "../../services/utilities/market-utility";
+import { translateCategory } from "../../services/utilities/market-utility";
+import { shorten } from "../../services/utilities/common-utility";
 import PriceTag from "../PriceTag/PriceTag";
 import "./ProductCard.scss";
 

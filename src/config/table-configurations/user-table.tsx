@@ -1,7 +1,7 @@
+import { TableConfiguration } from "../types/commonTypes";
+import { UserInfo } from "../types/userTypes";
 import CreditsViewer from "../../components/CreditsViewer/CreditsViewer";
 import RoleViewer from "../../components/RoleViewer/RoleViewer";
-import { TableConfiguration } from "../../config/types/commonTypes";
-import { UserInfo } from "../../config/types/userTypes";
 
 export const createUserTableConfig = (
   updateRole: (e, user: UserInfo) => void,

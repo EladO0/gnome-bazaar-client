@@ -10,6 +10,7 @@ import {
 import { CartProduct } from "../../config/types/marketTypes";
 import PriceTag from "../PriceTag/PriceTag";
 import millify from "millify";
+import ImagePreview from "../ImagePreview/ImagePreview";
 import "./PurchaseSummary.scss";
 
 interface PurchaseSummaryProps {
@@ -19,6 +20,7 @@ interface PurchaseSummaryProps {
   decrement?: (product: CartProduct) => void;
   quantity: boolean;
   title: string;
+  expand?: boolean;
 }
 const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
   products,
@@ -27,6 +29,7 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
   decrement,
   quantity = true,
   title = "",
+  expand,
 }) => {
   const disabled = useMemo(() => {
     return products.length === 0;
@@ -42,7 +45,7 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
     });
   }, [products]);
   return (
-    <div className="purchase-summary">
+    <div className={`purchase-summary ${expand && "expand"}`}>
       <div className="header">
         <ShoppingBag />
         {title}
@@ -62,11 +65,7 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
                 {decrement && <RemoveCircle onClick={() => decrement(p)} />}
               </div>
             )}
-            <img
-              src={p.product.img}
-              alt="product-preview"
-              className="product-preview"
-            />
+            <ImagePreview src={p.product.img} />
             <PriceTag
               credits={p.product.price * p.quantity}
               title={p.product.name}

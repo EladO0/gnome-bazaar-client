@@ -1,3 +1,5 @@
+import { Category } from "./types/marketTypes";
+
 export const eventTypes = {
   UnAuthorized: "UnAuthorized",
   StartLoading: "StartLoading",
@@ -16,6 +18,15 @@ export const BASENAME = "/Gnome-Bazaar";
 
 export const MAX_PROMPT_TIMER = 5; //seconds
 export const ENTRIES_PER_PAGE = 4 * 3;
+
+export const categories: Array<Category> = [
+  "Accessories",
+  "Gnome",
+  "Hat",
+  "Pants",
+  "Shirt",
+  "Shoes",
+];
 
 export const gnomes = [
   "gnome1.webp",

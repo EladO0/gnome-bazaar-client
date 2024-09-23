@@ -17,16 +17,20 @@
     border-color: var(--primary-color);
     border-width: 0.125rem;
     border-style: solid;
-    background-color: var(--light-secondary-color);
     padding: 1rem;
     padding-left: 1rem;
     overflow: auto;
-    max-height: 75%;
-    height: 100%;
+    max-height: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
 
     box-shadow: 0 0 5rem 0.1rem var(--theme-color);
+    &.dark {
+      background-color: var(--light-secondary-color);
+    }
+    &.light {
+      background-color: var(--theme-color);
+    }
   }
 }

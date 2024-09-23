@@ -1,0 +1,78 @@
+.product-form {
+  height: 25rem;
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  box-sizing: border-box;
+  overflow: auto;
+
+  .headers {
+    padding: 0 2rem;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    .title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      .remove {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+
+        color: var(--theme-color);
+        padding: 0.1rem .5rem;
+        background-color: var(--warning-color);
+      }
+      .image-dnd {
+        align-self: center;
+        input {
+        }
+      }
+    }
+  }
+  .fields {
+    overflow: auto;
+    width: 95%;
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    background-color: var(--light-secondary-color);
+    flex: 1;
+  }
+
+  .submit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.5rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-weight: 500;
+
+    &,
+    .MuiSvgIcon-root {
+      transition: 0.5s;
+    }
+    .MuiSvgIcon-root {
+      color: var(--active-color);
+    }
+    &:hover {
+      color: var(--theme-color);
+      background-color: var(--active-color);
+      .MuiSvgIcon-root {
+        color: var(--theme-color);
+      }
+    }
+  }
+}

@@ -25,11 +25,6 @@ export type TableConfiguration = Array<{
   flex: number;
 }>;
 
-export type SalesData = {
-  date: Date;
-  close: number;
-};
-
 export type SearchType = {
   searchTerm: string;
 };

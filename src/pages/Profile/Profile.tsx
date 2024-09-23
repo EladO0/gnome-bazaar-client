@@ -1,6 +1,6 @@
 import { AccountCircle, Receipt, TaskAlt } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   validateFullName,
   validateMail,
@@ -14,12 +14,15 @@ import {
   getUserCategories,
   getUserExpenses,
   getUserProfile,
+  updateUserProfile,
 } from "../../services/repositories/user-repository";
 import { UserInfo } from "../../config/types/userTypes";
-import "./Profile.scss";
+import { promptMessage } from "../../store/slices/promptSlice";
 import PriceTag from "../../components/PriceTag/PriceTag";
+import "./Profile.scss";
 
 const Profile = () => {
+  const dispatch = useAppDispatch();
   const uuid = useAppSelector((x) => x.auth.uuid);
   const [profileInfo, setProfileInfo] = useState<UserInfo>({
     id: "",
@@ -37,17 +40,17 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchProfileData = async () => {
-      const userResult = await getUserProfile(uuid);
+      const userResult = await getUserProfile();
       setProfileInfo(userResult);
 
-      const expensesResult = await getUserExpenses(uuid);
+      const expensesResult = await getUserExpenses();
       setExpensesData(expensesResult);
 
-      const categoriesResult = await getUserCategories(uuid);
+      const categoriesResult = await getUserCategories();
       setCategoriesData(categoriesResult);
     };
     fetchProfileData();
-  }, [uuid]);
+  }, []);
 
   const onUserChange = (e) => {
     const newVal = e.target.value;
@@ -104,6 +107,17 @@ const Profile = () => {
     if (!validateRegistrationForm(data, true)) return;
 
     // implement save profile changes
+
+    try {
+      await updateUserProfile(data);
+      dispatch(
+        promptMessage({ message: "!פרטים עודכנו בהצלחה", type: "success" })
+      );
+    } catch {
+      dispatch(
+        promptMessage({ message: "הייתה בעיה בעדכון הפרטים", type: "error" })
+      );
+    }
 
     return data;
   };

@@ -50,8 +50,11 @@
   select {
     outline: none;
     border: none;
-    border-radius: .5rem;
-    font-size: .75rem;
-    padding: .1rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    padding: 0.1rem;
+  }
+  button {
+    cursor: pointer;
   }
 }

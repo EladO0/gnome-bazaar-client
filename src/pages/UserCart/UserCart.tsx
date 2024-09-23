@@ -13,7 +13,7 @@ const UserCart = () => {
 
   useEffect(() => {
     const fetchCartProducts = async () => {
-      const cartProductsResult = await getCartProducts(auth.uuid);
+      const cartProductsResult = await getCartProducts();
       setCartProducts(cartProductsResult);
     };
     fetchCartProducts();
@@ -63,6 +63,7 @@ const UserCart = () => {
         increment={increment}
         decrement={decrement}
         quantity
+        expand
         title="סל המוצרים"
       />
     </div>

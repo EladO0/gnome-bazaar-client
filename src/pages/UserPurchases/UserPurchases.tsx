@@ -19,7 +19,6 @@ const UserPurchases = () => {
   const searchValue = useAppSelector((x) => x.search.searchTerm);
   const [fromDate, setFromDate] = useState<Dayjs | null>(null);
   const [ToDate, setToDate] = useState<Dayjs | null>(null);
-  console.log(fromDate, ToDate);
 
   const onFromDateChange = (newVal) => {
     setFromDate(newVal);
@@ -40,7 +39,7 @@ const UserPurchases = () => {
 
   useEffect(() => {
     const fetchCartProducts = async () => {
-      const purchasesResult = await getUserPurchases(auth.uuid);
+      const purchasesResult = await getUserPurchases();
       setPurchases(purchasesResult);
     };
     fetchCartProducts();
@@ -53,7 +52,9 @@ const UserPurchases = () => {
   };
 
   const viewPurchase = (purchase: Purchase): void => {
-    const title = `פירוט הזמנה ${purchase.date.toLocaleDateString("he")}`;
+    const title = `פירוט הזמנה ${new Date(purchase.date).toLocaleDateString(
+      "he"
+    )}`;
     dispatch(
       openPopup({
         component: (
@@ -63,6 +64,7 @@ const UserPurchases = () => {
             title={title}
           />
         ),
+        theme: "dark",
       })
     );
   };
@@ -107,7 +109,7 @@ const UserPurchases = () => {
               <PriceTag
                 credits={calcTotal(purchase)}
                 description={purchase.uuid}
-                title={purchase.date.toLocaleDateString("he")}
+                title={new Date(purchase.date).toLocaleDateString("he")}
               />
             </div>
           ))}

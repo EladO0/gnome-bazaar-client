@@ -6,24 +6,16 @@ import {
 } from "../../config/types/marketTypes";
 import { getProducts } from "../../services/repositories/market-repository";
 import { useAppSelector } from "../../store/hooks";
-import { ENTRIES_PER_PAGE } from "../../config/constants";
+import { categories, ENTRIES_PER_PAGE } from "../../config/constants";
 import { translateCategory } from "../../services/utilities/market-utility";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 import "./Market.scss";
-
-const categories: Array<Category> = [
-  "Accessories",
-  "Gnome",
-  "Hat",
-  "Pants",
-  "Shirt",
-  "Shoes",
-];
 
 const Market = () => {
   const marketRef = useRef<HTMLDivElement | null>(null);
   const searchValue = useAppSelector((x) => x.search.searchTerm);
-  const [categoryFilter, setCategory] = useState<Category | null>(null);
+  const [categoryFilter, setCategory] = useState<Category | undefined>();
   const [products, setProducts] = useState<Product[]>([]);
   const [entriesToSkip, setEntriesToSkip] = useState<number>(0);
 
@@ -34,21 +26,12 @@ const Market = () => {
     };
   }, [searchValue, categoryFilter]);
 
-  const setCategoryFilter = (category: Category): void => {
-    setCategory((x) => {
-      return x === category ? null : category;
-    });
-  };
-
-  const isCategorySelected = (category: Category) => {
-    return categoryFilter === category ? "filter active" : "filter";
-  };
   useEffect(() => {
     const fetchMarketData = async () => {
       marketRef.current?.scrollTo({ top: 0 });
       const productsResult = await getProducts(filters, ENTRIES_PER_PAGE);
       setProducts(productsResult);
-      setEntriesToSkip(ENTRIES_PER_PAGE);
+      setEntriesToSkip((x) => x + ENTRIES_PER_PAGE);
     };
     fetchMarketData();
   }, [filters]);
@@ -80,19 +63,19 @@ const Market = () => {
       scrollElement.removeEventListener("scrollend", handleScroll);
     };
   }, [handleScroll]);
+
+  const resetSkipEntries = (): void => {
+    setEntriesToSkip(0);
+  };
   return (
     <div className="market">
-      <div className="filters">
-        {categories.map((c, i) => (
-          <div
-            className={isCategorySelected(c)}
-            key={i}
-            onClick={() => setCategoryFilter(c)}
-          >
-            {translateCategory(c)}
-          </div>
-        ))}
-      </div>
+      <CategoryFilter
+        categories={categories}
+        mutatationFunc={setCategory}
+        extraCallback={resetSkipEntries}
+        translationFunc={translateCategory}
+        selectedFilter={categoryFilter}
+      />
       <div className="products" ref={marketRef}>
         {products.map((product, i) => (
           <div key={i} className="product-container">

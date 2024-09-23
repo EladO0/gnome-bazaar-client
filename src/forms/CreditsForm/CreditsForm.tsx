@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { UserInfo } from "../../../config/types/userTypes";
+import { UserInfo } from "../../config/types/userTypes";
 import { TaskAlt } from "@mui/icons-material";
-import { useAppDispatch } from "../../../store/hooks";
-import { closePopup } from "../../../store/slices/popupSlice";
-import "./CreditsPopup.scss";
+import { useAppDispatch } from "../../store/hooks";
+import { closePopup } from "../../store/slices/popupSlice";
+import "./CreditsForm.scss";
 
 interface CreditsProps {
   user: UserInfo;
@@ -12,7 +12,7 @@ interface CreditsProps {
 const CreditsPopup: React.FC<CreditsProps> = ({ user, callback }) => {
   const dispatch = useAppDispatch();
   const [amount, setAmount] = useState(10);
-  
+
   const update = () => {
     callback(user, amount);
     dispatch(closePopup());
@@ -23,8 +23,8 @@ const CreditsPopup: React.FC<CreditsProps> = ({ user, callback }) => {
     setAmount(newVal);
   };
   return (
-    <div className="credits-popup">
-      <header>:אנא הזן סכום להוספה</header>
+    <div className="credits-form">
+      <header>אנא הזן סכום להוספה:</header>
 
       <input type="number" value={amount} onChange={onAmountChange} />
       <div className="warning">

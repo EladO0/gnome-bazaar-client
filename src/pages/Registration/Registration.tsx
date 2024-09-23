@@ -19,6 +19,7 @@ import {
   validatePWD,
   validateRegistrationForm,
 } from "../../services/utilities/form-utility";
+import { userRegistration } from "../../services/repositories/user-repository";
 
 const initialUserInfo: UserInfo = {
   id: "",
@@ -40,12 +41,15 @@ const Registration = () => {
     e.preventDefault();
     if (!validateRegistrationForm(registrationData)) return;
 
-    const registrationStatus = true;
-    if (registrationStatus) {
+    try {
+      await userRegistration(registrationData);
+
       const msg = "!יצירת חשבון בוצעה בהצלחה";
       dispatch(promptMessage({ message: msg, type: "success" }));
       navigate(`/login`);
-    } else {
+    } catch {
+      const msg = "...הייתה בעיה ביצירת החשבון";
+      dispatch(promptMessage({ message: msg, type: "error" }));
       setUserInfo(initialUserInfo);
     }
   };

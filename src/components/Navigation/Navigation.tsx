@@ -1,14 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
-  BarChart,
   ContactSupport,
   History,
   Logout,
   Person,
-  ProductionQuantityLimits,
   ShoppingCart,
   Storefront,
+  Factory,
 } from "@mui/icons-material";
 import {
   NavigationRoute,
@@ -29,7 +28,7 @@ const routes: NavigationRoutes = [
   {
     url: "/supplier-panel",
     title: "פאנל ספקים",
-    Icon: <ProductionQuantityLimits />,
+    Icon: <Factory />,
     hasAccess: (auth: JWT) => auth.isSupplier !== false,
   },
   {
@@ -37,12 +36,6 @@ const routes: NavigationRoutes = [
     title: "מוצרים",
     hasAccess: () => true,
     Icon: <Storefront />,
-  },
-  {
-    url: "/Analysis",
-    title: "סקירה ונתונים",
-    hasAccess: () => true,
-    Icon: <BarChart />,
   },
   {
     url: "/user-purchases",

@@ -11,7 +11,6 @@ export type Product = {
   name: string;
   description: string;
   img: string;
-  storeAddress: string;
   price: number;
   category: Category;
   quantity: number;
@@ -30,5 +29,5 @@ export type Purchase = {
 
 export type MarketFiltersType = {
   productName: string;
-  category: Category | null;
+  category: Category | undefined;
 };

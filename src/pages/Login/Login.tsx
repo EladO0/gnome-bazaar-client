@@ -12,6 +12,7 @@ import {
   validateUser,
   validatePWD,
 } from "../../services/utilities/form-utility";
+import { closePopup } from "../../store/slices/popupSlice";
 
 const initialCredentials: Credentials = {
   user: "admin",
@@ -25,6 +26,7 @@ const Login = () => {
 
   useEffect(() => {
     dispatch(resetToken());
+    dispatch(closePopup());
   }, [dispatch]);
 
   const login = async (e) => {
