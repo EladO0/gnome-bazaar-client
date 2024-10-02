@@ -42,7 +42,7 @@ const Login = () => {
       navigate(`/market`);
     } else {
       setCredentials(initialCredentials);
-      const msg = "!שם משתמש או סיסמא אינם נכונים";
+      const msg = "שם משתמש או סיסמא אינם נכונים";
       dispatch(promptMessage({ message: msg, type: "error" }));
     }
   };

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { ChangeEvent, useMemo, useState } from "react";
 import "./FileDropArea.scss";
 
 interface FileDropAreaProps {
@@ -11,9 +11,9 @@ const FileDropArea: React.FC<FileDropAreaProps> = ({ id, uploadCallback }) => {
 
   const text = useMemo(() => {
     if (isDragging) {
-      return "Release to drop the image";
+      return "זרקו את התמונה פה";
     }
-    return "Drag and drop a single image here";
+    return "להעלאת תמונה, יש לגרור או ללחוץ כאן";
   }, [isDragging]);
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
     e.preventDefault();
@@ -33,11 +33,20 @@ const FileDropArea: React.FC<FileDropAreaProps> = ({ id, uploadCallback }) => {
     setIsDragging(false);
 
     const files = Array.from(e.dataTransfer.files);
+    upload(files);
+  };
+
+  const upload = (files: File[]): void => {
     const imageFile = files.find((file) => file.type.startsWith("image/"));
 
     if (imageFile) {
       uploadCallback(imageFile);
     }
+  };
+
+  const handleFileSelection = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
+    upload(files);
   };
 
   return (
@@ -50,7 +59,10 @@ const FileDropArea: React.FC<FileDropAreaProps> = ({ id, uploadCallback }) => {
       role="button"
       className={`file-drop-area ${isDragging ? "dragging" : ""}`}
     >
-      {text}
+      <label htmlFor="files">
+        {text}
+      </label>
+      <input id="files" type="file" onChange={handleFileSelection}></input>
     </div>
   );
 };

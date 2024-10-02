@@ -112,7 +112,7 @@ const Profile = () => {
     try {
       await updateUserProfile(data);
       dispatch(
-        promptMessage({ message: "!פרטים עודכנו בהצלחה", type: "success" })
+        promptMessage({ message: "פרטים עודכנו בהצלחה", type: "success" })
       );
     } catch {
       dispatch(
