@@ -55,7 +55,7 @@ const AdminPanel = () => {
           return newUsersState;
         });
         dispatch(
-          promptMessage({ message: "!הרשאה עודכנה בהצלחה", type: "success" })
+          promptMessage({ message: "הרשאה עודכנה בהצלחה", type: "success" })
         );
       } catch {
         dispatch(
@@ -80,7 +80,7 @@ const AdminPanel = () => {
             return newUsersState;
           });
           dispatch(
-            promptMessage({ message: "!קרדיטים נוספו בהצלחה", type: "success" })
+            promptMessage({ message: "קרדיטים נוספו בהצלחה", type: "success" })
           );
         } catch {
           dispatch(

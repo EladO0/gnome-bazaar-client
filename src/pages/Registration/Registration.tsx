@@ -44,11 +44,11 @@ const Registration = () => {
     try {
       await userRegistration(registrationData);
 
-      const msg = "!יצירת חשבון בוצעה בהצלחה";
+      const msg = "יצירת חשבון בוצעה בהצלחה";
       dispatch(promptMessage({ message: msg, type: "success" }));
       navigate(`/login`);
     } catch {
-      const msg = "...הייתה בעיה ביצירת החשבון";
+      const msg = "הייתה בעיה ביצירת החשבון";
       dispatch(promptMessage({ message: msg, type: "error" }));
       setUserInfo(initialUserInfo);
     }

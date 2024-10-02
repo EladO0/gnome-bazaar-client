@@ -8,6 +8,7 @@ const app = express();
 const port = 5000;
 const BASENAME = "/Gnome-Bazaar";
 
+app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json());
 app.use(
   cors({
@@ -53,6 +54,24 @@ app.get(`${BASENAME}/api/products`, (req, res) => {
   }
 
   return res.status(200).json(products);
+});
+
+app.post(`${BASENAME}/api/products`, (req, res) => {
+  const product = req.body;
+  product.id = utils.randomString(15);
+  res.status(201).json(product);
+});
+
+app.put(`${BASENAME}/api/products`, (req, res) => {
+  const product = req.body;
+  res.status(201).json(product);
+});
+
+app.delete(`${BASENAME}/api/products`, (req, res) => {
+  const { id } = req.query;
+  console.log(id);
+
+  res.status(200).end();
 });
 
 app.get(`${BASENAME}/api/supplier-products`, (req, res) => {
@@ -224,7 +243,7 @@ app.get(`${BASENAME}/api/user-purchases`, (req, res) => {
   return res.status(200).json(purchases);
 });
 
-app.get(`${BASENAME}/api/update-user-profile`, (req, res) => {
+app.post(`${BASENAME}/api/update-user-profile`, (req, res) => {
   const user = req.body;
   const isValid = true; //apply validation...
   if (!isValid) {
@@ -330,7 +349,7 @@ app.post(`${BASENAME}/api/token`, (req, res) => {
   const now = new Date();
   res.json({
     name: "Elad D Gozman",
-    expiry: new Date(now.getTime() + 30 * 60 * 1000),
+    expiry: new Date(now.getTime() + 2 * 60 * 60 * 1000),
     token: " d",
     isAdmin: true,
     isSupplier: true,

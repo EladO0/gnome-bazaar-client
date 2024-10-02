@@ -4,7 +4,7 @@ const ImagePreview = ({ src }) => {
   return src ? (
     <img src={src} alt="image-preview" className={imageStyles.imagePreview} />
   ) : (
-    <div className="image-preview"></div>
+    <div className={imageStyles.imagePreview}></div>
   );
 };
 export default ImagePreview;

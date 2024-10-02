@@ -106,12 +106,10 @@ const Profile = () => {
     };
     if (!validateRegistrationForm(data, true)) return;
 
-    // implement save profile changes
-
     try {
       await updateUserProfile(data);
       dispatch(
-        promptMessage({ message: "!פרטים עודכנו בהצלחה", type: "success" })
+        promptMessage({ message: "פרטים עודכנו בהצלחה", type: "success" })
       );
     } catch {
       dispatch(
