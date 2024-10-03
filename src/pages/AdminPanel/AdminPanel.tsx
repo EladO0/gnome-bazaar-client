@@ -34,7 +34,7 @@ const AdminPanel = () => {
   useEffect(() => {
     const fetchAdminData = async () => {
       const usersResult = await getAllUsers();
-      setUsers(usersResult);
+      setUsers(Array.isArray(usersResult) ? usersResult : []);
 
       const salesDataResult = await getAdminSalesInfo();
       setSalesData(salesDataResult);

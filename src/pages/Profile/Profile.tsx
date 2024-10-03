@@ -40,14 +40,14 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchProfileData = async () => {
-      const userResult = await getUserProfile();
+      const userResult = await getUserProfile(uuid);
       setProfileInfo(userResult);
 
-      const expensesResult = await getUserExpenses();
-      setExpensesData(expensesResult);
+      const expensesResult = await getUserExpenses(uuid);
+      setExpensesData(Array.isArray(expensesResult) ? expensesResult : []);
 
-      const categoriesResult = await getUserCategories();
-      setCategoriesData(categoriesResult);
+      const categoriesResult = await getUserCategories(uuid);
+      setCategoriesData(Array.isArray(categoriesResult) ? categoriesResult : []);
     };
     fetchProfileData();
   }, []);
@@ -104,9 +104,10 @@ const Profile = () => {
       uuid: uuid,
       ...profileInfo,
     };
-    if (!validateRegistrationForm(data, true)) return;
-
-    // implement save profile changes
+    if (!validateRegistrationForm(data, true)) {
+      dispatch(promptMessage({ message: "!הקלט לא עובר ולידציה", type: "error" }));
+      return;
+    }
 
     try {
       await updateUserProfile(data);
