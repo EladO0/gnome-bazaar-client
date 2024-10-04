@@ -20,7 +20,7 @@ const UserCart = () => {
   }, [auth]);
 
   const submitPurchase = async () => {
-    const msgConfig = "!תודה על קנייתך, פרטי ההזמנה ישלחו במייל";
+    const msgConfig = "תודה על קנייתך, נשמח לראותך שוב";
     dispatch(promptMessage({ message: msgConfig, type: "success" }));
 
     ///////////// TODO Submit on server side /////////////

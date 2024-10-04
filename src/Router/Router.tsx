@@ -96,7 +96,7 @@ const Router = () => {
     setIsLoading(false);
   };
   const promptNetworkError = useCallback(() => {
-    dispatch(promptMessage({ message: "...השרת אינו זמין", type: "error" }));
+    dispatch(promptMessage({ message: "השרת אינו זמין", type: "error" }));
   }, [dispatch]);
 
   useEffect(() => {

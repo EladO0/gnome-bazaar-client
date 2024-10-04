@@ -6,19 +6,23 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Category } from "../../config/types/marketTypes";
 import { Product } from "../../config/types/marketTypes";
 import {
+  createSupplierProduct,
+  deleteSupplierProduct,
   getCategorySalesInfo,
   getSupplierProducts,
   getSupplierSalesInfo,
+  updateSupplierProduct,
 } from "../../services/repositories/supplier-repository";
 import { createProductTableConfig } from "../../config/table-configurations/products-table";
 import { emitUnAuthorized } from "../../services/utilities/events-utility";
 import { DiagramData, PieChartData } from "../../config/types/graphTypes";
-import { openPopup } from "../../store/slices/popupSlice";
+import { closePopup, openPopup } from "../../store/slices/popupSlice";
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 import TablePreview from "../../components/TablePreview/TablePreview";
 import PieChart from "../../components/Graphs/PieChart/PieChart";
 import Diagram from "../../components/Graphs/Diagram/Diagram";
 import ProductForm from "../../forms/ProductsForm/ProductForm";
+import { promptMessage } from "../../store/slices/promptSlice";
 import "./SupplierPanel.scss";
 
 const SupplierPanel = () => {
@@ -53,6 +57,54 @@ const SupplierPanel = () => {
     return createProductTableConfig();
   }, []);
 
+  const deleteProduct = async (product: Product) => {
+    try {
+      await deleteSupplierProduct(product.id);
+      setProducts((x) => {
+        return x.filter((x) => x.id != product.id);
+      });
+      const msg = `${product.name} נמחק בהצלחה`;
+      dispatch(promptMessage({ type: "success", message: msg }));
+      dispatch(closePopup());
+    } catch {
+      const msg = "הייתה בעיה במחיקת מוצר";
+      dispatch(promptMessage({ type: "error", message: msg }));
+    }
+  };
+
+  const addProduct = async (product: Product) => {
+    try {
+      await createSupplierProduct(product);
+      setProducts((x) => {
+        return [product, ...x];
+      });
+      const msg = `${product.name} נוסף בהצלחה`;
+      dispatch(promptMessage({ type: "success", message: msg }));
+      dispatch(closePopup());
+    } catch {
+      const msg = "הייתה בעיה הוספת מוצר";
+      dispatch(promptMessage({ type: "error", message: msg }));
+    }
+  };
+
+  const updateProductCallback = async (product: Product) => {
+    try {
+      await updateSupplierProduct(product);
+      setProducts((x) => {
+        const newProductState = [...x];
+        const pIdx = newProductState.findIndex((x) => x.id === product.id);
+        newProductState[pIdx] = product;
+        return newProductState;
+      });
+      const msg = `${product.name} עודכן בהצלחה`;
+      dispatch(promptMessage({ type: "success", message: msg }));
+      dispatch(closePopup());
+    } catch {
+      const msg = "הייתה בעיה בעדכון מוצר";
+      dispatch(promptMessage({ type: "error", message: msg }));
+    }
+  };
+
   useEffect(() => {
     const fetchSupplierData = async () => {
       const productsResult = await getSupplierProducts();
@@ -73,7 +125,27 @@ const SupplierPanel = () => {
   }, []);
 
   const newProduct = () => {
-    dispatch(openPopup({ component: <ProductForm />, theme: "light" }));
+    dispatch(
+      openPopup({
+        component: <ProductForm callback={addProduct} />,
+        theme: "light",
+      })
+    );
+  };
+
+  const updateProduct = (product: Product) => {
+    dispatch(
+      openPopup({
+        component: (
+          <ProductForm
+            productData={product}
+            deleteCallback={deleteProduct}
+            callback={updateProductCallback}
+          />
+        ),
+        theme: "light",
+      })
+    );
   };
   return (
     <div className="supplier-panel">
@@ -100,6 +172,7 @@ const SupplierPanel = () => {
           headerClass="headerClass"
           data={filteredProducts}
           configuration={productConfiguration}
+          onRowClick={updateProduct}
         />
       </div>
       <Diagram data={supplierSalesInfo} title="מדד מכירות" Icon={AutoGraph} />

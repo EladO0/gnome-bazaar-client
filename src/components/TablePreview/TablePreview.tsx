@@ -29,7 +29,11 @@ const TablePreview: React.FC<TableProps> = ({
       </div>
       <div className="data-entries">
         {data.map((entry, i) => (
-          <div className={`entry row ${rowClass}`} key={i} onClick={onRowClick}>
+          <div
+            className={`entry row ${rowClass}`}
+            key={i}
+            onClick={() => onRowClick(entry)}
+          >
             {configuration.map((field, j) => (
               <div
                 key={j}

@@ -1,3 +1,27 @@
-.file-drop-area{
-    
+.file-drop-area {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  &.dragging,
+  &:hover {
+    box-shadow: 0 0 0.5rem 0.1rem var(--font-primary-color);
+    border-radius: 0.35rem;
+  }
+
+  label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  input {
+    display: none;
+  }
 }
