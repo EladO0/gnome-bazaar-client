@@ -40,7 +40,7 @@ const UserPurchases = () => {
   useEffect(() => {
     const fetchCartProducts = async () => {
       const purchasesResult = await getUserPurchases();
-      setPurchases(purchasesResult);
+      setPurchases(Array.isArray(purchasesResult) ? purchasesResult : []);
     };
     fetchCartProducts();
   }, [auth]);

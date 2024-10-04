@@ -30,7 +30,7 @@ const Market = () => {
     const fetchMarketData = async () => {
       marketRef.current?.scrollTo({ top: 0 });
       const productsResult = await getProducts(filters, ENTRIES_PER_PAGE);
-      setProducts(productsResult);
+      setProducts(Array.isArray(productsResult) ? productsResult : []);
       setEntriesToSkip((x) => x + ENTRIES_PER_PAGE);
     };
     fetchMarketData();

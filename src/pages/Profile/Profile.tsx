@@ -44,10 +44,10 @@ const Profile = () => {
       setProfileInfo(userResult);
 
       const expensesResult = await getUserExpenses();
-      setExpensesData(expensesResult);
+      setExpensesData(Array.isArray(expensesResult) ? expensesResult : []);
 
       const categoriesResult = await getUserCategories();
-      setCategoriesData(categoriesResult);
+      setCategoriesData(Array.isArray(categoriesResult) ? categoriesResult : []);
     };
     fetchProfileData();
   }, []);
@@ -104,7 +104,11 @@ const Profile = () => {
       uuid: uuid,
       ...profileInfo,
     };
-    if (!validateRegistrationForm(data, true)) return;
+    
+    if (!validateRegistrationForm(data, true)) {
+      dispatch(promptMessage({ message: "!הקלט לא עובר ולידציה", type: "error" }));
+      return;
+    }
 
     try {
       await updateUserProfile(data);

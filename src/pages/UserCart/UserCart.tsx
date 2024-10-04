@@ -14,7 +14,7 @@ const UserCart = () => {
   useEffect(() => {
     const fetchCartProducts = async () => {
       const cartProductsResult = await getCartProducts();
-      setCartProducts(cartProductsResult);
+      setCartProducts(Array.isArray(cartProductsResult) ? cartProductsResult : []);
     };
     fetchCartProducts();
   }, [auth]);

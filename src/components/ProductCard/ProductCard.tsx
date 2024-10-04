@@ -2,6 +2,9 @@ import { Favorite, ShoppingCart } from "@mui/icons-material";
 import { Product } from "../../config/types/marketTypes";
 import { translateCategory } from "../../services/utilities/market-utility";
 import { shorten } from "../../services/utilities/common-utility";
+import { addToUserCart } from "../../services/repositories/user-repository";
+import { useAppDispatch } from "../../store/hooks";
+import { promptMessage } from "../../store/slices/promptSlice";
 import PriceTag from "../PriceTag/PriceTag";
 import "./ProductCard.scss";
 
@@ -10,7 +13,20 @@ interface ProductProps {
 }
 
 const ProductCard: React.FC<ProductProps> = ({ product }) => {
-  const addToCart = () => {};
+  const dispatch = useAppDispatch();
+
+  const addToCart = async () => {
+    try {
+      await addToUserCart(product);
+      dispatch(
+        promptMessage({ message: "!פריט נוסף לעגלה", type: "success" })
+      );
+    } catch {
+      dispatch(
+        promptMessage({ message: "הייתה בעיה בהוספה לעגלה", type: "error" })
+      );
+    }
+  };
 
   const addToWishList = () => {};
 

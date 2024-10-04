@@ -20,6 +20,7 @@ export const authSlice = createSlice({
       state.expiry = action.payload.expiry;
       state.isSupplier = action.payload.isSupplier;
       state.isAdmin = action.payload.isAdmin;
+      state.uuid = action.payload.uuid;
     },
     resetToken: () => initialState,
   },

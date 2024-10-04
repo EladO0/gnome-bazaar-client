@@ -50,7 +50,7 @@ const SupplierPanel = () => {
     filteredData = filteredData.filter((x) =>
       x.name.toLowerCase().includes(searchValue.toLowerCase())
     );
-    return filteredData;
+    return Array.isArray(filteredData) ? filteredData : [];
   }, [products, categoryFilter, searchValue]);
 
   const productConfiguration = useMemo(() => {
@@ -108,7 +108,7 @@ const SupplierPanel = () => {
   useEffect(() => {
     const fetchSupplierData = async () => {
       const productsResult = await getSupplierProducts();
-      setProducts(productsResult);
+      setProducts(Array.isArray(productsResult) ? productsResult : []);
 
       const categorySalesInfoResult = await getCategorySalesInfo();
       const parsedCategorySalesInfoResult: PieChartData[] =
