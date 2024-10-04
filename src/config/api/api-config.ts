@@ -16,10 +16,10 @@ const apiService = axios.create({
 });
 
 apiService.interceptors.request.use(async (config) => {
-  //   const token = await localStorage.getItem(JWT)
-  //   if(token){
-  //     config.headers.Authorization = `Bearer ${token}`;
-  //   }
+  const token = await localStorage.getItem('token')
+  if(token){
+    config.headers.Authorization = `Bearer ${token}`;
+  }
   emitLoading();
   return config;
 });

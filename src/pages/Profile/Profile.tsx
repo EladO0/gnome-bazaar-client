@@ -40,13 +40,13 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchProfileData = async () => {
-      const userResult = await getUserProfile(uuid);
+      const userResult = await getUserProfile();
       setProfileInfo(userResult);
 
-      const expensesResult = await getUserExpenses(uuid);
+      const expensesResult = await getUserExpenses();
       setExpensesData(Array.isArray(expensesResult) ? expensesResult : []);
 
-      const categoriesResult = await getUserCategories(uuid);
+      const categoriesResult = await getUserCategories();
       setCategoriesData(Array.isArray(categoriesResult) ? categoriesResult : []);
     };
     fetchProfileData();

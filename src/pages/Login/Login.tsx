@@ -37,6 +37,7 @@ const Login = () => {
 
     if (tokenResult) {
       dispatch(loadToken(tokenResult));
+      localStorage.setItem('token', tokenResult.token);
       const msg = `${tokenResult.name} ,שלום`;
       dispatch(promptMessage({ message: msg, type: "success" }));
       navigate(`/market`);
