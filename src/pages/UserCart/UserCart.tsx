@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { CartProduct } from "../../config/types/marketTypes";
-import { getCartProducts } from "../../services/repositories/user-repository";
+import { addToUserCart, getCartProducts, removeFromCart, userSubmitPurchase } from "../../services/repositories/user-repository";
 import { promptMessage } from "../../store/slices/promptSlice";
 import PurchaseSummary from "../../components/PurchaseSummary/PurchaseSummary";
 import "./UserCart.scss";
@@ -20,39 +20,32 @@ const UserCart = () => {
   }, [auth]);
 
   const submitPurchase = async () => {
-    const msgConfig = "תודה על קנייתך, נשמח לראותך שוב";
-    dispatch(promptMessage({ message: msgConfig, type: "success" }));
-
-    ///////////// TODO Submit on server side /////////////
-
-    setCartProducts([]);
+    try {
+      await userSubmitPurchase();
+      const msgConfig = "תודה על קנייתך, נשמח לראותך שוב";
+      dispatch(promptMessage({ message: msgConfig, type: "success" }));
+      setCartProducts([]);
+    } catch {
+      dispatch(promptMessage({ message: "שגיאה ברכישה", type: "error" }));
+    }
   };
 
-  const increment = (product: CartProduct): void => {
-    setCartProducts((x) => {
-      const newProductsState = [...x];
-      const productIndex = newProductsState.findIndex(
-        (x) => x.product.id === product.product.id
-      );
-
-      newProductsState[productIndex].quantity++;
-
-      return newProductsState;
-    });
+  const increment = async (product: CartProduct) => {
+    try {
+      await addToUserCart(product.product);
+      setCartProducts(await getCartProducts());
+    } catch {
+      dispatch(promptMessage({ message: "שגיאה בהוספה", type: "error" }));
+    } 
   };
 
-  const decrement = (product: CartProduct): void => {
-    setCartProducts((x) => {
-      const newProductsState = [...x];
-      const productIndex = newProductsState.findIndex(
-        (x) => x.product.id === product.product.id
-      );
-      newProductsState[productIndex].quantity--;
-      if (newProductsState[productIndex].quantity <= 0) {
-        newProductsState.splice(productIndex, 1);
-      }
-      return newProductsState;
-    });
+  const decrement = async (product: CartProduct) => {
+    try {
+      await removeFromCart(product.product);
+      setCartProducts(await getCartProducts());
+    } catch {
+      dispatch(promptMessage({ message: "שגיאה בהוספה", type: "error" }));
+    }
   };
 
   return (

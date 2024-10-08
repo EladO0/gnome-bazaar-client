@@ -19,6 +19,7 @@ export type Product = {
 export type CartProduct = {
   product: Product;
   quantity: number;
+  price: number;
 };
 
 export type Purchase = {

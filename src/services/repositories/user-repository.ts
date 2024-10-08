@@ -25,6 +25,10 @@ export const getUserPurchases = async (): Promise<Array<Purchase>> => {
   return await apiService.get(`${userRoute}user-purchases`);
 };
 
+export const userSubmitPurchase = async (): Promise<Array<void>> => {
+  return await apiService.post(`${userRoute}submit-purchase`);
+};
+
 export const userRegistration = async (user: UserInfo): Promise<void> => {
   return await apiService.post(`${userRoute}register`, user);
 };
@@ -35,4 +39,8 @@ export const updateUserProfile = async (user: UserInfo): Promise<void> => {
 
 export const addToUserCart = async (product: Product): Promise<void> => {
   return await apiService.post(`${userRoute}add-to-cart`, product);
+};
+
+export const removeFromCart = async (product: Product): Promise<void> => {
+  return await apiService.post(`${userRoute}remove-from-cart`, product);
 };
