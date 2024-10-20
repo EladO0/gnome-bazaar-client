@@ -8,7 +8,6 @@ import { openPopup } from "../../store/slices/popupSlice";
 import { promptMessage } from "../../store/slices/promptSlice";
 import { DiagramData } from "../../config/types/graphTypes";
 import {
-  getAllUsers,
   getAdminSalesInfp as getAdminSalesInfo,
   updateUserRole,
   sendCreditsToUser,
@@ -18,6 +17,7 @@ import TablePreview from "../../components/TablePreview/TablePreview";
 import Diagram from "../../components/Graphs/Diagram/Diagram";
 import Tag from "../../components/Tag/Tag";
 import "./AdminPanel.scss";
+import { getAllUsers } from "../../services/repositories/user-repository";
 
 const AdminPanel = () => {
   const dispatch = useAppDispatch();

@@ -47,7 +47,7 @@ const UserPurchases = () => {
 
   const calcTotal = (purchase: Purchase): number => {
     return purchase.products.reduce((prev, current) => {
-      return prev + current.price * current.quantity;
+      return prev + current.product.price * current.quantity;
     }, 0);
   };
 
