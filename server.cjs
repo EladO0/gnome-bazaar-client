@@ -166,7 +166,7 @@ app.get(`${BASENAME}/api/user-expenses`, (req, res) => {
   return res.status(200).json(data);
 });
 
-app.get(`${BASENAME}/api/user-categories`, (req, res) => {
+app.get(`${BASENAME}/api/user/user-categories`, (req, res) => {
   //user profile by uuid from cookie/jwt
 
   const data = [
@@ -190,7 +190,7 @@ app.get(`${BASENAME}/api/user-categories`, (req, res) => {
   return res.status(200).json(data);
 });
 
-app.get(`${BASENAME}/api/cart-products`, (req, res) => {
+app.get(`${BASENAME}/api/user/cart-products`, (req, res) => {
   // cart products by uuid from cookie/jwt
   const products = [];
   for (let i = 0; i < 15; i++) {
@@ -212,7 +212,7 @@ app.get(`${BASENAME}/api/cart-products`, (req, res) => {
 
   return res.status(200).json(products);
 });
-app.get(`${BASENAME}/api/user-purchases`, (req, res) => {
+app.get(`${BASENAME}/api/user/user-purchases`, (req, res) => {
   // user purchase history by uuid from cookie/jwt
   const purchases = [];
   for (let i = 0; i < 15; i++) {
@@ -285,7 +285,7 @@ app.get(`${BASENAME}/api/send-user-credits`, (req, res) => {
   return res.status(200).end();
 });
 
-app.get(`${BASENAME}/api/users`, (req, res) => {
+app.get(`${BASENAME}/api/user/users`, (req, res) => {
   const isAdmin = true; //apply validation...
   if (!isAdmin) {
     res.status(401).end(); //unauthorized
@@ -326,7 +326,7 @@ app.get(`${BASENAME}/api/admin-sales-info`, (req, res) => {
   res.status(200).json(data);
 });
 
-app.post(`${BASENAME}/api/register`, (req, res) => {
+app.post(`${BASENAME}/api/user/register`, (req, res) => {
   const user = req.body;
   res.status(201);
 

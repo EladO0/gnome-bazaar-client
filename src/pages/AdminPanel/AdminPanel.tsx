@@ -11,13 +11,13 @@ import {
   getAdminSalesInfp as getAdminSalesInfo,
   updateUserRole,
   sendCreditsToUser,
+  getAllUsers
 } from "../../services/repositories/admin-repository";
 import CreditsPopup from "../../forms/CreditsForm/CreditsForm";
 import TablePreview from "../../components/TablePreview/TablePreview";
 import Diagram from "../../components/Graphs/Diagram/Diagram";
 import Tag from "../../components/Tag/Tag";
 import "./AdminPanel.scss";
-import { getAllUsers } from "../../services/repositories/user-repository";
 
 const AdminPanel = () => {
   const dispatch = useAppDispatch();
