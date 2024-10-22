@@ -96,7 +96,17 @@ const randomImage = () => {
   return `${SERVER}/image-repo/${gnomes[randomBetween(0, gnomes.length - 1)]}`;
 };
 
+function dataURLToBuffer(dataURL) {
+  const matches = dataURL.match(/^data:(.+);base64,(.+)$/);
+  if (!matches) {
+    throw new Error('Invalid data URL');
+  }
+  const base64Data = matches[2];
+  return Buffer.from(base64Data, 'base64');
+}
+
 module.exports = {
+  dataURLToBuffer,
   randomBetween,
   randomString,
   randomRole,

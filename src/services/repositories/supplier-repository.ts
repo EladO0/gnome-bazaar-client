@@ -20,6 +20,12 @@ export const createSupplierProduct = async (
   return await apiService.post(`products`, product);
 };
 
+export const publishSupplierProduct = async (
+  product: Product
+): Promise<DiagramData[]> => {
+  return await apiService.post(`publish-product`, product);
+};
+
 export const updateSupplierProduct = async (
   product: Product
 ): Promise<DiagramData[]> => {
