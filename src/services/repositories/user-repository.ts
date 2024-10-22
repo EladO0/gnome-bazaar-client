@@ -5,10 +5,6 @@ import { UserInfo } from "../../config/types/userTypes";
 
 const userRoute = 'user/';
 
-export const getAllUsers = async (): Promise<Array<UserInfo>> => {
-  return await apiService.get(`${userRoute}users`);
-};
-
 export const getUserProfile = async (): Promise<UserInfo> => {
   return await apiService.get(`${userRoute}user-profile`);
 };

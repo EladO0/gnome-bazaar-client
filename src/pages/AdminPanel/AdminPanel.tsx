@@ -44,8 +44,6 @@ const AdminPanel = () => {
 
   const updateRole = useCallback(
     async (e, user: UserInfo) => {
-      //////////// implement server update ////////////
-
       try {
         await updateUserRole(user);
         setUsers((x) => {

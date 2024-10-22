@@ -33,7 +33,16 @@ const UserCart = () => {
   const increment = async (product: CartProduct) => {
     try {
       await addToUserCart(product.product);
-      setCartProducts(await getCartProducts());
+      setCartProducts((x) => {
+        const newProductsState = [...x];
+        const productIndex = newProductsState.findIndex(
+          (x) => x.product._id === product.product._id
+        );
+  
+        newProductsState[productIndex].quantity++;
+  
+        return newProductsState;
+      });
     } catch {
       dispatch(promptMessage({ message: "שגיאה בהוספה", type: "error" }));
     } 
@@ -42,9 +51,19 @@ const UserCart = () => {
   const decrement = async (product: CartProduct) => {
     try {
       await removeFromCart(product.product);
-      setCartProducts(await getCartProducts());
+      setCartProducts((x) => {
+        const newProductsState = [...x];
+        const productIndex = newProductsState.findIndex(
+          (x) => x.product._id === product.product._id
+        );
+        newProductsState[productIndex].quantity--;
+        if (newProductsState[productIndex].quantity <= 0) {
+          newProductsState.splice(productIndex, 1);
+        }
+        return newProductsState;
+      });
     } catch {
-      dispatch(promptMessage({ message: "שגיאה בהוספה", type: "error" }));
+      dispatch(promptMessage({ message: "שגיאה בהחסרה", type: "error" }));
     }
   };
 
