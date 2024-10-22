@@ -1,4 +1,4 @@
-import { ChangeEvent, useMemo, useState } from "react";
+import React, { ChangeEvent, useMemo, useState } from "react";
 import { Category, Product } from "../../config/types/marketTypes";
 import { AddCircle, Delete, Done, RemoveCircle } from "@mui/icons-material";
 import { categories } from "../../config/constants";
@@ -31,6 +31,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
   }, [productData]);
 
   const [product, setProduct] = useState<Product>(defaultFormValue);
+  const [shouldPublish, setShouldPublish] = useState(false);
 
   const title = useMemo(() => {
     if (!productData) {
@@ -124,11 +125,24 @@ const ProductForm: React.FC<ProductFormProps> = ({
       isValid = false;
     }
     if (!isValid) return;
+
+    if (shouldPublish) {
+      publishProduct();
+    }
     await callback(product);
+  };
+
+  const publishProduct = async () => {
+    console.log("published");
   };
 
   const deleteProduct = async () => {
     await deleteCallback(product);
+  };
+
+  const publishHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const newVal = e.target.checked;
+    setShouldPublish(newVal);
   };
   return (
     <form className="product-form" onSubmit={onSubmit}>
@@ -208,6 +222,17 @@ const ProductForm: React.FC<ProductFormProps> = ({
           </select>
         </div>
       </div>
+      {!productData && (
+        <div className="notify">
+          <input
+            id="notify"
+            type="checkbox"
+            onChange={publishHandler}
+            checked={shouldPublish}
+          />
+          <label htmlFor="notify">אני מעוניין לפרסם את המוצר</label>
+        </div>
+      )}
       <button className="submit" type="submit">
         {!productData ? (
           <>

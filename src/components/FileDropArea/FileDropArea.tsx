@@ -59,10 +59,13 @@ const FileDropArea: React.FC<FileDropAreaProps> = ({ id, uploadCallback }) => {
       role="button"
       className={`file-drop-area ${isDragging ? "dragging" : ""}`}
     >
-      <label htmlFor="files">
-        {text}
-      </label>
-      <input id="files" type="file" onChange={handleFileSelection}></input>
+      <label htmlFor="files">{text}</label>
+      <input
+        id="files"
+        accept="image/*"
+        type="file"
+        onChange={handleFileSelection}
+      ></input>
     </div>
   );
 };
