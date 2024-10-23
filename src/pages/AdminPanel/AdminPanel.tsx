@@ -8,10 +8,10 @@ import { openPopup } from "../../store/slices/popupSlice";
 import { promptMessage } from "../../store/slices/promptSlice";
 import { DiagramData } from "../../config/types/graphTypes";
 import {
-  getAllUsers,
   getAdminSalesInfp as getAdminSalesInfo,
   updateUserRole,
   sendCreditsToUser,
+  getAllUsers
 } from "../../services/repositories/admin-repository";
 import CreditsPopup from "../../forms/CreditsForm/CreditsForm";
 import TablePreview from "../../components/TablePreview/TablePreview";
@@ -44,8 +44,6 @@ const AdminPanel = () => {
 
   const updateRole = useCallback(
     async (e, user: UserInfo) => {
-      //////////// implement server update ////////////
-
       try {
         await updateUserRole(user);
         setUsers((x) => {

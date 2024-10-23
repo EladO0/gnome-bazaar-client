@@ -7,7 +7,7 @@ export type Category =
   | "Accessories";
 
 export type Product = {
-  id: string;
+  _id: string;
   name: string;
   description: string;
   img: string;

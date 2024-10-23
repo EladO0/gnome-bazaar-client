@@ -59,9 +59,9 @@ const SupplierPanel = () => {
 
   const deleteProduct = async (product: Product) => {
     try {
-      await deleteSupplierProduct(product.id);
+      await deleteSupplierProduct(product._id);
       setProducts((x) => {
-        return x.filter((x) => x.id != product.id);
+        return x.filter((x) => x._id != product._id);
       });
       const msg = `${product.name} נמחק בהצלחה`;
       dispatch(promptMessage({ type: "success", message: msg }));
@@ -92,7 +92,7 @@ const SupplierPanel = () => {
       await updateSupplierProduct(product);
       setProducts((x) => {
         const newProductState = [...x];
-        const pIdx = newProductState.findIndex((x) => x.id === product.id);
+        const pIdx = newProductState.findIndex((x) => x._id === product._id);
         newProductState[pIdx] = product;
         return newProductState;
       });
