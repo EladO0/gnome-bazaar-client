@@ -6,6 +6,7 @@
   padding-right: 2rem;
 
   .products {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     padding-left: 2rem;
