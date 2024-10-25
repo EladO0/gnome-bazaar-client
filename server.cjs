@@ -62,6 +62,44 @@ app.post(`${BASENAME}/api/products`, (req, res) => {
   res.status(201).json(product);
 });
 
+app.post(`${BASENAME}/api/publish-product`, async (req, res) => {
+  const product = req.body;
+  try {
+    // Step 1: Convert Data URL to Buffer
+    // const imageBuffer = dataURLToBuffer(imageDataUrl);
+
+    // Step 2: Upload the image to Facebook
+    const imageFormData = new FormData();
+    imageFormData.append('access_token', PAGE_ACCESS_TOKEN);
+    // imageFormData.append('source', imageBuffer, { filename: 'image.jpg' }); // Upload buffer as image file
+    imageFormData.append('published', false); // Set to false to prevent auto-publishing the image
+
+    // const imageResponse = await axios.post(
+    //   `https://graph.facebook.com/${FB_PAGE_ID}/photos`,
+    //   imageFormData,
+    //   { headers: imageFormData.getHeaders() }
+    // );
+
+    // const photoId = imageResponse.data.id; // Get the image ID
+
+    // Step 3: Post the message with the uploaded image
+    const postMessage = `${title}\n\n${description}`; // Combine title and description in the message
+    const postResponse = await axios.post(
+      `https://graph.facebook.com/${FB_PAGE_ID}/feed`,
+      {
+        message: postMessage,
+        // attached_media: [{ media_fbid: photoId }],
+        access_token: PAGE_ACCESS_TOKEN
+      }
+    );
+
+    res.status(200).json({ success: true, data: postResponse.data });
+  } catch (error) {
+    console.error('Error posting with image:', error.response ? error.response.data : error.message);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 app.put(`${BASENAME}/api/products`, (req, res) => {
   const product = req.body;
   res.status(201).json(product);
