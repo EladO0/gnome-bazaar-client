@@ -29,7 +29,7 @@ const Prompt = () => {
   }, [timer]);
 
   useEffect(() => {
-    let interval = 0;
+    let interval:number | NodeJS.Timeout = 0;
     if (timer > 0) {
       interval = setTimeout(() => {
         setTimer((x) => x - 1);
