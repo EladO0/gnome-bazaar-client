@@ -12,6 +12,7 @@ interface ProductFormProps {
   callback?: (product: Product) => Promise<void>;
   deleteCallback?: (product: Product) => Promise<void>;
 }
+
 const ProductForm: React.FC<ProductFormProps> = ({
   productData,
   callback = () => {},
@@ -20,7 +21,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
   const defaultFormValue: Product = useMemo(() => {
     if (productData) return productData;
     return {
-      id: "",
+      _id: "",
       img: "",
       name: "",
       price: 100,
