@@ -6,12 +6,14 @@ interface PriceTagProps {
   title?: string;
   description?: string;
   small?: boolean;
+  quantity?: number;
 }
 
 const PriceTag: React.FC<PriceTagProps> = ({
   credits,
   title,
   description,
+  quantity,
   small = false,
 }) => {
   return (
@@ -26,6 +28,7 @@ const PriceTag: React.FC<PriceTagProps> = ({
         <div className="my-credits">
           <header>{title}</header>
           <div className="description">{description}</div>
+          { quantity && <div className="quantity"> כמות מקסימלית : {quantity}</div> }
         </div>
       )}
     </div>
