@@ -33,6 +33,14 @@
         word-break: break-all;
         direction: rtl;
       }
+      
+      .quantity {
+        color: orange;
+        direction: rtl;
+        font-size: calc($size / 4);
+        word-break: break-all;
+        width: 100%;
+      }
     }
 
     .credit-count {

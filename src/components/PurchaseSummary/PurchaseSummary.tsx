@@ -70,6 +70,7 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
               credits={p.product.price * p.quantity}
               title={p.product.name}
               description={p.product.description}
+              quantity={p.product.quantity}
             />
           </div>
         ))}
