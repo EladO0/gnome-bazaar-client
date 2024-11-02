@@ -125,6 +125,11 @@ const ProductForm: React.FC<ProductFormProps> = ({
       document.getElementById("product-image")?.classList.add("error");
       isValid = false;
     }
+
+    if (!product.description) {
+      document.getElementById("product-description")?.classList.add("error");
+      isValid = false;
+    }
     if (!isValid) return;
 
     if (shouldPublish) {
@@ -199,7 +204,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
           />
         </div>
 
-        <div className="field-entry">
+        <div className="field-entry" id="product-description">
           <div className="field-name">תיאור</div>
           <textarea
             className="field-value"

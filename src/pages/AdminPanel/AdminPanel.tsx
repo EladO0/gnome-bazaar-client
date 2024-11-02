@@ -11,7 +11,7 @@ import {
   getAdminSalesInfp as getAdminSalesInfo,
   updateUserRole,
   sendCreditsToUser,
-  getAllUsers
+  getAllUsers,
 } from "../../services/repositories/admin-repository";
 import CreditsPopup from "../../forms/CreditsForm/CreditsForm";
 import TablePreview from "../../components/TablePreview/TablePreview";
@@ -70,7 +70,10 @@ const AdminPanel = () => {
         //////////// implement server update ////////////
 
         try {
-          await sendCreditsToUser(user);
+          await sendCreditsToUser({
+            creditsToAdd: amount,
+            userId: user.id,
+          });
           setUsers((x) => {
             const newUsersState = [...x];
             const userIdx = newUsersState.findIndex((x) => x.id === user.id);

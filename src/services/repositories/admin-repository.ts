@@ -1,8 +1,8 @@
 import apiService from "../../config/api/api-config";
 import { DiagramData } from "../../config/types/graphTypes";
-import { UserInfo } from "../../config/types/userTypes";
+import { UserCreditForm, UserInfo } from "../../config/types/userTypes";
 
-const adminRoute = 'admin/'
+const adminRoute = "admin/";
 
 export const getAllUsers = async (): Promise<Array<UserInfo>> => {
   return await apiService.get(`${adminRoute}users`);
@@ -19,7 +19,7 @@ export const updateUserRole = async (
 };
 
 export const sendCreditsToUser = async (
-  user: UserInfo
+  user: UserCreditForm
 ): Promise<Array<DiagramData>> => {
   return await apiService.post(`${adminRoute}send-user-credits`, user);
 };

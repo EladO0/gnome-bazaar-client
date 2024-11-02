@@ -31,3 +31,8 @@ export type UserInfo = {
   credits: number;
   role: Role;
 };
+
+export type UserCreditForm = {
+  userId: string;
+  creditsToAdd: number;
+};

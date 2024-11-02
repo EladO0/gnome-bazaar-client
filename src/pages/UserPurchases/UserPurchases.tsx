@@ -62,6 +62,7 @@ const UserPurchases = () => {
             products={purchase.products}
             quantity
             title={title}
+            maxQuantity={false}
           />
         ),
         theme: "dark",

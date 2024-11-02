@@ -28,7 +28,9 @@ const PriceTag: React.FC<PriceTagProps> = ({
         <div className="my-credits">
           <header>{title}</header>
           <div className="description">{description}</div>
-          { quantity && <div className="quantity"> כמות מקסימלית : {quantity}</div> }
+          {quantity && (
+            <div className="quantity"> כמות מקסימלית : {quantity}</div>
+          )}
         </div>
       )}
     </div>

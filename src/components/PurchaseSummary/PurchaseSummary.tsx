@@ -21,6 +21,7 @@ interface PurchaseSummaryProps {
   quantity: boolean;
   title: string;
   expand?: boolean;
+  maxQuantity?: boolean;
 }
 const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
   products,
@@ -30,6 +31,7 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
   quantity = true,
   title = "",
   expand,
+  maxQuantity = true,
 }) => {
   const disabled = useMemo(() => {
     return products.length === 0;
@@ -70,7 +72,7 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
               credits={p.product.price * p.quantity}
               title={p.product.name}
               description={p.product.description}
-              quantity={p.product.quantity}
+              quantity={maxQuantity ? p.product.quantity : undefined}
             />
           </div>
         ))}
