@@ -4,9 +4,9 @@ import {
   MarketFiltersType,
   Product,
 } from "../../config/types/marketTypes";
-import { getProducts } from "../../services/repositories/market-repository";
+import { getProducts, getCategories } from "../../services/repositories/market-repository";
 import { useAppSelector } from "../../store/hooks";
-import { categories, ENTRIES_PER_PAGE } from "../../config/constants";
+import { ENTRIES_PER_PAGE } from "../../config/constants";
 import { translateCategory } from "../../services/utilities/market-utility";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
@@ -15,6 +15,7 @@ import "./Market.scss";
 const Market = () => {
   const marketRef = useRef<HTMLDivElement | null>(null);
   const searchValue = useAppSelector((x) => x.search.searchTerm);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [categoryFilter, setCategory] = useState<Category | undefined>();
   const [products, setProducts] = useState<Product[]>([]);
   const [entriesToSkip, setEntriesToSkip] = useState<number>(0);
@@ -35,6 +36,15 @@ const Market = () => {
     };
     fetchMarketData();
   }, [filters]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categoriesResult = await getCategories();
+      setCategories(Array.isArray(categoriesResult) ? categoriesResult : []);
+    };
+    fetchCategories();
+  }, []);
+
 
   const handleScroll = useCallback(async () => {
     const scrollTop = marketRef.current?.scrollTop || 0;

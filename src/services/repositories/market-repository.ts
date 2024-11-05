@@ -1,5 +1,6 @@
 import apiService from "../../config/api/api-config";
-import { MarketFiltersType, Product } from "../../config/types/marketTypes";
+import {Category, MarketFiltersType, Product} from "../../config/types/marketTypes";
+
 export const getProducts = async (
   filters: MarketFiltersType,
   take: number,
@@ -14,3 +15,7 @@ export const getProducts = async (
     },
   });
 };
+
+export const getCategories = async (): Promise<Category[]> => {
+  return await apiService.get("categories");
+}
