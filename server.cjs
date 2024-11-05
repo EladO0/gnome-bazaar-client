@@ -73,7 +73,8 @@ app.post(`${BASENAME}/api/products`, (req, res) => {
 app.post(`${BASENAME}/api/publish-product`, async (req, res) => {
   const product = req.body;
   try {
-    const { data } = await client.v2.tweet("test");
+
+    const { data } = await client.v2.tweet("message");
     res.status(200).json({ tweetId: data.id });
   } catch (error) {
     res.status(500).json({ error: error.message });
