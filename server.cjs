@@ -11,7 +11,7 @@ const BASENAME = "/Gnome-Bazaar";
 
 const client = new TwitterApi({
   appKey: process.env.VITE_API_KEY,
-  appSecret: process.env.VITE_SECRET_KEY,
+  appSecret: process.env.VITE_API_SECRET_KEY,
   accessToken: process.env.VITE_ACCESS_TOKEN,
   accessSecret: process.env.VITE_SECRET_TOKEN,
 });
@@ -360,7 +360,7 @@ app.post(`${BASENAME}/api/register`, (req, res) => {
 app.post(`${BASENAME}/api/token`, (req, res) => {
   const { user, pwd } = req.body;
   console.log(user, pwd);
-  if (user !== "admin" || pwd !== "Aa123456!") {
+  if (user !== "1" || pwd !== "1") {
     res.status(401).end();
     return;
   }

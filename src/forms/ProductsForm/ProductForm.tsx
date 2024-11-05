@@ -6,6 +6,7 @@ import { translateCategory } from "../../services/utilities/market-utility";
 import ImagePreview from "../../components/ImagePreview/ImagePreview";
 import FileDropArea from "../../components/FileDropArea/FileDropArea";
 import "./ProductForm.scss";
+import { publishSupplierProduct } from "../../services/repositories/supplier-repository";
 
 interface ProductFormProps {
   productData?: Product;
@@ -15,8 +16,8 @@ interface ProductFormProps {
 
 const ProductForm: React.FC<ProductFormProps> = ({
   productData,
-  callback = () => {},
-  deleteCallback = () => {},
+  callback = () => { },
+  deleteCallback = () => { },
 }) => {
   const defaultFormValue: Product = useMemo(() => {
     if (productData) return productData;
@@ -133,13 +134,13 @@ const ProductForm: React.FC<ProductFormProps> = ({
     if (!isValid) return;
 
     if (shouldPublish) {
-      publishProduct();
+      await publishProduct();
     }
     await callback(product);
   };
 
   const publishProduct = async () => {
-    console.log("published");
+    await publishSupplierProduct(product);
   };
 
   const deleteProduct = async () => {
