@@ -47,7 +47,9 @@ const Profile = () => {
       setExpensesData(Array.isArray(expensesResult) ? expensesResult : []);
 
       const categoriesResult = await getUserCategories();
-      setCategoriesData(Array.isArray(categoriesResult) ? categoriesResult : []);
+      setCategoriesData(
+        Array.isArray(categoriesResult) ? categoriesResult : []
+      );
     };
     fetchProfileData();
   }, []);
@@ -104,9 +106,11 @@ const Profile = () => {
       uuid: uuid,
       ...profileInfo,
     };
-    
+
     if (!validateRegistrationForm(data, true)) {
-      dispatch(promptMessage({ message: "!הקלט לא עובר ולידציה", type: "error" }));
+      dispatch(
+        promptMessage({ message: "!הקלט לא עובר ולידציה", type: "error" })
+      );
       return;
     }
 
@@ -137,7 +141,7 @@ const Profile = () => {
         />
       </div>
       <div className="information">
-        <div className="entry" id="fullName">
+        <div className="entry" id="user">
           <input
             type="text"
             autoFocus
@@ -154,11 +158,11 @@ const Profile = () => {
           />
           <header>שם מלא</header>
         </div>
-        <div className="entry" id="fullName">
+        <div className="entry" id="mail">
           <input type="text" value={profileInfo.mail} onChange={onMailChange} />
           <header>כתובת מייל</header>
         </div>
-        <div className="entry" id="fullName">
+        <div className="entry" id="phone">
           <input
             type="text"
             value={profileInfo.phone}

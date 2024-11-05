@@ -84,21 +84,28 @@ export const validateRegistrationForm = (
 ): boolean => {
   let isValid = true;
   if (!fullNameSchemeValidation(formData.fullName)) {
+    console.log("full name not good");
+    
     document.getElementById("fullName")?.classList.add("error");
   }
   if (!mailSchemeValidation(formData.mail)) {
+    console.log("mail not good");
     document.getElementById("mail")?.classList.add("error");
     isValid = false;
   }
   if (!phoneSchemeValidation(formData.phone)) {
+    console.log("phone not good");
     document.getElementById("phone")?.classList.add("error");
     isValid = false;
   }
   if (!skip_pwd && !passwordSchemeValidation(formData.pwd)) {
+    console.log("pwd not good");
     document.getElementById("password")?.classList.add("error");
     isValid = false;
   }
   if (!userSchemeValidation(formData.userName)) {
+    
+    console.log("username not good");
     document.getElementById("user")?.classList.add("error");
     isValid = false;
   }
