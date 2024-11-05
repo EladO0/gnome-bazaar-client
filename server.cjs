@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { TwitterApi } = require('twitter-api-v2');
 const utils = require("./server-utility.cjs");
 const express = require("express");
 const cors = require("cors");
@@ -7,6 +8,13 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = 5000;
 const BASENAME = "/Gnome-Bazaar";
+
+const client = new TwitterApi({
+  appKey: process.env.VITE_API_KEY,
+  appSecret: process.env.VITE_SECRET_KEY,
+  accessToken: process.env.VITE_ACCESS_TOKEN,
+  accessSecret: process.env.VITE_SECRET_TOKEN,
+});
 
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json());
@@ -65,39 +73,12 @@ app.post(`${BASENAME}/api/products`, (req, res) => {
 app.post(`${BASENAME}/api/publish-product`, async (req, res) => {
   const product = req.body;
   try {
-    // Step 1: Convert Data URL to Buffer
-    // const imageBuffer = dataURLToBuffer(imageDataUrl);
-
-    // Step 2: Upload the image to Facebook
-    const imageFormData = new FormData();
-    imageFormData.append('access_token', PAGE_ACCESS_TOKEN);
-    // imageFormData.append('source', imageBuffer, { filename: 'image.jpg' }); // Upload buffer as image file
-    imageFormData.append('published', false); // Set to false to prevent auto-publishing the image
-
-    // const imageResponse = await axios.post(
-    //   `https://graph.facebook.com/${FB_PAGE_ID}/photos`,
-    //   imageFormData,
-    //   { headers: imageFormData.getHeaders() }
-    // );
-
-    // const photoId = imageResponse.data.id; // Get the image ID
-
-    // Step 3: Post the message with the uploaded image
-    const postMessage = `${title}\n\n${description}`; // Combine title and description in the message
-    const postResponse = await axios.post(
-      `https://graph.facebook.com/${FB_PAGE_ID}/feed`,
-      {
-        message: postMessage,
-        // attached_media: [{ media_fbid: photoId }],
-        access_token: PAGE_ACCESS_TOKEN
-      }
-    );
-
-    res.status(200).json({ success: true, data: postResponse.data });
+    const { data } = await client.v2.tweet("test");
+    res.status(200).json({ tweetId: data.id });
   } catch (error) {
-    console.error('Error posting with image:', error.response ? error.response.data : error.message);
-    res.status(500).json({ success: false, error: error.message });
+    res.status(500).json({ error: error.message });
   }
+
 });
 
 app.put(`${BASENAME}/api/products`, (req, res) => {
