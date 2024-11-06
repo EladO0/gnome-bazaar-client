@@ -1,4 +1,5 @@
 import { Product } from "./marketTypes";
+import {Address} from "./addressType.ts";
 
 export type Supplier = {
   products: Array<Product>;
@@ -30,6 +31,7 @@ export type UserInfo = {
   phone: string;
   credits: number;
   role: Role;
+  address: Address;
 };
 
 export type UserCreditForm = {
