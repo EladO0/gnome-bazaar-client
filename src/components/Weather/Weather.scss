@@ -1,0 +1,17 @@
+.weather {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  color: var(--font-primary-color);
+
+  .icon {
+    transition-duration: 200ms;
+    &.hot {
+      color: var(--warning-color);
+    }
+    &.cold {
+      color: var(--active-color);
+    }
+  }
+}

@@ -18,7 +18,7 @@ export const BASENAME = "/Gnome-Bazaar";
 
 export const MAX_PROMPT_TIMER = 5; //seconds
 export const ENTRIES_PER_PAGE = 4 * 3;
-
+export const WEATHER_POOLING = 10 * 1000;
 export const categories: Array<Category> = [
   "Accessories",
   "Gnome",

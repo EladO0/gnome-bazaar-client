@@ -35,6 +35,16 @@ app.get(`/intro`, async (req, res) => {
   res.sendFile(path.join(__dirname, "public", "assets", "intro.mp4"));
 });
 
+app.get(`${BASENAME}/api/weather`, async (req, res) => {
+  const weatherKey = process.env.VITE_WEATHER_API;
+  const response = await fetch(
+    `http://api.weatherapi.com/v1/current.json?key=${weatherKey}&q=israel&aqi=yes`
+  );
+  const data = await response.json();
+  const temp_c = data?.current?.temp_c || "לא זמין כרגע...";
+  res.json(temp_c);
+});
+
 app.get(`/image-repo/:img`, async (req, res) => {
   const { img } = req.params;
 
@@ -77,7 +87,6 @@ app.post(`${BASENAME}/api/products`, (req, res) => {
 app.post(`${BASENAME}/api/publish-product`, async (req, res) => {
   const product = req.body;
   try {
-
     const { data } = await client.v2.tweet("message");
     res.status(200).json({ tweetId: data.id });
   } catch (error) {

@@ -7,14 +7,14 @@ import {
   RemoveCircle,
   ShoppingBag,
 } from "@mui/icons-material";
-import { CartProduct } from "../../config/types/marketTypes";
 import PriceTag from "../PriceTag/PriceTag";
 import millify from "millify";
 import ImagePreview from "../ImagePreview/ImagePreview";
-import "./PurchaseSummary.scss";
 import Signature from "../Signature/Signature";
+import { CartProduct } from "../../config/types/marketTypes";
 import { useAppDispatch } from "../../store/hooks";
 import { openPopup } from "../../store/slices/popupSlice";
+import "./PurchaseSummary.scss";
 
 interface PurchaseSummaryProps {
   products: Array<CartProduct>;
@@ -55,7 +55,7 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
     if (!submitCallback) return;
     dispatch(
       openPopup({
-        component: <Signature callback={submitCallback} />,
+        component: <Signature callback={submitCallback} data="" />,
         theme: "light",
       })
     );
@@ -98,7 +98,7 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
         </div>
         <div className="seperator"></div>
         <button
-          disabled={disabled}
+          // disabled={disabled}
           className={`payment ${disabled && "disabled"}`}
           onClick={submitForm}
         >

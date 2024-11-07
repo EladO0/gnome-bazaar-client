@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { updateSearchValue } from "../../store/slices/filtersSlice";
 import "./Navbar.scss";
+import Weather from "../Weather/Weather";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -36,6 +37,7 @@ const Navbar = () => {
           placeholder="חיפוש..."
         />
         <Search className="magnifying-glass" />
+        <Weather />
       </div>
     </section>
   );
