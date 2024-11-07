@@ -6,6 +6,7 @@ import {
   Marker,
 } from "@react-google-maps/api";
 import { Branch } from "../../config/types/locationTypes";
+import { server } from "../../config/api/api-config";
 import "./AboutUs.scss";
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -111,7 +112,7 @@ const AboutUs = () => {
       </div>
       <div className="guide-video">
         <video width={500} controls>
-          <source src={"http://localhost:5000/intro"} />
+          <source src={`${server}/intro`} />
         </video>
       </div>
     </div>

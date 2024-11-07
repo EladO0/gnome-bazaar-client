@@ -9,7 +9,7 @@ import {
 } from "../../services/utilities/events-utility";
 
 export const environment = import.meta.env.VITE_SERVER;
-const server = environment + "/Gnome-Bazaar/api";
+export const server = environment + "/Gnome-Bazaar/api";
 
 const apiService = axios.create({
   baseURL: server,
