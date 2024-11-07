@@ -16,8 +16,8 @@ const apiService = axios.create({
 });
 
 apiService.interceptors.request.use(async (config) => {
-  const token = await localStorage.getItem('token')
-  if(token){
+  const token = await localStorage.getItem("token");
+  if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   emitLoading();
@@ -46,4 +46,17 @@ apiService.interceptors.response.use(
   }
 );
 
+//region silent api service
+export const apiServiceSilent = axios.create({
+  baseURL: server,
+});
+
+apiServiceSilent.interceptors.request.use(async (config) => {
+  const token = await localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+//#endregion
 export default apiService;

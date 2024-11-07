@@ -36,13 +36,17 @@ app.get(`/intro`, async (req, res) => {
 });
 
 app.get(`${BASENAME}/api/weather`, async (req, res) => {
-  const weatherKey = process.env.VITE_WEATHER_API;
-  const response = await fetch(
-    `http://api.weatherapi.com/v1/current.json?key=${weatherKey}&q=israel&aqi=yes`
-  );
-  const data = await response.json();
-  const temp_c = data?.current?.temp_c || "לא זמין כרגע...";
-  res.json(temp_c);
+  try {
+    const weatherKey = process.env.VITE_WEATHER_API;
+    const response = await fetch(
+      `http://api.weatherapi.com/v1/current.json?key=${weatherKey}&q=israel&aqi=yes`
+    );
+    const data = await response.json();
+    const temp_c = data?.current?.temp_c || "לא זמין כרגע...";
+    res.json(temp_c);
+  } catch {
+    res.json("לא זמין כרגע...");
+  }
 });
 
 app.get(`/image-repo/:img`, async (req, res) => {

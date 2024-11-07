@@ -15,8 +15,8 @@ import {
 import { closePopup } from "../../store/slices/popupSlice";
 
 const initialCredentials: Credentials = {
-  user: "1",
-  pwd: "1",
+  user: "lina",
+  pwd: "123",
 };
 
 const Login = () => {

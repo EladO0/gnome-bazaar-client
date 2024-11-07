@@ -1,9 +1,8 @@
-import { environment } from "../../config/api/api-config";
+import { apiServiceSilent } from "../../config/api/api-config";
 
 const commonRoute = "/";
 
-const server = environment + "/Gnome-Bazaar/api";
 export const getWeather = async (): Promise<string> => {
-  const response = await fetch(`${server}${commonRoute}weather`);
-  return await response.json();
+  const response = await apiServiceSilent.get(`${commonRoute}get-weather`);
+  return await response.data;
 };
