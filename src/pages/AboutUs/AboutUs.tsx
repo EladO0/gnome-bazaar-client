@@ -41,75 +41,79 @@ const AboutUs = () => {
   }, []);
 
   return (
-    <div className="about-us">
-      <div className="branches">
-        <div className="title">😄 בואו לבקר אותנו</div>
-        <LoadScript googleMapsApiKey={apiKey}>
-          <GoogleMap
-            mapContainerClassName="branch-map"
-            center={{ lat: mapCenter.latitude, lng: mapCenter.longitude }}
-            zoom={10}
-          >
-            {storeLocations.map((store, index) => (
-              <Marker
-                key={index}
-                position={{ lat: store.latitude, lng: store.longitude }}
-                title={store.name}
-                onClick={() => setSelectedMarker(store)}
-              />
-            ))}
-            {selectedMarker && (
-              <InfoWindow
-                position={{
-                  lat: selectedMarker.latitude,
-                  lng: selectedMarker.longitude,
-                }}
-                onCloseClick={() => setSelectedMarker(null)}
-              >
-                <h1>{selectedMarker.name}</h1>
-              </InfoWindow>
-            )}
-          </GoogleMap>
-        </LoadScript>
-      </div>
-      <div className="contact-us">
-        <div className="title">צרו קשר</div>
-        <p>
-          תודה שביקרתם באתר שלנו! אנחנו כאן כדי לעזור לכם למצוא את הלבוש המושלם
-          עבורכם או עבור הגמד היקר שלכם.
-        </p>
-        <p>
-          אנחנו מבינים שלמצוא את הלבוש המושלם יכול להיות מאתגר, ולכן אנו מציעים
-          שירות לקוחות אישי ומקצועי שילווה אתכם לאורך כל הדרך.
+    <div className="about-us-container">
+      <div className="about-us">
+        <div className="branches">
+          <div className="title">😄 בואו לבקר אותנו</div>
+          <LoadScript googleMapsApiKey={apiKey}>
+            <GoogleMap
+              mapContainerClassName="branch-map"
+              center={{ lat: mapCenter.latitude, lng: mapCenter.longitude }}
+              zoom={10}
+            >
+              {storeLocations.map((store, index) => (
+                <Marker
+                  key={index}
+                  position={{ lat: store.latitude, lng: store.longitude }}
+                  title={store.name}
+                  onClick={() => setSelectedMarker(store)}
+                />
+              ))}
+              {selectedMarker && (
+                <InfoWindow
+                  position={{
+                    lat: selectedMarker.latitude,
+                    lng: selectedMarker.longitude,
+                  }}
+                  onCloseClick={() => setSelectedMarker(null)}
+                >
+                  <h1>{selectedMarker.name}</h1>
+                </InfoWindow>
+              )}
+            </GoogleMap>
+          </LoadScript>
+        </div>
+        <div className="contact-us">
+          <div className="title">צרו קשר</div>
           <p>
-            בין אם אתם מחפשים פריט ייחודי או זקוקים לייעוץ, אל תהססו לפנות
-            אלינו.
+            תודה שביקרתם באתר שלנו! אנחנו כאן כדי לעזור לכם למצוא את הלבוש
+            המושלם עבורכם או עבור הגמד היקר שלכם.
           </p>
-        </p>
-        <p>
-          זמני פעילות: א'-ה': 09:00-18:00
-          <br /> ו': 09:00-13:00
-        </p>
-        <p>
-          אם יש לכם שאלות, בקשות מיוחדות, או שאתם פשוט צריכים עזרה בבחירת המידה
-          הנכונה, אנחנו כאן בשבילכם.
-          <br />
-          צרו איתנו קשר ישיר באחת מהדרכים הבאות:
-          <br />
-          דוא"ל: gnome-bazaar@email.com
-          <br />
-          טלפון: 054-53546765
-          <br />
-          חנות מפעל: רחוב גמדון 7, עיר הפלאים, ישראל
-          <br />
-          <br />
-          נשמח לשמוע מכם ולעזור לכם למצוא בדיוק את מה שאתם מחפשים, אנחנו
-          מתחייבים לחזור אליכם בהקדם האפשרי!
-        </p>
+          <p>
+            אנחנו מבינים שלמצוא את הלבוש המושלם יכול להיות מאתגר, ולכן אנו
+            מציעים שירות לקוחות אישי ומקצועי שילווה אתכם לאורך כל הדרך.
+            <p>
+              בין אם אתם מחפשים פריט ייחודי או זקוקים לייעוץ, אל תהססו לפנות
+              אלינו.
+            </p>
+          </p>
+          <p>
+            זמני פעילות: א'-ה': 09:00-18:00
+            <br /> ו': 09:00-13:00
+          </p>
+          <p>
+            אם יש לכם שאלות, בקשות מיוחדות, או שאתם פשוט צריכים עזרה בבחירת
+            המידה הנכונה, אנחנו כאן בשבילכם.
+            <br />
+            צרו איתנו קשר ישיר באחת מהדרכים הבאות:
+            <br />
+            דוא"ל: gnome-bazaar@email.com
+            <br />
+            טלפון: 054-53546765
+            <br />
+            חנות מפעל: רחוב גמדון 7, עיר הפלאים, ישראל
+            <br />
+            <br />
+            נשמח לשמוע מכם ולעזור לכם למצוא בדיוק את מה שאתם מחפשים, אנחנו
+            מתחייבים לחזור אליכם בהקדם האפשרי!
+          </p>
+        </div>
       </div>
-      <video autoPlay width={500} height={500} controls>
-        <source src={"http://localhost:5000/intro"} />
-      </video>
+      <div className="guide-video">
+        <video width={500} controls>
+          <source src={"http://localhost:5000/intro"} />
+        </video>
+      </div>
     </div>
   );
 };
