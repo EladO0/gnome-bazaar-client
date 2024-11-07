@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { LockOutlined, PersonOutline } from "@mui/icons-material";
 import { getAuthToken } from "../../services/repositories/auth-repository";
-import { loadToken, resetToken } from "../../store/slices/authenticationSlice";
+import { loadToken } from "../../store/slices/authenticationSlice";
 import { useAppDispatch } from "../../store/hooks";
 import { Link, useNavigate } from "react-router-dom";
-import { Credentials } from "../../config/types/userTypes";
+import { Credentials, JWT } from "../../config/types/userTypes";
 import { promptMessage } from "../../store/slices/promptSlice";
 import "./Login.scss";
 import {
@@ -24,10 +24,36 @@ const Login = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState(initialCredentials);
 
+  const authorizedUser = useCallback(
+    (jwt: JWT) => {
+      const msg = `${jwt.name} ,שלום`;
+      dispatch(promptMessage({ message: msg, type: "success" }));
+      navigate(`/market`);
+    },
+    [dispatch, navigate]
+  );
+
   useEffect(() => {
-    dispatch(resetToken());
+    const expiry = localStorage.getItem("expiry") as string;
+    const isAdmin = localStorage.getItem("isAdmin") as string;
+    const isSupplier = localStorage.getItem("isSupplier") as string;
+    const name = localStorage.getItem("name") as string;
+    const uuid = localStorage.getItem("uuid") as string;
+    const token = localStorage.getItem("token") as string;
+    const jwt: JWT = {
+      expiry: new Date(expiry),
+      isAdmin: isAdmin == "true",
+      isSupplier: isSupplier == "true",
+      name: name,
+      token: token,
+      uuid: uuid,
+    };
+    if (token) {
+      dispatch(loadToken(jwt));
+      authorizedUser(jwt);
+    }
     dispatch(closePopup());
-  }, [dispatch]);
+  }, [dispatch, authorizedUser]);
 
   const login = async (e) => {
     e.preventDefault();
@@ -37,10 +63,13 @@ const Login = () => {
 
     if (tokenResult) {
       dispatch(loadToken(tokenResult));
-      localStorage.setItem('token', tokenResult.token);
-      const msg = `${tokenResult.name} ,שלום`;
-      dispatch(promptMessage({ message: msg, type: "success" }));
-      navigate(`/market`);
+      localStorage.setItem("expiry", tokenResult.expiry.toString());
+      localStorage.setItem("isAdmin", tokenResult.isAdmin.toString());
+      localStorage.setItem("isSupplier", tokenResult.isSupplier.toString());
+      localStorage.setItem("name", tokenResult.name);
+      localStorage.setItem("uuid", tokenResult.uuid);
+      localStorage.setItem("token", tokenResult.token);
+      authorizedUser(tokenResult);
     } else {
       setCredentials(initialCredentials);
       const msg = "שם משתמש או סיסמא אינם נכונים";

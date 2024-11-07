@@ -22,7 +22,15 @@ export const authSlice = createSlice({
       state.isAdmin = action.payload.isAdmin;
       state.uuid = action.payload.uuid;
     },
-    resetToken: () => initialState,
+    resetToken: () => {
+      localStorage.removeItem("expiry");
+      localStorage.removeItem("isAdmin");
+      localStorage.removeItem("isSupplier");
+      localStorage.removeItem("name");
+      localStorage.removeItem("uuid");
+      localStorage.removeItem("token");
+      return initialState;
+    },
   },
 });
 
