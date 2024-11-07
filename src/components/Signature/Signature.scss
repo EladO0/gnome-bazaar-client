@@ -1,0 +1,29 @@
+.signature {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.51rem;
+  box-sizing: border-box;
+  .title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--font-primary-color);
+  }
+  .canvas {
+    width: 300px;
+    height: 125px;
+    border-radius: var(--card-radius);
+    border-color: var(--secondary-color);
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  .save-changes {
+    padding: 0.5rem 0;
+    box-sizing: border-box;
+    transition-duration: 200ms;
+    &:hover {
+      background-color: var(--light-secondary-color);
+    }
+  }
+}

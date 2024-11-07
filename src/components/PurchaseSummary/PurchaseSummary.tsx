@@ -12,10 +12,13 @@ import PriceTag from "../PriceTag/PriceTag";
 import millify from "millify";
 import ImagePreview from "../ImagePreview/ImagePreview";
 import "./PurchaseSummary.scss";
+import Signature from "../Signature/Signature";
+import { useAppDispatch } from "../../store/hooks";
+import { openPopup } from "../../store/slices/popupSlice";
 
 interface PurchaseSummaryProps {
   products: Array<CartProduct>;
-  submitCallback?: () => void;
+  submitCallback?: (signature: string) => void;
   increment?: (product: CartProduct) => void;
   decrement?: (product: CartProduct) => void;
   quantity: boolean;
@@ -33,6 +36,7 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
   expand,
   maxQuantity = true,
 }) => {
+  const dispatch = useAppDispatch();
   const disabled = useMemo(() => {
     return products.length === 0;
   }, [products]);
@@ -46,6 +50,16 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
       lowercase: true,
     });
   }, [products]);
+
+  const submitForm = () => {
+    if (!submitCallback) return;
+    dispatch(
+      openPopup({
+        component: <Signature callback={submitCallback} />,
+        theme: "light",
+      })
+    );
+  };
   return (
     <div className={`purchase-summary ${expand && "expand"}`}>
       <div className="header">
@@ -86,7 +100,7 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
         <button
           disabled={disabled}
           className={`payment ${disabled && "disabled"}`}
-          onClick={submitCallback}
+          onClick={submitForm}
         >
           {submitCallback && (
             <>

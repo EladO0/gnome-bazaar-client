@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { CartProduct } from "../../config/types/marketTypes";
-import { addToUserCart, getCartProducts, removeFromCart, userSubmitPurchase } from "../../services/repositories/user-repository";
+import {
+  addToUserCart,
+  getCartProducts,
+  removeFromCart,
+  userSubmitPurchase,
+} from "../../services/repositories/user-repository";
 import { promptMessage } from "../../store/slices/promptSlice";
 import PurchaseSummary from "../../components/PurchaseSummary/PurchaseSummary";
 import "./UserCart.scss";
@@ -14,14 +19,16 @@ const UserCart = () => {
   useEffect(() => {
     const fetchCartProducts = async () => {
       const cartProductsResult = await getCartProducts();
-      setCartProducts(Array.isArray(cartProductsResult) ? cartProductsResult : []);
+      setCartProducts(
+        Array.isArray(cartProductsResult) ? cartProductsResult : []
+      );
     };
     fetchCartProducts();
   }, [auth]);
 
-  const submitPurchase = async () => {
+  const submitPurchase = async (signature: string) => {
     try {
-      await userSubmitPurchase();
+      await userSubmitPurchase(signature);
       const msgConfig = "תודה על קנייתך, נשמח לראותך שוב";
       dispatch(promptMessage({ message: msgConfig, type: "success" }));
       setCartProducts([]);
@@ -38,14 +45,14 @@ const UserCart = () => {
         const productIndex = newProductsState.findIndex(
           (x) => x.product._id === product.product._id
         );
-  
+
         newProductsState[productIndex].quantity++;
-  
+
         return newProductsState;
       });
     } catch {
       dispatch(promptMessage({ message: "שגיאה בהוספה", type: "error" }));
-    } 
+    }
   };
 
   const decrement = async (product: CartProduct) => {

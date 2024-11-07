@@ -3,7 +3,7 @@ import { DataPreviewType } from "../../config/types/commonTypes";
 import { CartProduct, Purchase, Product } from "../../config/types/marketTypes";
 import { UserInfo } from "../../config/types/userTypes";
 
-const userRoute = 'user/';
+const userRoute = "user/";
 
 export const getUserProfile = async (): Promise<UserInfo> => {
   return await apiService.get(`${userRoute}user-profile`);
@@ -25,8 +25,10 @@ export const getUserPurchases = async (): Promise<Array<Purchase>> => {
   return await apiService.get(`${userRoute}user-purchases`);
 };
 
-export const userSubmitPurchase = async (): Promise<Array<void>> => {
-  return await apiService.post(`${userRoute}submit-purchase`);
+export const userSubmitPurchase = async (
+  signature: string
+): Promise<Array<void>> => {
+  return await apiService.post(`${userRoute}submit-purchase`, signature);
 };
 
 export const userRegistration = async (user: UserInfo): Promise<void> => {
