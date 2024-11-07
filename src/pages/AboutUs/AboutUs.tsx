@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { GoogleMap, InfoWindow, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  InfoWindow,
+  LoadScript,
+  Marker,
+} from "@react-google-maps/api";
 import { Branch } from "../../config/types/locationTypes";
 import "./AboutUs.scss";
 
@@ -9,27 +14,31 @@ const maps: Array<Branch> = [
   {
     name: "shir house",
     latitude: 31.9333296,
-    longitude: 34.7999968
+    longitude: 34.7999968,
   },
   {
     name: "amit house",
     latitude: 31.894756,
-    longitude: 34.809322
-  }
-]
+    longitude: 34.809322,
+  },
+];
 
 const AboutUs = () => {
-  const [mapCenter, setMapCenter] = useState<Branch>({ latitude: 31.9333296, longitude: 34.7999968, name: "center" }); // Map's center state
+  const [mapCenter, setMapCenter] = useState<Branch>({
+    latitude: 31.9333296,
+    longitude: 34.7999968,
+    name: "center",
+  }); // Map's center state
   const [storeLocations, setStoreLocations] = useState<Array<Branch>>([]);
   const [selectedMarker, setSelectedMarker] = useState<Branch | null>(null);
 
   useEffect(() => {
     const mapsResult = maps;
     setStoreLocations(mapsResult);
-    setMapCenter(x => {
+    setMapCenter((x) => {
       return mapsResult.length > 0 ? mapsResult[0] : x;
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <div className="about-us">
@@ -51,18 +60,17 @@ const AboutUs = () => {
             ))}
             {selectedMarker && (
               <InfoWindow
-
-                position={{ lat: selectedMarker.latitude, lng: selectedMarker.longitude }}
+                position={{
+                  lat: selectedMarker.latitude,
+                  lng: selectedMarker.longitude,
+                }}
                 onCloseClick={() => setSelectedMarker(null)}
               >
                 <h1>{selectedMarker.name}</h1>
-
               </InfoWindow>
             )}
-
           </GoogleMap>
         </LoadScript>
-
       </div>
       <div className="contact-us">
         <div className="title">צרו קשר</div>
@@ -73,8 +81,10 @@ const AboutUs = () => {
         <p>
           אנחנו מבינים שלמצוא את הלבוש המושלם יכול להיות מאתגר, ולכן אנו מציעים
           שירות לקוחות אישי ומקצועי שילווה אתכם לאורך כל הדרך.
-          <p>בין אם אתם מחפשים
-            פריט ייחודי או זקוקים לייעוץ, אל תהססו לפנות אלינו.</p>
+          <p>
+            בין אם אתם מחפשים פריט ייחודי או זקוקים לייעוץ, אל תהססו לפנות
+            אלינו.
+          </p>
         </p>
         <p>
           זמני פעילות: א'-ה': 09:00-18:00
@@ -93,10 +103,13 @@ const AboutUs = () => {
           חנות מפעל: רחוב גמדון 7, עיר הפלאים, ישראל
           <br />
           <br />
-          נשמח לשמוע מכם ולעזור לכם למצוא בדיוק את מה שאתם מחפשים, אנחנו מתחייבים
-          לחזור אליכם בהקדם האפשרי!
+          נשמח לשמוע מכם ולעזור לכם למצוא בדיוק את מה שאתם מחפשים, אנחנו
+          מתחייבים לחזור אליכם בהקדם האפשרי!
         </p>
       </div>
+      <video autoPlay width={500} height={500} controls>
+        <source src={"http://localhost:5000/intro"} />
+      </video>
     </div>
   );
 };

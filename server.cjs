@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { TwitterApi } = require('twitter-api-v2');
+const { TwitterApi } = require("twitter-api-v2");
 const utils = require("./server-utility.cjs");
 const express = require("express");
 const cors = require("cors");
@@ -30,6 +30,10 @@ app.use((req, res, next) => {
 });
 
 // #region Assets Manager //
+
+app.get(`/intro`, async (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "assets", "intro.mp4"));
+});
 
 app.get(`/image-repo/:img`, async (req, res) => {
   const { img } = req.params;
@@ -78,7 +82,6 @@ app.post(`${BASENAME}/api/publish-product`, async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-
 });
 
 app.put(`${BASENAME}/api/products`, (req, res) => {
