@@ -36,8 +36,8 @@ const Profile = () => {
     address: {
       display_name: "",
       latitude: 0,
-        longitude: 0
-    }
+      longitude: 0,
+    },
   });
 
   const [categoriesData, setCategoriesData] = useState<DataPreviewType>([]);
