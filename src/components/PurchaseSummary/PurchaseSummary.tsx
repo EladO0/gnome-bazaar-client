@@ -98,7 +98,7 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
         </div>
         <div className="seperator"></div>
         <button
-          // disabled={disabled}
+          disabled={disabled}
           className={`payment ${disabled && "disabled"}`}
           onClick={submitForm}
         >
