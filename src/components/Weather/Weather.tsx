@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getWeather } from "../../services/repositories/common-repository";
+import { getWeather } from "../../services/repositories/external-repository";
 import { WEATHER_POOLING as WEATHER_PULLING } from "../../config/constants";
 import "./Weather.scss";
 import { Thermostat } from "@mui/icons-material";
