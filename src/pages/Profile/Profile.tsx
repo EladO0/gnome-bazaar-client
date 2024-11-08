@@ -33,6 +33,11 @@ const Profile = () => {
     phone: "",
     credits: 0,
     role: undefined,
+    address: {
+      display_name: "",
+      latitude: 0,
+        longitude: 0
+    }
   });
 
   const [categoriesData, setCategoriesData] = useState<DataPreviewType>([]);

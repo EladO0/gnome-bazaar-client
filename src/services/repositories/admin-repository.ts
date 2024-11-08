@@ -13,9 +13,9 @@ export const getAdminSalesInfp = async (): Promise<Array<DiagramData>> => {
 };
 
 export const updateUserRole = async (
-  user: UserInfo
+  user: UserInfo, newRole: string
 ): Promise<Array<DiagramData>> => {
-  return await apiService.post(`${adminRoute}update-user-role`, user);
+  return await apiService.post(`${adminRoute}update-user-role`, {user, newRole});
 };
 
 export const sendCreditsToUser = async (

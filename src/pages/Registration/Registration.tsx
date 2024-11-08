@@ -5,6 +5,7 @@ import {
   LockOutlined,
   PersonOutline,
   Phone,
+  House,
 } from "@mui/icons-material";
 import { useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
@@ -20,6 +21,8 @@ import {
   validateRegistrationForm,
 } from "../../services/utilities/form-utility";
 import { userRegistration } from "../../services/repositories/user-repository";
+import {getAddress} from "../../services/repositories/utilities-repository";
+import {Address} from "../../config/types/addressType";
 
 const initialUserInfo: UserInfo = {
   id: "",
@@ -30,12 +33,58 @@ const initialUserInfo: UserInfo = {
   phone: "0503403413",
   credits: 0,
   role: "Admin",
+  address:
+      {
+        display_name: "הרצל 1 תל אביב",
+        latitude: 0,
+        longitude: 0
+      }
 };
 
 const Registration = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [registrationData, setUserInfo] = useState(initialUserInfo);
+  const [addressSuggestions, setAddressSuggestions] = useState<Address[]>([]);
+  const [inputValue, setInputValue] = useState<string>(initialUserInfo.address.display_name);
+
+
+
+
+
+  const onAddressChange = async (e) => {
+    const newVal = e.target.value;
+    setInputValue(newVal);
+
+    if (newVal.length > 2) {
+      try {
+        const suggestions = await getAddress(newVal);
+        setAddressSuggestions(Array.isArray(suggestions) ? suggestions : []);
+      } catch (error) {
+        console.error("Error fetching autocomplete suggestions:", error);
+        setAddressSuggestions([]);
+      }
+    } else {
+      setAddressSuggestions([]);
+    }
+  };
+
+  const onSuggestionSelected = (selectedValue: string) => {
+    const selectedAddress = addressSuggestions.find(suggestion => suggestion.display_name === selectedValue);
+    if (selectedAddress) {
+      setUserInfo((x) => {
+        const newCredentialsState = { ...x };
+        newCredentialsState.address = selectedAddress;
+        return newCredentialsState;
+      });
+      setInputValue(selectedAddress.display_name);
+    }
+  };
+  const onInput = (e) => {
+    const selectedValue = e.target.value;
+    onSuggestionSelected(selectedValue);
+  };
+
 
   const register = async (e) => {
     e.preventDefault();
@@ -112,6 +161,8 @@ const Registration = () => {
     });
   };
 
+
+
   return (
     <div className="registration-page">
       <form className="registration-form" onSubmit={register}>
@@ -120,27 +171,27 @@ const Registration = () => {
         <div className="input-container">
           <label htmlFor="fullName">שם מלא:</label>
           <div className="field-container" id="fullName">
-            <AccountCircle />
+            <AccountCircle/>
             <input
-              autoFocus
-              value={registrationData.fullName}
-              onChange={onFullNameChange}
-              name="fullName"
-              type="text"
-              placeholder="הזן שם מלא"
+                autoFocus
+                value={registrationData.fullName}
+                onChange={onFullNameChange}
+                name="fullName"
+                type="text"
+                placeholder="הזן שם מלא"
             />
           </div>
         </div>
         <div className="input-container">
           <label htmlFor="username">שם משתמש:</label>
           <div className="field-container" id="user">
-            <PersonOutline />
+            <PersonOutline/>
             <input
-              value={registrationData.userName}
-              onChange={onUserChange}
-              name="username"
-              type="text"
-              placeholder="הזן שם משתמש"
+                value={registrationData.userName}
+                onChange={onUserChange}
+                name="username"
+                type="text"
+                placeholder="הזן שם משתמש"
             />
           </div>
         </div>
@@ -148,13 +199,13 @@ const Registration = () => {
         <div className="input-container">
           <label htmlFor="password">סיסמא:</label>
           <div className="field-container" id="password">
-            <LockOutlined />
+            <LockOutlined/>
             <input
-              value={registrationData.pwd}
-              onChange={onPasswordChange}
-              name="password"
-              type="password"
-              placeholder="הזן סיסמא"
+                value={registrationData.pwd}
+                onChange={onPasswordChange}
+                name="password"
+                type="password"
+                placeholder="הזן סיסמא"
             />
           </div>
         </div>
@@ -162,13 +213,13 @@ const Registration = () => {
         <div className="input-container">
           <label htmlFor="mail">מייל:</label>
           <div className="field-container" id="mail">
-            <AlternateEmail />
+            <AlternateEmail/>
             <input
-              value={registrationData.mail}
-              onChange={onMailChange}
-              name="mail"
-              type="text"
-              placeholder="הזן מייל"
+                value={registrationData.mail}
+                onChange={onMailChange}
+                name="mail"
+                type="text"
+                placeholder="הזן מייל"
             />
           </div>
         </div>
@@ -176,14 +227,37 @@ const Registration = () => {
         <div className="input-container">
           <label htmlFor="phone">טלפון נייד:</label>
           <div className="field-container" id="phone">
-            <Phone />
+            <Phone/>
             <input
-              value={registrationData.phone}
-              onChange={onPhoneChange}
-              name="phone"
-              type="tel"
-              placeholder="הזן טלפון"
+                value={registrationData.phone}
+                onChange={onPhoneChange}
+                name="phone"
+                type="tel"
+                placeholder="הזן טלפון"
             />
+          </div>
+        </div>
+        <div className="input-container">
+          <label htmlFor="address">כתובת:</label>
+          <div className="field-container" id="address">
+            <House/>
+            <input
+                value={inputValue}
+                onChange={onAddressChange}
+                onInput={onInput}
+                name="address"
+                type="text"
+                placeholder="הזן כתובת"
+                list="address-options"
+            />
+            <datalist id="address-options">
+              {Array.isArray(addressSuggestions) &&
+                  addressSuggestions.map((suggestion, index) => (
+                      <option key={index} value={suggestion.display_name} >
+                        {suggestion.display_name}
+                      </option>
+                  ))}
+            </datalist>
           </div>
         </div>
 

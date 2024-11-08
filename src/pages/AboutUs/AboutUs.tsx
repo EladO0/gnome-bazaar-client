@@ -8,21 +8,9 @@ import {
 import { Branch } from "../../config/types/locationTypes";
 import { server } from "../../config/api/api-config";
 import "./AboutUs.scss";
+import {getSuppliersLocations} from "../../services/repositories/supplier-repository.ts";
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-
-const maps: Array<Branch> = [
-  {
-    name: "shir house",
-    latitude: 31.9333296,
-    longitude: 34.7999968,
-  },
-  {
-    name: "amit house",
-    latitude: 31.894756,
-    longitude: 34.809322,
-  },
-];
 
 const AboutUs = () => {
   const [mapCenter, setMapCenter] = useState<Branch>({
@@ -34,11 +22,19 @@ const AboutUs = () => {
   const [selectedMarker, setSelectedMarker] = useState<Branch | null>(null);
 
   useEffect(() => {
-    const mapsResult = maps;
-    setStoreLocations(mapsResult);
-    setMapCenter((x) => {
-      return mapsResult.length > 0 ? mapsResult[0] : x;
-    });
+    const fetchLocations = async () => {
+      try {
+        const suppliersLocationResult = await getSuppliersLocations();
+        setStoreLocations(suppliersLocationResult);
+        setMapCenter(x => {
+          return suppliersLocationResult.length > 0 ? suppliersLocationResult[0] : x;
+        });
+      } catch (error) {
+        console.error("Error fetching supplier locations:", error);
+      }
+    };
+
+    fetchLocations();
   }, []);
 
   return (

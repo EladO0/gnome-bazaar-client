@@ -1,6 +1,7 @@
 import apiService from "../../config/api/api-config";
 import { DiagramData, PieChartData } from "../../config/types/graphTypes";
 import { Product } from "../../config/types/marketTypes";
+import {Branch} from "../../config/types/locationTypes.ts";
 
 const supplierRoute = 'supplier/';
 
@@ -39,3 +40,7 @@ export const deleteSupplierProduct = async (
 ): Promise<DiagramData[]> => {
   return await apiService.delete(`products?id=${id}`);
 };
+
+export const getSuppliersLocations = async (): Promise<Branch[]> => {
+  return await apiService.get(`${supplierRoute}supplier-locations`);
+}

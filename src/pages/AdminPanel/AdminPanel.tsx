@@ -45,13 +45,9 @@ const AdminPanel = () => {
   const updateRole = useCallback(
     async (e, user: UserInfo) => {
       try {
-        await updateUserRole(user);
-        setUsers((x) => {
-          const newUsersState = [...x];
-          const userIdx = newUsersState.findIndex((x) => x.id === user.id);
-          newUsersState[userIdx].role = e.target.value;
-          return newUsersState;
-        });
+        const newRole: string = e.target.value.toString();
+        await updateUserRole(user, newRole);
+        setUsers(await getAllUsers());
         dispatch(
           promptMessage({ message: "הרשאה עודכנה בהצלחה", type: "success" })
         );
