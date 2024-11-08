@@ -32,7 +32,7 @@ const initialUserInfo: UserInfo = {
   mail: "shirhirsh510@gmail.com",
   phone: "0503403413",
   credits: 0,
-  role: "Admin",
+  role: "User",
   address:
       {
         display_name: "הרצל 1 תל אביב",
