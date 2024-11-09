@@ -5,6 +5,13 @@
   overflow: auto;
   padding-right: 2rem;
 
+  .filters{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+  }
+
   .products {
     width: 100%;
     display: grid;

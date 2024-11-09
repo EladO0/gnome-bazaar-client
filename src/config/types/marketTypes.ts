@@ -30,4 +30,6 @@ export type Purchase = {
 export type MarketFiltersType = {
   productName: string;
   category: Category | undefined;
+  min: number | undefined;
+  max: number | undefined;
 };

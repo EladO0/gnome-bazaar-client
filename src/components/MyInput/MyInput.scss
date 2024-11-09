@@ -1,0 +1,40 @@
+.my-input {
+  position: relative;
+
+  input {
+    height: 2rem;
+    width: 10rem;
+    border: var(--card-border);
+    box-shadow: var(--card-shadow);
+    direction: rtl;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+  .placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition-duration: 250ms;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    pointer-events: none;
+    color: var(--font-primary-color);
+    .MuiSvgIcon-root {
+      font-size: 1rem;
+    }
+  }
+
+  &:focus-within,
+  &.static {
+    .placeholder {
+      top: 0;
+      right: 0;
+      transform: translate(-50%, -100%);
+    }
+  }
+}
