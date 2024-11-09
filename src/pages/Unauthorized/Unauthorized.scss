@@ -8,7 +8,7 @@
   box-sizing: border-box;
   user-select: none;
 
-  .prompt-container {
+  .header-container {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
       font-size: 1.2rem;
       color: var(--font-light-color);
     }
-    .prompt {
+    .header {
       display: flex;
       flex-direction: row;
       align-items: center;

@@ -9,8 +9,8 @@ const Unauthorized = () => {
   }, []);
   return (
     <div className="unauthorized">
-      <div className="prompt-container">
-        <div className="prompt">
+      <div className="header-container">
+        <div className="header">
           <Warning />
           <div className="title">אין ברשותך הרשאה לגשת לדף זה</div>
         </div>
