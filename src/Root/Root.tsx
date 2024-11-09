@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { eventTypes } from "../config/constants";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { eventEmitter } from "../services/utilities/events-utility";
@@ -13,6 +13,7 @@ import "./Root.scss";
 
 const Root = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const auth = useAppSelector((x) => x.auth);
 
@@ -31,8 +32,9 @@ const Root = () => {
   }, [navigate]);
 
   const requireLogin = useCallback(() => {
+    dispatch(resetToken());
     navigate("/login");
-  }, [navigate]);
+  }, [navigate, dispatch]);
 
   useEffect(() => {
     eventEmitter.on(eventTypes.UnAuthorized, unAuthorize);
@@ -45,10 +47,10 @@ const Root = () => {
   }, [unAuthorize, requireLogin]);
 
   useEffect(() => {
-    if (!auth.token) {
-      requireLogin();
+    if (location.pathname === "/") {
+      navigate("/market");
     }
-  }, [requireLogin, auth]);
+  }, [location, navigate]);
 
   return (
     <div className="root">

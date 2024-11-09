@@ -24,8 +24,9 @@ const Login = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState(initialCredentials);
 
-  const authorizedUser = useCallback(
+  const authorizeUser = useCallback(
     (jwt: JWT) => {
+      dispatch(loadToken(jwt));
       const msg = `${jwt.name} ,שלום`;
       dispatch(promptMessage({ message: msg, type: "success" }));
       navigate(`/market`);
@@ -40,20 +41,20 @@ const Login = () => {
     const name = localStorage.getItem("name") as string;
     const uuid = localStorage.getItem("uuid") as string;
     const token = localStorage.getItem("token") as string;
-    const jwt: JWT = {
-      expiry: new Date(expiry),
-      isAdmin: isAdmin == "true",
-      isSupplier: isSupplier == "true",
-      name: name,
-      token: token,
-      uuid: uuid,
-    };
-    if (token) {
-      dispatch(loadToken(jwt));
-      authorizedUser(jwt);
+    if (expiry && isAdmin && isSupplier && name && uuid && token) {
+      const jwt: JWT = {
+        expiry: new Date(expiry),
+        isAdmin: isAdmin == "true",
+        isSupplier: isSupplier == "true",
+        name: name,
+        token: token,
+        uuid: uuid,
+      };
+      authorizeUser(jwt);
     }
+
     dispatch(closePopup());
-  }, [dispatch, authorizedUser]);
+  }, [dispatch, authorizeUser]);
 
   const login = async (e) => {
     e.preventDefault();
@@ -62,14 +63,13 @@ const Login = () => {
     const tokenResult = await getAuthToken(credentials);
 
     if (tokenResult) {
-      dispatch(loadToken(tokenResult));
       localStorage.setItem("expiry", tokenResult.expiry.toString());
       localStorage.setItem("isAdmin", tokenResult.isAdmin.toString());
       localStorage.setItem("isSupplier", tokenResult.isSupplier.toString());
       localStorage.setItem("name", tokenResult.name);
       localStorage.setItem("uuid", tokenResult.uuid);
       localStorage.setItem("token", tokenResult.token);
-      authorizedUser(tokenResult);
+      authorizeUser(tokenResult);
     } else {
       setCredentials(initialCredentials);
       const msg = "שם משתמש או סיסמא אינם נכונים";
