@@ -12,6 +12,8 @@ export const getProducts = async (
       category: filters.category,
       skip: entriesToSkip,
       take: take,
+      minPrice: filters.min,
+      maxPrice: filters.max,
     },
   });
 };
