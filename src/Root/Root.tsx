@@ -17,24 +17,24 @@ const Root = () => {
   const dispatch = useAppDispatch();
   const auth = useAppSelector((x) => x.auth);
 
-  useEffect(() => {
-    const ttl = calcTimeToLive(auth.expiry);
-    if (ttl > 0)
-      setTimeout(() => {
-        dispatch(resetToken());
-        const msg = "משתמש זה מחובר זמן רב, אנא התחברו מחדש";
-        dispatch(promptMessage({ message: msg, type: "error" }));
-      }, ttl);
-  }, [dispatch, auth]);
-
-  const unAuthorize = useCallback(() => {
-    navigate("/401");
-  }, [navigate]);
-
   const requireLogin = useCallback(() => {
     dispatch(resetToken());
     navigate("/login");
   }, [navigate, dispatch]);
+
+  useEffect(() => {
+    const ttl = calcTimeToLive(auth.expiry);
+    if (ttl > 0)
+      setTimeout(() => {
+        requireLogin();
+        const msg = "משתמש זה מחובר זמן רב, אנא התחברו מחדש";
+        dispatch(promptMessage({ message: msg, type: "error" }));
+      }, ttl);
+  }, [dispatch, requireLogin, auth]);
+
+  const unAuthorize = useCallback(() => {
+    navigate("/401");
+  }, [navigate]);
 
   useEffect(() => {
     eventEmitter.on(eventTypes.UnAuthorized, unAuthorize);
@@ -48,9 +48,9 @@ const Root = () => {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      navigate("/market");
+      navigate("/login");
     }
-  }, [location, navigate]);
+  }, [location, navigate, auth]);
 
   return (
     <div className="root">
