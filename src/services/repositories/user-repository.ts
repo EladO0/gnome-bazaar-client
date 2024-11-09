@@ -28,7 +28,7 @@ export const getUserPurchases = async (): Promise<Array<Purchase>> => {
 export const userSubmitPurchase = async (
   signature: string
 ): Promise<Array<void>> => {
-  return await apiService.post(`${userRoute}submit-purchase`, signature);
+  return await apiService.post(`${userRoute}submit-purchase`, {signature: signature});
 };
 
 export const userRegistration = async (user: UserInfo): Promise<void> => {
