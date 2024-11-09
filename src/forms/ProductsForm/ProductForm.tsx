@@ -6,7 +6,6 @@ import { translateCategory } from "../../services/utilities/market-utility";
 import ImagePreview from "../../components/ImagePreview/ImagePreview";
 import FileDropArea from "../../components/FileDropArea/FileDropArea";
 import "./ProductForm.scss";
-import { publishSupplierProduct } from "../../services/repositories/supplier-repository";
 
 interface ProductFormProps {
   productData?: Product;
@@ -16,8 +15,8 @@ interface ProductFormProps {
 
 const ProductForm: React.FC<ProductFormProps> = ({
   productData,
-  callback = () => { },
-  deleteCallback = () => { },
+  callback = () => {},
+  deleteCallback = () => {},
 }) => {
   const defaultFormValue: Product = useMemo(() => {
     if (productData) return productData;
@@ -33,7 +32,6 @@ const ProductForm: React.FC<ProductFormProps> = ({
   }, [productData]);
 
   const [product, setProduct] = useState<Product>(defaultFormValue);
-  const [shouldPublish, setShouldPublish] = useState(false);
 
   const title = useMemo(() => {
     if (!productData) {
@@ -133,24 +131,13 @@ const ProductForm: React.FC<ProductFormProps> = ({
     }
     if (!isValid) return;
 
-    if (shouldPublish) {
-      await publishProduct();
-    }
     await callback(product);
-  };
-
-  const publishProduct = async () => {
-    await publishSupplierProduct(product);
   };
 
   const deleteProduct = async () => {
     await deleteCallback(product);
   };
 
-  const publishHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const newVal = e.target.checked;
-    setShouldPublish(newVal);
-  };
   return (
     <form className="product-form" onSubmit={onSubmit}>
       <div className="headers">
@@ -229,17 +216,6 @@ const ProductForm: React.FC<ProductFormProps> = ({
           </select>
         </div>
       </div>
-      {!productData && (
-        <div className="notify">
-          <input
-            id="notify"
-            type="checkbox"
-            onChange={publishHandler}
-            checked={shouldPublish}
-          />
-          <label htmlFor="notify">אני מעוניין לפרסם את המוצר</label>
-        </div>
-      )}
       <button className="submit" type="submit">
         {!productData ? (
           <>

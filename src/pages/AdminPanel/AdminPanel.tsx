@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { AutoGraph, LockPerson } from "@mui/icons-material";
+import { AutoGraph, LockPerson, Twitter } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { createUserTableConfig } from "../../config/table-configurations/user-table";
 import { UserInfo } from "../../config/types/userTypes";
@@ -12,6 +12,7 @@ import {
   updateUserRole,
   sendCreditsToUser,
   getAllUsers,
+  getMediaFollowers,
 } from "../../services/repositories/admin-repository";
 import CreditsPopup from "../../forms/CreditsForm/CreditsForm";
 import TablePreview from "../../components/TablePreview/TablePreview";
@@ -23,8 +24,16 @@ const AdminPanel = () => {
   const dispatch = useAppDispatch();
   const [salesData, setSalesData] = useState<DiagramData[]>([]);
   const [users, setUsers] = useState<UserInfo[]>([]);
+  const [mediaFollowers, setMediaFollowers] = useState<number>();
   const auth = useAppSelector((x) => x.auth);
 
+  useEffect(() => {
+    const fetchMediaData = async () => {
+      const mediaResult = await getMediaFollowers();
+      setMediaFollowers(mediaResult);
+    };
+    fetchMediaData();
+  }, []);
   useEffect(() => {
     if (!auth.isAdmin) {
       emitUnAuthorized();
@@ -111,6 +120,14 @@ const AdminPanel = () => {
           configuration={userTableConfig}
           rowClass="user-entry"
         />
+      </div>
+      <div className="media-followers">
+        <Tag title="פרסום" Icon={Twitter} />
+        <header>:נתוני החנות במדיה</header>
+        <div>
+          מספר עוקבים בטוויטר
+          <span className="follower-count">{mediaFollowers}</span>
+        </div>
       </div>
       <Diagram data={salesData} title="מדד מכירות" Icon={AutoGraph} />
     </div>

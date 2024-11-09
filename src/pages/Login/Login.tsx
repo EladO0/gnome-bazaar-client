@@ -13,6 +13,7 @@ import {
   validatePWD,
 } from "../../services/utilities/form-utility";
 import { closePopup } from "../../store/slices/popupSlice";
+import { loadStorageToken } from "../../config/api/api-config";
 
 const initialCredentials: Credentials = {
   user: "lina",
@@ -35,21 +36,8 @@ const Login = () => {
   );
 
   useEffect(() => {
-    const expiry = localStorage.getItem("expiry") as string;
-    const isAdmin = localStorage.getItem("isAdmin") as string;
-    const isSupplier = localStorage.getItem("isSupplier") as string;
-    const name = localStorage.getItem("name") as string;
-    const uuid = localStorage.getItem("uuid") as string;
-    const token = localStorage.getItem("token") as string;
-    if (expiry && isAdmin && isSupplier && name && uuid && token) {
-      const jwt: JWT = {
-        expiry: new Date(expiry),
-        isAdmin: isAdmin == "true",
-        isSupplier: isSupplier == "true",
-        name: name,
-        token: token,
-        uuid: uuid,
-      };
+    const jwt = loadStorageToken();
+    if (jwt) {
       authorizeUser(jwt);
     }
 

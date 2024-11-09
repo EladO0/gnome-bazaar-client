@@ -4,8 +4,9 @@ import { eventTypes } from "../config/constants";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { eventEmitter } from "../services/utilities/events-utility";
 import { calcTimeToLive } from "../services/utilities/date-utility";
-import { resetToken } from "../store/slices/authenticationSlice";
+import { loadToken, resetToken } from "../store/slices/authenticationSlice";
 import { promptMessage } from "../store/slices/promptSlice";
+import { loadStorageToken } from "../config/api/api-config";
 import Navigation from "../components/Navigation/Navigation";
 import Navbar from "../components/Navbar/Navbar";
 import Popup from "../components/Popup/Popup";
@@ -21,6 +22,15 @@ const Root = () => {
     dispatch(resetToken());
     navigate("/login");
   }, [navigate, dispatch]);
+
+  useEffect(() => {
+    const jwt = loadStorageToken();
+    if (jwt) {
+      dispatch(loadToken(jwt));
+    } else {
+      requireLogin();
+    }
+  }, [dispatch, requireLogin]);
 
   useEffect(() => {
     const ttl = calcTimeToLive(auth.expiry);
@@ -50,7 +60,7 @@ const Root = () => {
     if (location.pathname === "/") {
       navigate("/login");
     }
-  }, [location, navigate, auth]);
+  }, [location, navigate]);
 
   return (
     <div className="root">

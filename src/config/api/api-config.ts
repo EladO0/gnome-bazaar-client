@@ -7,9 +7,30 @@ import {
   emitNetWorkError,
   emitUnAuthorized,
 } from "../../services/utilities/events-utility";
+import { JWT } from "../types/userTypes";
 
 export const environment = import.meta.env.VITE_SERVER;
 export const server = environment + "/Gnome-Bazaar/api";
+
+export const loadStorageToken = (): JWT | false => {
+  const expiry = localStorage.getItem("expiry") as string;
+  const isAdmin = localStorage.getItem("isAdmin") as string;
+  const isSupplier = localStorage.getItem("isSupplier") as string;
+  const name = localStorage.getItem("name") as string;
+  const uuid = localStorage.getItem("uuid") as string;
+  const token = localStorage.getItem("token") as string;
+  if (expiry && isAdmin && isSupplier && name && uuid && token) {
+    return {
+      expiry: new Date(expiry),
+      isAdmin: isAdmin == "true",
+      isSupplier: isSupplier == "true",
+      name: name,
+      token: token,
+      uuid: uuid,
+    };
+  }
+  return false;
+};
 
 const apiService = axios.create({
   baseURL: server,

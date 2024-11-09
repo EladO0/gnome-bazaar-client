@@ -13,13 +13,21 @@ export const getAdminSalesInfp = async (): Promise<Array<DiagramData>> => {
 };
 
 export const updateUserRole = async (
-  user: UserInfo, newRole: string
+  user: UserInfo,
+  newRole: string
 ): Promise<Array<DiagramData>> => {
-  return await apiService.post(`${adminRoute}update-user-role`, {user, newRole});
+  return await apiService.post(`${adminRoute}update-user-role`, {
+    user,
+    newRole,
+  });
 };
 
 export const sendCreditsToUser = async (
   user: UserCreditForm
 ): Promise<Array<DiagramData>> => {
   return await apiService.post(`${adminRoute}send-user-credits`, user);
+};
+
+export const getMediaFollowers = async (): Promise<number> => {
+  return await apiService.get(`${adminRoute}media-followers`);
 };

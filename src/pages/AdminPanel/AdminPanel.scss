@@ -2,13 +2,35 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: 1fr 2fr;
   padding: 1rem;
   padding-bottom: 0;
   box-sizing: border-box;
   gap: 1rem;
   overflow: auto;
+  text-align: right;
 
+  .media-followers {
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    background-color: var(--theme-color);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    box-sizing: border-box;
+    gap: 1rem;
+    header{
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .follower-count{
+      color: var(--active-color);
+      font-size: 2rem;
+      font-weight: 700;
+    }
+  }
   .manage-container {
+    grid-row: span 2;
     border: var(--card-border);
     border-radius: var(--card-radius);
     background-color: var(--theme-color);
