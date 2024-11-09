@@ -24,16 +24,26 @@ const AdminPanel = () => {
   const dispatch = useAppDispatch();
   const [salesData, setSalesData] = useState<DiagramData[]>([]);
   const [users, setUsers] = useState<UserInfo[]>([]);
-  const [mediaFollowers, setMediaFollowers] = useState<number>();
+  const [mediaFollowers, setMediaFollowers] = useState<number>(0);
   const auth = useAppSelector((x) => x.auth);
 
   useEffect(() => {
     const fetchMediaData = async () => {
-      const mediaResult = await getMediaFollowers();
-      setMediaFollowers(mediaResult);
+      try {
+        const mediaResult = await getMediaFollowers();
+        setMediaFollowers(mediaResult);
+      } catch {
+        dispatch(
+          promptMessage({
+            message: "Twitter api יותר מדי בקשות ל",
+            type: "error",
+          })
+        );
+      }
     };
     fetchMediaData();
-  }, []);
+  }, [dispatch]);
+
   useEffect(() => {
     if (!auth.isAdmin) {
       emitUnAuthorized();
@@ -72,8 +82,6 @@ const AdminPanel = () => {
   const openCreditsPopup = useCallback(
     (user: UserInfo) => {
       const addCredits = async (user: UserInfo, amount: number) => {
-        //////////// implement server update ////////////
-
         try {
           await sendCreditsToUser({
             creditsToAdd: amount,
@@ -124,9 +132,9 @@ const AdminPanel = () => {
       <div className="media-followers">
         <Tag title="פרסום" Icon={Twitter} />
         <header>:נתוני החנות במדיה</header>
-        <div>
-          מספר עוקבים בטוויטר
+        <div className="info">
           <span className="follower-count">{mediaFollowers}</span>
+          מספר עוקבים בטוויטר
         </div>
       </div>
       <Diagram data={salesData} title="מדד מכירות" Icon={AutoGraph} />
