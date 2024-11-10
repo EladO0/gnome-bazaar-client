@@ -4,7 +4,7 @@ import { closePopup } from "../../store/slices/popupSlice";
 import "./Signature.scss";
 
 interface SignatureProps {
-  callback: (signature: string) => void;
+  callback?: (signature: string) => void;
   data?: string;
 }
 
@@ -76,7 +76,7 @@ const Signature: React.FC<SignatureProps> = ({ data, callback }) => {
 
   const saveChanges = () => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!callback || !canvas) return;
 
     const dataUrl = canvas.toDataURL("image/png");
     callback(dataUrl);
@@ -85,13 +85,9 @@ const Signature: React.FC<SignatureProps> = ({ data, callback }) => {
     dispatch(closePopup());
   };
 
-  const closeForm = () => {
-    dispatch(closePopup());
-  };
-
   return (
-    <div className="signature">
-      <header className="title">חתימה לאישור עסקה</header>
+    <div className={`signature ${data && "small"}`}>
+      {!data && <header className="title">חתימה לאישור עסקה</header>}
       <canvas
         className="canvas"
         ref={canvasRef}
@@ -100,13 +96,9 @@ const Signature: React.FC<SignatureProps> = ({ data, callback }) => {
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
       />
-      {!data ? (
+      {!data && (
         <button className="save-changes" onClick={saveChanges}>
           אישור עסקה
-        </button>
-      ) : (
-        <button className="save-changes" onClick={closeForm}>
-          סגירה
         </button>
       )}
     </div>

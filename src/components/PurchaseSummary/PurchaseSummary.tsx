@@ -18,6 +18,7 @@ import "./PurchaseSummary.scss";
 
 interface PurchaseSummaryProps {
   products: Array<CartProduct>;
+  signature?: string;
   submitCallback?: (signature: string) => void;
   increment?: (product: CartProduct) => void;
   decrement?: (product: CartProduct) => void;
@@ -35,6 +36,7 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
   title = "",
   expand,
   maxQuantity = true,
+  signature,
 }) => {
   const dispatch = useAppDispatch();
   const disabled = useMemo(() => {
@@ -91,27 +93,30 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
           </div>
         ))}
       </div>
-      <div className="payment-container">
-        <div className="info">
-          <div className="title">סה"כ קרדיטים 💰 </div>
-          <div className="total">{total} </div>
+      <div className="transaction-info">
+        <div className="payment-container">
+          <div className="info">
+            <div className="title">סה"כ קרדיטים 💰 </div>
+            <div className="total">{total} </div>
+          </div>
+          <div className="seperator"></div>
+          <button
+            disabled={disabled}
+            className={`payment ${disabled && "disabled"}`}
+            onClick={submitForm}
+          >
+            {submitCallback && (
+              <>
+                לתשלום
+                <br />
+                לחצו
+              </>
+            )}
+            <CheckCircle />
+            <Close className="block" />
+          </button>
         </div>
-        <div className="seperator"></div>
-        <button
-          disabled={disabled}
-          className={`payment ${disabled && "disabled"}`}
-          onClick={submitForm}
-        >
-          {submitCallback && (
-            <>
-              לתשלום
-              <br />
-              לחצו
-            </>
-          )}
-          <CheckCircle />
-          <Close className="block" />
-        </button>
+        {signature && <Signature data={signature} />}
       </div>
     </div>
   );

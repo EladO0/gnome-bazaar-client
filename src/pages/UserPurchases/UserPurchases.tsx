@@ -63,6 +63,7 @@ const UserPurchases = () => {
             quantity
             title={title}
             maxQuantity={false}
+            signature={purchase.signature}
           />
         ),
         theme: "dark",

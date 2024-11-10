@@ -25,6 +25,7 @@ export type Purchase = {
   uuid: string;
   date: Date;
   products: Array<CartProduct>;
+  signature: string;
 };
 
 export type MarketFiltersType = {
